@@ -1,0 +1,59 @@
+<nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+  
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/usuarios']">
+            <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px">  Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/clubes']">
+            <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px; color: white;">
+            <i class="fa fa-app-store"></i> Clubes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/clubes" [queryParams]="{pagina:1}">
+            <i class="fa fa-app-store"></i> queryStrings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/diretivasCuston']">
+            <i class="fa fa-app-store"></i> Diretivas Customizadas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/exemplosPipes']">
+          <i class="fa fa-app-store"></i> pipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/exemplosPipes']">
+          <i class="fa fa-app-store"></i> pipes</a>
+        </li>
+          
+  
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#" class="fa fa-cog"> {{usuarioLogado.US_USNOMETRATAMENTO}}  </a>
+        </li>
+        <li>
+            <a href="#" (click)="logout()" >logout</a>
+            
+          </li>
+        <li>
+          <a href="#" class="fa fa-home"></a>
+        </li>
+     </ul>
+     <!-- <cft-input errorMessage="Grupo usuario deve ser preenchido " label="Grupo de usuário">
+      <select >
+          <option *ngFor=  "let c of (usuarioLogado)" [value]="c.US_USID">{{c.US_USLOGIN}}</option>
+      </select>
+  </cft-input> -->
+    </div>
+  </nav>
+

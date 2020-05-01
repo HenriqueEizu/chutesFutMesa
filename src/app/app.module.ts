@@ -1,0 +1,88 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+// import {appRoutes} from './app-routes'
+import {appRoutes} from './app.routing'
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {CommonModule} from '@angular/common'
+import {LOCALE_ID} from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
+import { RouterModule,PreloadAllModules } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalModule} from 'ngx-bootstrap/modal';
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
+// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+// import {NgxPaginationModule} from 'ngx-pagination';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { TooltipModule } from 'ng2-tooltip-directive';
+
+
+import { SharedModule} from  './shared/shared.module';
+import { LoginComponent } from './login/login.component';
+// import { UsuarioComponent } from './usuario/usuario.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component'
+// import { ClubeComponent } from './clube/clube.component';
+// import { ClubeListComponent } from './clube/clube-list/clube-list.component';
+// import { ClubeListSortableHeader } from './clube/clube-list/sortable.directive';
+// import { UsuarioService} from './usuario/usuario.service'
+// import { ClubeService} from  './clube/clube.service';
+// import { UsuarioListComponent } from './usuario/usuario-list/usuario-list.component';
+import { DiretivasCustomizadasComponent } from './diretivas-customizadas/diretivas-customizadas.component';
+import { ExemplosPipeComponent } from './exemplos-pipe/exemplos-pipe.component';
+import { CamelCasePipe } from './camel-case.pipe'
+import { ClubeModule } from './clube/clube.module';
+import { UsuarioModule} from './usuario/usuario.module'
+import { AuthGuard } from './guards/auth.guard';
+import { DeactivateGuard } from './guards/deactive.guard';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    // UsuarioComponent,
+    PaginaNaoEncontradaComponent,
+    HeaderComponent,
+    HomeComponent,
+    // ClubeComponent,
+    // ClubeListComponent,
+    // ClubeListSortableHeader,
+    // UsuarioListComponent,
+    DiretivasCustomizadasComponent,
+    ExemplosPipeComponent,
+    CamelCasePipe,
+    
+    
+    // InputComponent
+  ],
+  imports: [
+    BrowserModule,
+    
+    FormsModule,
+    ReactiveFormsModule, 
+    // HttpModule,
+    CommonModule,
+    RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules}),
+    FontAwesomeModule,
+    HttpClientModule,
+    ModalModule.forRoot(),
+    // Ng2SearchPipeModule,
+    // NgxPaginationModule,
+    SharedModule.forRoot(),
+    // NgbModule,
+    // TooltipModule,
+    ClubeModule,
+    UsuarioModule,
+    AppRoutingModule,
+  ],
+  providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard
+  // ,ClubeService, UsuarioService
+],
+  bootstrap: [AppComponent],
+})
+export class AppModule { }

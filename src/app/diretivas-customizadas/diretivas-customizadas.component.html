@@ -1,0 +1,40 @@
+<br/>
+<br/>
+<br/>
+<br/>
+
+<!-- <p cftFundoAmarelo style="background-color:yellow">Texto com fundo dddddamarelo</p> -->
+
+<p cftFundoAmarelo >Texto com fundo dddddamarelo</p>
+
+<button cftFundoAmarelo >ddddddddddddddd</button>
+
+<p cftHighlightMouse dddddd >Texto quando eu passo o mouse</p>
+
+<!-- <p cftHighlight [defaultColor]="'grey'" [highlightColor]="'red'"> Texto jighlight com cores customizadas</p> -->
+
+<p [cftHighlight]="'red'" [defaultColor]="'grey'"> Texto jighlight com cores customizadas</p>
+
+<h5>Diretiva Estrutura - ngElse</h5>
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui
+</div>
+
+<!-- <div *ngIf="!mostrarCursos">
+    Não existem cursos para serem listados.
+</div> -->
+
+<div *ngElse="mostrarCursos">
+    Não existem cursos para serem listados.
+</div>
+
+<!-- <ng-template [ngIf]="mostrarCursos">
+    <div>Lista de cursos aqui. ng-template </div>
+</ng-template>
+<br>
+
+<div ng-template="ngIf mostrarCursos">
+    Lista de cursos aqui. kkkkkkkkkkk
+</div> -->
+<button (click)="onMostrarCursos()">Mostar Cursos</button>

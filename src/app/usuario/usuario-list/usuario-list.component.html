@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3 col-xs-3">
+      &nbsp;
+    </div>
+  
+    <div class="col-sm-7 col-xs-7 card bg-info text-red">
+      <div class="card-body">  <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px"> Usuarios</div>
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="form-group form-inline">
+                  Filtro: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+                  <span class="ml-3" *ngIf="service.loading$ | async">Carregando...</span>
+              </div>
+              <div class="col-sm-2 col-xs-2"></div>
+              <div class="col-sm-4 col-xs-4">
+                <a class="nav-link" [routerLink]="['/clube']">
+                  <span tooltip="Adicionar Clube" placement="top" show-delay="500">
+                    <img src="/assets/images/icons/add.png" class="mr-2" style="width: 30px"> Usuário
+                    </span> 
+                    </a>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <table class="table table-striped col-sm-12 col-xs-12">
+                  <thead>
+                  <tr>
+                    <th scope="col" sortable="US_USLOGIN" (sort)="onSort($event)">Login</th>
+                    <th scope="col" sortable="US_USNOMETRATAMENTO" (sort)="onSort($event)">Nome Trat.</th>
+                    <th scope="col" sortable="CL_CLNOME" (sort)="onSort($event)">Clube</th>
+                    <th scope="col" sortable="GU_GUDESCRICAO" (sort)="onSort($event)">Grupo Usuário</th>
+                    <th scope="col">Ação</th>
+                    <th scope="col">Ação</th>
+  
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let usuario of usuarios$ | async">
+                    <td>
+                      <img [src]="usuario.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                      <span [tooltip]="usuario.US_USLOGIN" placement="top" show-delay="500">
+                        <ngb-highlight [result]="usuario.US_USLOGIN.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
+                      </span>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="usuario.US_USNOMETRATAMENTO " [term]="service.searchTerm"></ngb-highlight>
+                    </td>
+                    <td><ngb-highlight [result]="usuario.CL_CLNOME " [term]="service.searchTerm"></ngb-highlight></td>
+                    <!-- <td><ngb-highlight [result]="clube.CL_CLTELEFONE " [term]="service.searchTerm"></ngb-highlight></td> -->
+                    <td>
+                      <span [tooltip]="usuario.GU_GUDESCRICAO" placement="top" show-delay="500">
+                        <ngb-highlight [result]="usuario.GU_GUDESCRICAO.substring(0,12) " [term]="service.searchTerm"></ngb-highlight>
+                      </span>  
+                    </td>
+                    <td><a class="nav-link" [routerLink]="['/usuario',usuario.US_USID]">
+                      <span tooltip="Editar" placement="top" show-delay="500">
+                          <i class="fa fa-edit"></i>
+                        </span> 
+                        </a>
+                    </td>
+                    <td><a class="nav-link exemplo_4"  (click)="ExcluiUsuario(usuario.US_USID);"> 
+                      <span tooltip="Excluir" placement="top" show-delay="500">
+                        <img src="/assets/images/icons/excluir.png" class="mr-2" style="width: 20px" >
+                      </span> 
+                      </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination
+                [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+              </ngb-pagination>
+  
+              <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                <option [ngValue]="2">2 itens por página</option>
+                <option [ngValue]="4">4 itens por página</option>
+                <option [ngValue]="6">6 itens por página</option>
+              </select>
+            </div>  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <router-outlet></router-outlet>         -->

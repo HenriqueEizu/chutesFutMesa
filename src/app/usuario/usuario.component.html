@@ -1,0 +1,175 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div> 
+    
+{{usuarioForm.valid}}
+    <div class="col-sm-8 col-xs-8 card bg-info text-red">
+        <div class="card-body"><img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px"> Cadastro de Usuário</div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Inserir usuário</h4>
+                <form [formGroup]="usuarioForm" novalidate>        
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                                Login:
+                        </div>
+                        <div class="col-sm-5  col-xs-5">
+                            <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="login do usuário">
+                                <input name="US_USLOGIN" class="form-control" formControlName="US_USLOGIN" autocomplete="off" placeholder="Login">
+                            </cft-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-2" >
+                            <span class="help-block pull-right has-error-block" *ngIf="blnExisteLogin" style="color:red"><i class="fa fa-remove"></i> Login já existente</span>
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Senha:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                                <input name="US_USSENHA" class="form-control" formControlName="US_USSENHA" autocomplete="off" placeholder="Senha">
+                            </cft-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-2" >
+                            <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.hasError('senhaNoMatch')" style="color:red"><i class="fa fa-remove"></i> Senhas não conferem</span>
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Confirma Senha:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                                <input name="US_USSENHA_CONFIRMA" class="form-control" formControlName="US_USSENHA_CONFIRMA" autocomplete="off" placeholder="Confirma Senha">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Nome Usuário:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Nome do usuário">
+                                <input name="US_USNOMETRATAMENTO" class="form-control" formControlName="US_USNOMETRATAMENTO" autocomplete="off" placeholder="Nome do Usuário">
+                            </cft-input>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Clube:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Clube do usuário">
+                                <input name="US_CLID" class="form-control" formControlName="US_CLID" autocomplete="off" placeholder="Clube do Usuário">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Email Usuário:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" >
+                            <cft-input errorMessage="Formato de email inexistente " label="Email usuário">
+                                <input name="US_USEMAIL" class="form-control" formControlName="US_USEMAIL" autocomplete="off" placeholder="Email Usuário">
+                            </cft-input>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Grupo de Usuário:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" >
+                            <cft-input errorMessage="Grupo usuario deve ser preenchido " label="Grupo de usuário">
+                                <select name="US_GUID" class="form-control" formControlName="US_GUID">
+                                    <option *ngFor=  "let c of (gruposUsuarios)" [value]="c.GU_GUID">{{c.GU_GUDESCRICAO}}</option>
+                                </select>
+                            </cft-input> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Ativo:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" style="text-align: left;">
+                            <input type="checkbox" name="US_USATIVO" class="form-control" formControlName="US_USATIVO" autocomplete="off" placeholder="Ativo">
+                        </div>
+                    </div>
+                
+                    
+                </form>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-8 col-xs-8">
+                        <button (click)="InserirUsuario(usuarioForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!usuarioForm.valid" >
+                            <i class="fa fa-user"></i> Inserir
+                        </button>
+                    </div>
+                    <div class="col-sm-3 col-xs-3" >
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12  col-xs-12 ">
+                        <span style="color: red;">{{message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  

@@ -1,0 +1,224 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+    
+<!-- {{clubeForm.valid}} -->
+    <div class="col-sm-8 col-xs-8 card bg-info text-red">
+        <div class="card-body"> <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px"> Cadastro de Clubes</div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Inserir usuário</h4>
+                <form [formGroup]="clubeForm" novalidate>  
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-5  col-xs-5">
+                            <img [src]= "pathimagecomplete"  class="mr-2" style="width: 50px">
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                                Nome:
+                        </div>
+                        <div class="col-sm-5  col-xs-5">
+                            <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome do clube">
+                                <input name="CL_CLNOME" class="form-control" formControlName="CL_CLNOME" autocomplete="off" placeholder="Clube">
+                            </cft-input>
+                        </div>
+                        <!-- <div class="col-xs-12 col-sm-2" >
+                            <span class="help-block pull-right has-error-block" *ngIf="blnExisteLogin" style="color:red"><i class="fa fa-remove"></i> Login já existente</span>
+                          </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Endereço:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                                <input name="CL_CLENDERECO" class="form-control" formControlName="CL_CLENDERECO" autocomplete="off" placeholder="Endereço">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Cidade:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                                <input name="CL_CLCIDADE" class="form-control" formControlName="CL_CLCIDADE" autocomplete="off" placeholder="Cidade">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            UF:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" >
+                            <cft-input errorMessage="Grupo usuario deve ser preenchido " label="Grupo de usuário">
+                                <select name="CL_CLUF" class="form-control" formControlName="CL_CLUF">
+                                    <option *ngFor=  "let c of (estados)" [value]="c.UF_UFSIGLA">{{c.UF_UFNOME}}</option>
+                                </select>
+                            </cft-input> 
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Sigla do Clube:
+                        </div>
+                        <div class="col-sm-5  col-xs-5" >
+                            <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Sigla do Clube">
+                                <input name="CL_CLSIGLA" class="form-control" formControlName="CL_CLSIGLA" autocomplete="off" placeholder="Sigla do Clube">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Emblema do Clube:
+                        </div>
+                        <div class="col-sm-4 col-xs-4" >
+                            <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Sigla do Clube">
+                                <input type="file" name="CL_CLEMBLEMA" class="form-control" formControlName="CL_CLEMBLEMA" autocomplete="off" (change)="handleFileInput($event.target.files)">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Email Clube:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" >
+                            <cft-input errorMessage="Formato de email inexistente " label="Email clube">
+                                <input name="CL_CLEMAIL" class="form-control" formControlName="CL_CLEMAIL" autocomplete="off" placeholder="Email clube">
+                            </cft-input>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Ativo:
+                        </div>
+                        <div class="row col-sm-7 col-xs-7">
+                            <div class="col-sm-2 col-xs-2" style="text-align: left;">
+                                <input type="checkbox" name="CL_CLATIVO" class="form-control" formControlName="CL_CLATIVO" autocomplete="off" placeholder="Ativo">
+                            </div>
+                            <div class="col-sm-10 col-xs-10"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Responsável:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" style="text-align: left;">
+                            <cft-input errorMessage="Formato de email inexistente " label="Responsavel clube">
+                                <input name="CL_CLRESPONSAVEL" class="form-control" formControlName="CL_CLRESPONSAVEL" autocomplete="off" placeholder="Responsavel clube">
+                            </cft-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            Telefone:
+                        </div>
+                        <div class="col-sm-5 col-xs-5" style="text-align: left;">
+                            <cft-input errorMessage="Formato de Telefone inexistente " label="Telefone clube">
+                                <input name="CL_CLTELEFONE" class="form-control" formControlName="CL_CLTELEFONE" 
+                                autocomplete="off" placeholder="Telefone clube" >
+                            </cft-input>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-8 col-xs-8">
+                        <button (click)="InserirClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" >
+                            <i class="fa fa-save"></i> Salvar
+                        </button>
+                        
+                    </div>
+                    <div class="col-sm-3 col-xs-3" >
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12  col-xs-12 ">
+                        <span style="color: red;">{{message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja Inserir este Clube?</p>
+    <button type="button" class="btn btn-default"  (click) = "onConfirmInsert()">Yes</button>
+    <button type="button" class="btn btn-primary"  (click) = "onDeclineInsert()">No</button>
+  </div>
+</ng-template>
+
+  

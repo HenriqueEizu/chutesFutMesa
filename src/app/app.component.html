@@ -1,0 +1,14 @@
+<cft-header *ngIf="isLoggedIn$ | async "></cft-header>
+<router-outlet>
+
+    
+</router-outlet>
+
+<footer *ngIf="isLoggedIn$ | async " class="main-footer">
+    <div class="container">
+        <div class="pull-right hidden-xs">
+        <b>Version</b> 1.0.0
+        </div>
+        <strong>Chutes FutMesa</strong> Eizu Soluções
+    </div>
+</footer>

@@ -1,0 +1,85 @@
+{{ loginForm.valid }}
+<form [formGroup]="loginForm" novalidate>      
+	<div class="row"> 
+		<div class="col-md-12  col-xs-12">&nbsp;  </div>
+	</div>
+	<div class="row">
+		<div class="col-md-4  col-xs-4"></div>
+		<div class="col-md-4  col-xs-4 jumbotron " style="height: 80%;">
+			<div class="row">
+				<div class="col-md-12  col-xs-12 ">
+					<h3>Entre no Cartola FutMesa</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12  col-xs-12 ">
+					<button type="button" class="btn btn-primary btn-face btn-block">
+						<i class="fa fa-facebook-official"></i> Facebook
+					</button>
+				</div>
+				<div class="row">
+					<div class="col-md-12  col-xs-12">&nbsp;  </div>
+				</div>
+				<div class="col-xs-12 col-md-12">
+					<button type="button" class="btn btn-warning btn-google btn-block">
+						<img src="assets/images/icons/icon-google.png" alt="GOOGLE">
+						Google
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12  col-xs-12">&nbsp;  </div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-xs-12">
+					<cft-input errorMessage="Campo obrigatório e com 5 carateres" label="login do usuário">
+						<input name="US_USLOGIN" class="form-control btn-block" formControlName="US_USLOGIN" autocomplete="off" placeholder="Login">
+					</cft-input>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12  col-xs-12">&nbsp;  </div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-xs-12" >
+					<cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+						<input type="password" name="US_USSENHA" class="form-control btn-block" formControlName="US_USSENHA" autocomplete="off" placeholder="Senha">
+					</cft-input>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12  col-xs-12">&nbsp;  </div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<!-- <button class="login100-form-btn" [disabled]="!form.valid"> -->
+					<button (click)="VerificaUsuario(loginForm.value)" class="btn btn-success pull-right btn-block" [disabled]="!loginForm.valid">
+						<fa-icon [icon]="faAddressBook"></fa-icon> Login
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12  col-xs-12 ">
+					<span style="color: red;">{{message}}</span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-9 col-xs-9" style="margin-left: 15px;">
+					<a href="#">Esqueceu a senha</a>
+				</div>
+				<div class="col-md-3 col-xs-3"></div>
+			</div>
+			<div class="row" class="col-md-12  col-xs-12 ">&nbsp;  <br></div>
+			<div class="row">
+				<div class="col-md-9 col-xs-9" style="margin-left: 15px;">
+					<a href="#">Ou Cadastre-se</a>
+					<!-- <a [routerLink]="['/usuario']" ><b>Meat</b></a>
+					<a [routerLink]="['/login']" ><b>Meat</b></a> -->
+				</div>
+				<div class="col-md-3 col-xs-3"></div>
+			</div>
+		</div>
+		<div class="col-md-5 col-xs-5">&nbsp; </div>
+	</div>
+</form>
