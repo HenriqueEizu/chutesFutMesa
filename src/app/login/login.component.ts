@@ -6,6 +6,7 @@ import {Router} from '@angular/router'
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons';
 import {AlertModalService} from '../shared/alertmodal/alertmodal.service'
 import { BsModalRef } from 'ngx-bootstrap/modal/public_api';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -13,6 +14,20 @@ import { BsModalRef } from 'ngx-bootstrap/modal/public_api';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
+  usuarioLogado1: Usuario;
+
+  private usuarioLogado = new BehaviorSubject<Usuario>(this.usuarioLogado1);
+
+  get usuarioCacheFunc() {
+    return this.usuarioLogado; // {2}
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
+  }
 
   loginForm: FormGroup
   usuarioLocal : Usuario;
@@ -42,10 +57,15 @@ export class LoginComponent implements OnInit {
             // this.message = "Login ou Senha não conferem"
             this.loginForm.reset();
           }
+          
         });
   } 
-handlerError(){
-  this.alertService.showAlertDanger("Login ou senha incorreta")
-}
+  handlerError(){
+    this.alertService.showAlertDanger("Login ou senha incorreta")
+  }
+
+  logout() {                            // {4}
+    this.loggedIn.next(false);
+  }
 
 }

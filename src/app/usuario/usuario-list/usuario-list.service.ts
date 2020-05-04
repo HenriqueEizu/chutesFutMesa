@@ -47,7 +47,7 @@ export class UsuarioListService {
   private _search$ = new Subject<void>();
   private _usuarios$ = new BehaviorSubject<Usuario[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-  public USUARIOS : Usuario[];
+  public USUARIOS : any[];
 
   private _state: State = {
     page: 1,
@@ -70,7 +70,7 @@ export class UsuarioListService {
       this._total$.next(result.total);
     });
 
-    this.usuarioServ.GetAllUsuarios().subscribe((es : Usuario[]) => {
+    this.usuarioServ.GetAllUsuarios().subscribe((es : any[]) => {
       this.USUARIOS = es});
 
     this._search$.next();

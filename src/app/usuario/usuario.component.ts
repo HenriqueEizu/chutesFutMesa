@@ -1,14 +1,18 @@
+
 import { Component, OnInit, Input} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors } from '@angular/forms'
 import {Usuario,GrupoUsuario} from './usuario.model'
 import { formatDate,DatePipe,registerLocaleData} from "@angular/common";
 import {Observable} from 'rxjs'
-import {UsuarioService} from './usuario.service'
-import {Router} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import localeBR from "@angular/common/locales/br";
-import { throwError } from 'rxjs';
 import { IFormCanDeactivate } from '../guards/form-deactivate';
 registerLocaleData(localeBR, "br");
+
+import { Clube } from '../clube/clube.model';
+import {UsuarioService} from './usuario.service'
+import { ClubeService } from './../clube/clube.service';
+
 
 @Component({
   selector: 'cft-usuario',
@@ -18,6 +22,7 @@ registerLocaleData(localeBR, "br");
 export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   gruposUsuarios: GrupoUsuario[];
+  clubes: Clube[];
   blnExisteLogin : boolean;
   usuarioLocal : Usuario;
   usuarioForm: FormGroup
@@ -25,10 +30,13 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
   numberPattern = /^[1-9]*$/
   message: String;
   usuarioExiste : Observable<Usuario>;
+  usuarioCarregado : Usuario;
 
   constructor(private usuarioService: UsuarioService
+               , private clubeService: ClubeService
                , private router: Router
-               , private formBuilder : FormBuilder){
+               , private formBuilder : FormBuilder
+               ,private route: ActivatedRoute){
 
                 }
   podeDesativar() {
@@ -45,18 +53,31 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       this.gruposUsuarios = gruposUsuarios;
     });
 
+    this.clubeService.GetAllClube().subscribe((cls : Clube[]) =>{
+      this.clubes = cls;
+    })
+
+    const usuario = this.route.snapshot.data['usuario'];
+
+    this.route.params.subscribe((params:any) => {
+      console.log(params);
+      this.usuarioCarregado = params['usuario']
+    });
+
+
     this.usuarioForm = this.formBuilder.group({
-      US_USLOGIN: this.formBuilder.control('',[Validators.required, Validators.minLength(6)],[this.customerNameValidator.bind(this)]),
-      US_USSENHA: this.formBuilder.control('',[Validators.required, Validators.minLength(6)]),
-      US_USSENHA_CONFIRMA: this.formBuilder.control('',[Validators.required, Validators.minLength(6)]),
-      US_USNOMETRATAMENTO: this.formBuilder.control('',[Validators.required, Validators.minLength(5)]),
-      US_CLID: this.formBuilder.control('',[Validators.required, Validators.pattern(this.numberPattern)]),
-      US_USEMAIL: this.formBuilder.control('',[Validators.required, Validators.pattern(this.emailPattern)]),
-      US_USATIVO: this.formBuilder.control(''),
-      US_GUID: this.formBuilder.control('',[Validators.required]),
+      US_USID: [usuario.US_USID],
+      US_USLOGIN: this.formBuilder.control(usuario.US_USLOGIN,[Validators.required, Validators.minLength(6)],[this.customerNameValidator.bind(this)]),
+      US_USSENHA: this.formBuilder.control(usuario.US_USSENHA,[Validators.required, Validators.minLength(6)]),
+      US_USSENHA_CONFIRMA: this.formBuilder.control(usuario.US_USSENHA_CONFIRMA,[Validators.required, Validators.minLength(6)]),
+      US_USNOMETRATAMENTO: this.formBuilder.control(usuario.US_USNOMETRATAMENTO,[Validators.required, Validators.minLength(5)]),
+      US_CLID: this.formBuilder.control(usuario.US_CLID,[Validators.required, Validators.pattern(this.numberPattern)]),
+      US_USEMAIL: this.formBuilder.control(usuario.US_USEMAIL,[Validators.required, Validators.pattern(this.emailPattern)]),
+      US_USATIVO: this.formBuilder.control(usuario.US_USATIVO),
+      US_GUID: this.formBuilder.control(usuario.US_GUID,[Validators.required]),
     },{validator:UsuarioComponent.equalsTo})
   }
-
+ 
   customerNameValidator(c: AbstractControl):Observable<Usuario>
   {
     var login = c.value;

@@ -70,13 +70,14 @@ export class UsuarioService{
   VerificaUsuario(usuario: Usuario): Observable<Usuario>{
     var usuarioLocal : Observable<Usuario>
     // usuarioLocal = this.http.post<Usuario>(`${MEAT_API}/usuario`,usuario).pipe();
-    usuarioLocal = this.http.post<Usuario>(`${MEAT_API}/usuario`,usuario)
-    usuarioLocal.subscribe((us : Usuario) => {
+    usuarioLocal = this.http.post<Usuario>(`${MEAT_API}/usuario/login`,usuario)
+    usuarioLocal.subscribe((us : any) => {
       console.log(usuarioLocal);
       if (us != null){
         // this.mostrarMenuEmmiter.emit(true);
         this.loggedIn.next(true);
-        this.usuarioCacheFunc.next(us)
+        this.usuarioCacheFunc.next(us.usuario);
+        localStorage.setItem('token', us.token);
         this.router.navigate([''])
       }
       // else{
@@ -87,23 +88,24 @@ export class UsuarioService{
     return usuarioLocal;
   }
 
-  VerificaLogin(usuario: string): Observable<Usuario>{
-    let params = new HttpParams();
-    params = params.append('login', usuario);
+  VerificaLogin(id: String): Observable<Usuario>{
     var usuarioLocal : Observable<Usuario>
-    alert(`${MEAT_API}/usuario/verificaLogin/${usuario}`);
-    usuarioLocal = this.http.get<Usuario>(`${MEAT_API}/usuario/verificaLogin/${usuario}` ).pipe();
-    // alert(usuarioLocal + "ddddddd")
+    usuarioLocal = this.http.get<Usuario>(`${MEAT_API}/usuario/verificaLogin/${id}` ).pipe();
     return usuarioLocal;
   }
 
-  GetAllUsuarios(): Observable<Usuario[]>{
-    let usuarios$ = new Observable<Usuario[]>();
-    usuarios$ = this.http.get<Usuario[]>(`${MEAT_API}/usuarios`).pipe();
+  GetIdusuario(id: number):Observable<Usuario>{
+    var usuarioLocal : Observable<Usuario>
+    usuarioLocal = this.http.get<Usuario>(`${MEAT_API}/usuario/GetIdusuario/${id}` ).pipe();
+    return usuarioLocal;
+  }
+
+  GetAllUsuarios(): Observable<any[]>{
+    var usuarios$ = this.http.get<Usuario[]>(`${MEAT_API}/usuario/listausuarios`).pipe();
     return usuarios$;
   }
 
-  logout() {                            // {4}
+  logout() {                           // {4}
     this.loggedIn.next(false);
   }
 }

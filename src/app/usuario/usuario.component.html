@@ -96,9 +96,9 @@
                             Clube:
                         </div>
                         <div class="col-sm-5  col-xs-5" >
-                            <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Clube do usuário">
-                                <input name="US_CLID" class="form-control" formControlName="US_CLID" autocomplete="off" placeholder="Clube do Usuário">
-                            </cft-input>
+                            <select name="US_CLID" class="form-control" formControlName="US_CLID">
+                                <option *ngFor=  "let c of (clubes)" [value]="c.CL_CLID">{{c.CL_CLNOME}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -123,11 +123,9 @@
                             Grupo de Usuário:
                         </div>
                         <div class="col-sm-5 col-xs-5" >
-                            <cft-input errorMessage="Grupo usuario deve ser preenchido " label="Grupo de usuário">
-                                <select name="US_GUID" class="form-control" formControlName="US_GUID">
-                                    <option *ngFor=  "let c of (gruposUsuarios)" [value]="c.GU_GUID">{{c.GU_GUDESCRICAO}}</option>
-                                </select>
-                            </cft-input> 
+                            <select name="US_GUID" class="form-control" formControlName="US_GUID">
+                                <option *ngFor=  "let c of (gruposUsuarios)" [value]="c.GU_GUID">{{c.GU_GUDESCRICAO}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">

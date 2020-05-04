@@ -12,7 +12,7 @@ import { DeactivateGuard } from '../guards/deactive.guard'
 export const clubeRoutes: Routes = [
     {path: 'usuario', component: UsuarioComponent,resolve:{clube :UsuarioResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},
     {path: 'usuario/:id',component : UsuarioComponent,resolve:{ clube :UsuarioResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
-    {path: 'usuarios', component: UsuarioListComponent,canActivate : [AuthGuard],canLoad:[AuthGuard]},
+    {path: 'listausuarios', component: UsuarioListComponent,canActivate : [AuthGuard],canLoad:[AuthGuard]},
 ]
 
 const routes: Routes = [];

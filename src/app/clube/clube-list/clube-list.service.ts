@@ -105,7 +105,7 @@ export class ClubeListService {
 
     // 2. filter
     clubes = clubes.filter(clube => matches(clube, searchTerm, this.pipe));
-    const total = clubes.length;
+    const total = clubes.length; 
 
     // 3. paginate
     clubes = clubes.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);

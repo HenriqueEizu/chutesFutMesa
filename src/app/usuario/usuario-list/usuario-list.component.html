@@ -45,9 +45,9 @@
                   <thead>
                   <tr>
                     <th scope="col" sortable="US_USLOGIN" (sort)="onSort($event)">Login</th>
-                    <th scope="col" sortable="US_USNOMETRATAMENTO" (sort)="onSort($event)">Nome Trat.</th>
-                    <th scope="col" sortable="CL_CLNOME" (sort)="onSort($event)">Clube</th>
-                    <th scope="col" sortable="GU_GUDESCRICAO" (sort)="onSort($event)">Grupo Usuário</th>
+                    <th scope="col" sortable="US_USNOMETRATAMENTO" (sort)="onSort($event)">Nome</th>
+                    <th scope="col" sortable="OBJ_CLUBE.CL_CLNOME" (sort)="onSort($event)">Clube</th>
+                    <th scope="col" sortable="OBJ_GRUPOUSUARIO.GU_GUDESCRICAO" (sort)="onSort($event)">Grupo Usuário</th>
                     <th scope="col">Ação</th>
                     <th scope="col">Ação</th>
   
@@ -56,7 +56,7 @@
                   <tbody>
                   <tr *ngFor="let usuario of usuarios$ | async">
                     <td>
-                      <img [src]="usuario.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                      <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">
                       <span [tooltip]="usuario.US_USLOGIN" placement="top" show-delay="500">
                         <ngb-highlight [result]="usuario.US_USLOGIN.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
                       </span>
@@ -64,11 +64,14 @@
                     <td>
                         <ngb-highlight [result]="usuario.US_USNOMETRATAMENTO " [term]="service.searchTerm"></ngb-highlight>
                     </td>
-                    <td><ngb-highlight [result]="usuario.CL_CLNOME " [term]="service.searchTerm"></ngb-highlight></td>
-                    <!-- <td><ngb-highlight [result]="clube.CL_CLTELEFONE " [term]="service.searchTerm"></ngb-highlight></td> -->
                     <td>
-                      <span [tooltip]="usuario.GU_GUDESCRICAO" placement="top" show-delay="500">
-                        <ngb-highlight [result]="usuario.GU_GUDESCRICAO.substring(0,12) " [term]="service.searchTerm"></ngb-highlight>
+                      <span [tooltip]="usuario.OBJ_CLUBE.CL_CLNOME" placement="top" show-delay="500">
+                        <img [src]="usuario.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                      </span>
+                    </td>
+                    <td>
+                      <span [tooltip]="usuario.OBJ_GRUPOUSUARIO.GU_GUDESCRICAO" placement="top" show-delay="500">
+                        <ngb-highlight [result]="usuario.OBJ_GRUPOUSUARIO.GU_GUDESCRICAO.substring(0,12) " [term]="service.searchTerm"></ngb-highlight>
                       </span>  
                     </td>
                     <td><a class="nav-link" [routerLink]="['/usuario',usuario.US_USID]">

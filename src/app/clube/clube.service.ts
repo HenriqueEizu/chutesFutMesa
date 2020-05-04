@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
  import {Observable} from 'rxjs'
 import {MEAT_API, MEAT_APP} from '../app.api'
 import {catchError, retry, take} from  'rxjs/operators'
-import { HttpClient ,HttpClientModule,HttpResponse, HttpHeaders,HttpErrorResponse,HttpParams  } from '@angular/common/http'; 
+import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
 import {Clube,Estado} from './clube.model'
 
@@ -10,9 +10,15 @@ import 'rxjs/Rx';
 
 
 @Injectable() 
-export class ClubeService{
+export class ClubeService {
 
-    constructor(private http: HttpClient){ }
+  header = new HttpHeaders();
+
+    constructor(private http: HttpClient){ 
+     
+    this.header.append("Content-Type","application/json") ;
+    this.header.append("Authorization","Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU19VU0xPR0lOIjoiRkFSQUggIiwiVVNfVVNFTUFJTCI6IkZBUkFIQEZBUkFILkNPTS5CUiIsImlhdCI6MTU4ODUxMTU5NSwiZXhwIjoxNTg4NTE1MTk1fQ.bqKs5K3DiTsfFvE6A6P1UTolNJ1jEbyHp21-gq9D7Gc") ;
+                        }
 
     GetAllEstado(): Observable<Estado[]>{
         return this.http.get<Estado[]>(`${MEAT_API}/estados`).pipe(retry(10),
@@ -43,7 +49,7 @@ export class ClubeService{
     // let params = new HttpParams();
     // params = params.append('login', clube);
     var clubeLocal : Observable<Clube>
-    clubeLocal = this.http.get<Clube>(`${MEAT_API}/clube/verificaClube/${clube}` ).pipe();
+    clubeLocal = this.http.get<Clube>(`${MEAT_API}/clubes/verificaClube/${clube}` ).pipe();
     return clubeLocal;
   }
   postFile(fileToUpload: File): Observable<string> {

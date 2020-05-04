@@ -14,10 +14,9 @@ constructor(private service: UsuarioService){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Usuario> {
         if  (route.params && route.params['id']){
-            // return this.service.(route.params['id'])
-            return null;
+            return this.service.GetIdusuario(route.params['id']); 
         }
-
+ 
         return of ({
             US_USID: null,
             US_USLOGIN: null,

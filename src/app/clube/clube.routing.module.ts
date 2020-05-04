@@ -18,7 +18,7 @@ export const clubeRoutes: Routes = [
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forChild(clubeRoutes)],
+  imports: [RouterModule.forChild(clubeRoutes)], 
   exports: [RouterModule]
 })
 export class CursoRoutingModule { }

@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'cft-usuario-list',
   templateUrl: './usuario-list.component.html',
-  styleUrls: ['./usuario-list.component.css']
+  styleUrls: ['./usuario-list.component.css'],
+  providers: [UsuarioListService, DecimalPipe]
 })
 export class UsuarioListComponent implements OnInit {
 
@@ -48,7 +49,7 @@ export class UsuarioListComponent implements OnInit {
     });
 
     this.service.sortColumn = column;
-    this.service.sortDirection = direction;
+    this.service.sortDirection = direction; 
   }
 
   ExcluiUsuario(id: number){

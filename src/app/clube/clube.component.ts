@@ -56,7 +56,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   podeDesativar() {
     return true;
   }
-
+ 
   ngOnInit(): void {
     this.clubeService.GetAllEstado().subscribe((es : Estado[]) => {
     this.estados = es;

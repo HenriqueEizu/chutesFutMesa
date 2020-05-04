@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 // import {appRoutes} from './app-routes'
 import {appRoutes} from './app.routing'
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CommonModule} from '@angular/common'
 import {LOCALE_ID} from '@angular/core';
 import localePt from '@angular/common/locales/pt';
@@ -39,6 +39,7 @@ import { ClubeModule } from './clube/clube.module';
 import { UsuarioModule} from './usuario/usuario.module'
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactive.guard';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 
 @NgModule({
@@ -80,7 +81,11 @@ import { DeactivateGuard } from './guards/deactive.guard';
     UsuarioModule,
     AppRoutingModule,
   ],
-  providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard
+  providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,
+              { provide: HTTP_INTERCEPTORS,
+                useClass: TokenInterceptor,
+                multi: true,
+              }
   // ,ClubeService, UsuarioService
 ],
   bootstrap: [AppComponent],
