@@ -25,50 +25,53 @@ export class ClubeService {
         catchError(this.handleError)) ;
     }
 
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do client
-      errorMessage = error.error.message;
-    } else {
-      // Erro ocorreu no lado do servidor
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  };
+    handleError(error: HttpErrorResponse) {
+      let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        // Erro ocorreu no lado do client
+        errorMessage = error.error.message;
+      } else {
+        // Erro ocorreu no lado do servidor
+        errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      }
+      console.log(errorMessage);
+      return throwError(errorMessage);
+    };
 
-  GetAllClube(): Observable<Clube[]>{
-    let clubes$ = new Observable<Clube[]>();
-    clubes$ = this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
-    return clubes$;
-    // return this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
-  }
- 
-  VerificaClube(clube: string): Observable<Clube>{
-    // let params = new HttpParams();
-    // params = params.append('login', clube);
-    var clubeLocal : Observable<Clube>
-    clubeLocal = this.http.get<Clube>(`${MEAT_API}/clubes/verificaClube/${clube}` ).pipe();
-    return clubeLocal;
-  }
+    GetAllClube(): Observable<Clube[]>{
+      let clubes$ = new Observable<Clube[]>();
+      clubes$ = this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
+      return clubes$;
+      // return this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
+    }
+
+    GetClubeId(id: number):Observable<Clube>{
+      var clubeLocal : Observable<Clube>
+      clubeLocal = this.http.get<Clube>(`${MEAT_API}/clubes/GetClubeId/${id}` ).pipe();
+      return clubeLocal;
+    }
+    
+    VerificaClube(){
+      return this.http.get<any>(`${MEAT_API}/clubes/VerificaClube`).pipe();
+    }
+
   postFile(fileToUpload: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
-    var teste = this.http.post<string>(`${MEAT_API}/upload`,formData).pipe();
+    var teste = this.http.post<string>(`${MEAT_API}/clubes/upload`,formData).pipe();
     return teste;
     }
 
     InserirClube(clube : Clube) : Observable<boolean>{
-        return this.http.post<boolean>(`${MEAT_API}/clube/Incluir` ,clube)
+        return this.http.post<boolean>(`${MEAT_API}/clubes/Incluir` ,clube)
     }
 
     ExcluirClube(id : number) : Observable<boolean>{
-      return this.http.delete<boolean>(`${MEAT_API}/clube/Excluir/${id}`);
+      return this.http.delete<boolean>(`${MEAT_API}/clubes/Excluir/${id}`);
     }
 
     AlterarClube(clube : Clube) : Observable<boolean>{
-      return this.http.put<boolean>(`${MEAT_API}/clube/Alterar/${clube.CL_CLID}`,clube).pipe(take(1));
+      return this.http.put<boolean>(`${MEAT_API}/clubes/Alterar/${clube.CL_CLID}`,clube).pipe(take(1));
     }
 
     SalvarClube(clube : Clube): Observable<boolean>{

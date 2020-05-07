@@ -4,13 +4,15 @@ use futmesacartola;
 create table Usuario (
 		US_USID int AUTO_INCREMENT PRIMARY KEY,
 		US_USLOGIN  VARCHAR(300) not null,
-        US_USSENHA  VARCHAR(8) not null,
+        US_USSENHA  VARCHAR(300) not null,
         US_USATIVO  boolean,
         US_USNOMETRATAMENTO VARCHAR(300) not null,
         US_CLID int ,
         US_GUID int ,
         US_USEMAIL VARCHAR(300) not null,
         US_USDATACADASTRO  Date);
+ALTER TABLE Usuario ADD UNIQUE (US_USLOGIN);
+ALTER TABLE Usuario ADD UNIQUE (US_USEMAIL);
 use futmesacartola;
 create table Clubes (
 		CL_CLID int AUTO_INCREMENT PRIMARY KEY,

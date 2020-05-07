@@ -30,7 +30,7 @@ export class UsuarioListComponent implements OnInit {
     this.usuarios$ = service.usuarios$;
     this.total$ = service.total$;
   }
-
+ 
   ngOnInit(): void {
 
   }
@@ -53,21 +53,21 @@ export class UsuarioListComponent implements OnInit {
   }
 
   ExcluiUsuario(id: number){
-    // const result$ = this.alertService.showConfirm("Confirmação de Inclusão","Você realmente deseja inserir este clube?","Fechar","Inserir");
-    // result$.asObservable()
-    // .pipe(
-    //   take(1),
-    //   switchMap(result => result ? this.usuarioService.ExcluirClube(id) : EMPTY)
-    // ).subscribe(
-    //   success => {  
-    //                this.alertService.showAlertSuccess("Clube excluir com sucesso");
-    //               //  window.location.reload();
-    //                this.router.navigate(['home'])
-    //                },
-    //   error =>  { 
-    //             this.alertService.showAlertDanger("Erro ao excluir clube. Tente novamente") ;
-    //             }
-    // )
+    const result$ = this.alertService.showConfirm("Confirmação de Inclusão","Você realmente deseja inserir este clube?","Fechar","Inserir");
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.usuarioService.ExcluirUsuario(id) : EMPTY)
+    ).subscribe(
+      success => {  
+                   this.alertService.showAlertSuccess("Usuário excluido com sucesso");
+                  //  window.location.reload();
+                   this.router.navigate(['home'])
+                   },
+      error =>  { 
+                this.alertService.showAlertDanger("Erro ao excluir usuário. Tente novamente") ;
+                }
+    )
   }
 
   onDeclineInsert(){

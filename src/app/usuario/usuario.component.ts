@@ -1,9 +1,9 @@
 
 import { Component, OnInit, Input} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors } from '@angular/forms'
+import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors, FormControl } from '@angular/forms'
 import {Usuario,GrupoUsuario} from './usuario.model'
 import { formatDate,DatePipe,registerLocaleData} from "@angular/common";
-import {Observable} from 'rxjs'
+import {Observable, EMPTY} from 'rxjs'
 import {Router, ActivatedRoute} from '@angular/router'
 import localeBR from "@angular/common/locales/br";
 import { IFormCanDeactivate } from '../guards/form-deactivate';
@@ -12,6 +12,8 @@ registerLocaleData(localeBR, "br");
 import { Clube } from '../clube/clube.model';
 import {UsuarioService} from './usuario.service'
 import { ClubeService } from './../clube/clube.service';
+import { delay, map, tap, filter, take, switchMap } from 'rxjs/operators';
+import { AlertModalService } from '../shared/alertmodal/alertmodal.service';
 
 
 @Component({
@@ -36,7 +38,8 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
                , private clubeService: ClubeService
                , private router: Router
                , private formBuilder : FormBuilder
-               ,private route: ActivatedRoute){
+               ,private route: ActivatedRoute
+               ,private alertService: AlertModalService){
 
                 }
   podeDesativar() {
@@ -45,10 +48,10 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   // pipe = new DatePipe('pt-BR'); // Use your own locale
   myDate = new Date();
-  
+
 
   ngOnInit(): void {
-    
+
     this.usuarioService.GetAllGrupoUsuario().subscribe((gruposUsuarios : GrupoUsuario[]) => {
       this.gruposUsuarios = gruposUsuarios;
     });
@@ -59,6 +62,8 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
     const usuario = this.route.snapshot.data['usuario'];
 
+    this.usuarioLocal = usuario;
+
     this.route.params.subscribe((params:any) => {
       console.log(params);
       this.usuarioCarregado = params['usuario']
@@ -67,36 +72,58 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
     this.usuarioForm = this.formBuilder.group({
       US_USID: [usuario.US_USID],
-      US_USLOGIN: this.formBuilder.control(usuario.US_USLOGIN,[Validators.required, Validators.minLength(6)],[this.customerNameValidator.bind(this)]),
+      US_USLOGIN: this.formBuilder.control(usuario.US_USLOGIN,[Validators.required, Validators.minLength(6)],[this.ValidaLogin.bind(this)]),
       US_USSENHA: this.formBuilder.control(usuario.US_USSENHA,[Validators.required, Validators.minLength(6)]),
       US_USSENHA_CONFIRMA: this.formBuilder.control(usuario.US_USSENHA_CONFIRMA,[Validators.required, Validators.minLength(6)]),
       US_USNOMETRATAMENTO: this.formBuilder.control(usuario.US_USNOMETRATAMENTO,[Validators.required, Validators.minLength(5)]),
       US_CLID: this.formBuilder.control(usuario.US_CLID,[Validators.required, Validators.pattern(this.numberPattern)]),
-      US_USEMAIL: this.formBuilder.control(usuario.US_USEMAIL,[Validators.required, Validators.pattern(this.emailPattern)]),
+      US_USEMAIL: this.formBuilder.control(usuario.US_USEMAIL,[Validators.required, Validators.pattern(this.emailPattern)],[this.ValidaEmail.bind(this)]),
       US_USATIVO: this.formBuilder.control(usuario.US_USATIVO),
       US_GUID: this.formBuilder.control(usuario.US_GUID,[Validators.required]),
     },{validator:UsuarioComponent.equalsTo})
   }
- 
-  customerNameValidator(c: AbstractControl):Observable<Usuario>
-  {
-    var login = c.value;
-    var user : Usuario;
-    this.usuarioExiste =  this.usuarioService.VerificaLogin(String(login)).pipe()
-    this.usuarioExiste.subscribe((e : Usuario) => {
-        user = e
-        alert(user);
-        if (user == null){
-          this.blnExisteLogin = false
-          return undefined;
-        }else{
-          this.blnExisteLogin = true
-          return this.usuarioExiste
-        }
-      
-      });
-    return this.usuarioExiste;
+
+  Verificalogin(Login:string){
+    return this.usuarioService.VerificaLogin().pipe(
+      delay(3000),
+      map((dados: {usuarios : any[]}) => dados.usuarios),
+      tap(console.log),
+      map((dados: {login : string}[]) => dados.filter(v => v.login.toUpperCase() === Login.toUpperCase())),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
   }
+
+  ValidaLogin(formControl : FormControl)
+  {
+    return this.Verificalogin(formControl.value).pipe(
+      tap(console.log),
+      map(loginExiste => loginExiste ? {loginInvalido: true} : null )
+    );
+  }
+
+  VerificaEmail(Email:string){
+    return this.usuarioService.VerificaLogin().pipe(
+      delay(3000),
+      map((dados: {usuarios : any[]}) => dados.usuarios),
+      tap(console.log),
+      map((dados: {email : string}[]) => dados.filter(v => v.email.toUpperCase() === Email.toUpperCase())),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
+  }
+
+  ValidaEmail(formControl : FormControl)
+  {
+    return this.VerificaEmail(formControl.value).pipe(
+      tap(console.log),
+      map(emailExiste => emailExiste ? {emailInvalido: true} : null )
+    );
+  }
+
+
   static equalsTo(group: AbstractControl):{[key:string]: boolean}{
     const senha = group.get('US_USSENHA')
     const senhaConfirmacao = group.get('US_USSENHA_CONFIRMA')
@@ -108,19 +135,34 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
     }
     return undefined
   }
-
+ 
   InserirUsuario(usuario: Usuario){
+    let msgSuccess = "Usuário inserido com sucesso";
+    let msgErro = "Erro ao incluir usuário. Tente novamente";
+    let msgQuestãoTitulo = "Confirmação de Inclusão"
+    let msgQuestaoCorpo = "Você realmente deseja inserir este usuário?"
+    let msgBotao = "Inserir"
+    if (this.usuarioForm.value.US_USID != null){
+      msgSuccess = "Usuário alterado com sucesso";
+      msgErro = "Erro ao atualizar usuário. Tente novamente"
+      msgQuestãoTitulo = "Confirmação de Alteração"
+      msgQuestaoCorpo = "Você realmente deseja alterar este usuário?"
+      msgBotao = "Alterar"
+    }
     usuario.US_USDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
-    var blnResponse : boolean;
-    this.usuarioService.InserirUsuario(usuario).subscribe((resp : boolean) => {
-      blnResponse = resp
-      if (blnResponse == true){
-        this.router.navigate(['home'])
-        this.message = "Erro a inserir usuario"
-      }
-      else{
-        this.message = "Erro a inserir usuario"
-      }
-    });
-  }
+    const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.usuarioService.SalvarUsuario(usuario) : EMPTY)
+      ).subscribe(
+        success => {
+                    this.alertService.showAlertSuccess(msgSuccess);
+                    this.router.navigate(['usuarios'])
+                    },
+        error =>  {
+                  this.alertService.showAlertDanger(msgErro) ;
+                  }
+      )}
 }
+

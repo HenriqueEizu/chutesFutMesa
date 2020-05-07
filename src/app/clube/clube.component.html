@@ -14,7 +14,7 @@
     </div>
 </div>
 
-
+ 
 
 <div class="row">
     <div class="col-sm-2 col-xs-2">
@@ -56,9 +56,9 @@
                                 <input name="CL_CLNOME" class="form-control" formControlName="CL_CLNOME" autocomplete="off" placeholder="Clube">
                             </cft-input>
                         </div>
-                        <!-- <div class="col-xs-12 col-sm-2" >
-                            <span class="help-block pull-right has-error-block" *ngIf="blnExisteLogin" style="color:red"><i class="fa fa-remove"></i> Login já existente</span>
-                          </div> -->
+                        <div class="col-xs-12 col-sm-2" >
+                            <span class="help-block pull-right has-error-block" *ngIf="clubeForm.get('CL_CLNOME').hasError('nomeClubeInvalido')" style="color:red"><i class="fa fa-remove"></i> Clube já existente</span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-2 col-xs-2">
@@ -113,6 +113,9 @@
                             <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Sigla do Clube">
                                 <input name="CL_CLSIGLA" class="form-control" formControlName="CL_CLSIGLA" autocomplete="off" placeholder="Sigla do Clube">
                             </cft-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-2" >
+                            <span class="help-block pull-right has-error-block" *ngIf="clubeForm.get('CL_CLSIGLA').hasError('SiglaClubeInvalido')" style="color:red"><i class="fa fa-remove"></i> Sigla já existente</span>
                         </div>
                     </div>
                     <div class="row">

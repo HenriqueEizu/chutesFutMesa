@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors } from '@angular/forms'
+import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors, FormControl } from '@angular/forms'
 import { formatDate} from "@angular/common";
-import {switchMap, take, map} from  'rxjs/operators'
+import {switchMap, take, map, delay, tap} from  'rxjs/operators'
 import {Observable} from 'rxjs'
 import {ClubeService} from './clube.service'
 import {Router, ActivatedRoute} from '@angular/router'
@@ -56,7 +56,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   podeDesativar() {
     return true;
   }
- 
+  
   ngOnInit(): void {
     this.clubeService.GetAllEstado().subscribe((es : Estado[]) => {
     this.estados = es;
@@ -103,10 +103,10 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     this.clubeForm = this.formBuilder.group({
       CL_CLID : [clube.CL_CLID],
-      CL_CLNOME: this.formBuilder.control(clube.CL_CLNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)],[this.customerNameValidator.bind(this)]),
+      CL_CLNOME: this.formBuilder.control(clube.CL_CLNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)],[this.ValidaNomeClube.bind(this)]),
       CL_CLENDERECO: this.formBuilder.control(clube.CL_CLENDERECO),
       CL_CLCIDADE: this.formBuilder.control(clube.CL_CLCIDADE),
-      CL_CLSIGLA: this.formBuilder.control(clube.CL_CLSIGLA,[Validators.required, Validators.minLength(2),Validators.maxLength(5)]),
+      CL_CLSIGLA: this.formBuilder.control(clube.CL_CLSIGLA,[Validators.required, Validators.minLength(2),Validators.maxLength(5)],[this.ValidaSiglaClube.bind(this)]),
       CL_CLEMBLEMA: this.formBuilder.control(''),
       CL_CLEMAIL: this.formBuilder.control(clube.CL_CLEMAIL,[Validators.required, Validators.pattern(this.emailPattern)]),
       CL_CLATIVO: this.formBuilder.control(clube.CL_CLATIVO),
@@ -115,6 +115,46 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
       CL_CLUF: this.formBuilder.control(clube.CL_CLUF),
     });
 
+  }
+
+  VerificaNomeClube(NomeClube:string){
+    return this.clubeService.VerificaClube().pipe(
+      delay(3000),
+      map((dados: {clubes : any[]}) => dados.clubes),
+      tap(console.log),
+      map((dados: {nomeClube : string}[]) => dados.filter(v => v.nomeClube.toUpperCase() === NomeClube.toUpperCase())),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
+  }
+
+  ValidaNomeClube(formControl : FormControl)
+  {
+    return this.VerificaNomeClube(formControl.value).pipe(
+      tap(console.log),
+      map(emailExiste => emailExiste ? {nomeClubeInvalido: true} : null )
+    );
+  }
+
+  VerificaSiglaClube(SiglaClube:string){
+    return this.clubeService.VerificaClube().pipe(
+      delay(3000),
+      map((dados: {clubes : any[]}) => dados.clubes),
+      tap(console.log),
+      map((dados: {siglaClube : string}[]) => dados.filter(v => v.siglaClube.toUpperCase() === SiglaClube.toUpperCase())),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
+  }
+
+  ValidaSiglaClube(formControl : FormControl)
+  {
+    return this.VerificaSiglaClube(formControl.value).pipe(
+      tap(console.log),
+      map(emailExiste => emailExiste ? {SiglaClubeInvalido: true} : null )
+    );
   }
 
 
@@ -181,24 +221,6 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     return sucesso;
   }
 
-  customerNameValidator(c: AbstractControl):Observable<Clube>
-  {
-    var clubeTela = c.value;
-    var clube : Clube;
-    this.clubeExiste =  this.clubeService.VerificaClube(String(clubeTela)).pipe()
-    this.clubeExiste.subscribe((e : Clube) => {
-        clube = e
-        if (clube == null){
-          this.blnExisteClube = false
-          return undefined;
-        }else{
-          this.blnExisteClube = true
-          return this.clubeExiste
-        }
-
-      });
-    return this.clubeExiste;
-  }
   InserirClube(clube: Clube){
     let msgSuccess = "Clube inserido com sucesso";
     let msgErro = "Erro ao incluir clube. Tente novamente";
@@ -212,7 +234,6 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
       msgQuestaoCorpo = "Você realmente deseja alterar este clube?"
       msgBotao = "Alterar"
     }
-
 
     this.clubeSelecionado = clube;
 

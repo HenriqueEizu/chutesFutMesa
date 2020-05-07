@@ -53,7 +53,7 @@ export class ClubeListComponent implements OnInit {
   }
 
   ExcluiClube(id: number){
-    const result$ = this.alertService.showConfirm("Confirmação de Inclusão","Você realmente deseja inserir este clube?","Fechar","Inserir");
+    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este clube?","Fechar","Excluir");
     result$.asObservable()
     .pipe(
       take(1),

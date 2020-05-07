@@ -49,7 +49,7 @@ export class UsuarioService{
         // .map(gps => gps.json());
 
     }
-
+ 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -62,9 +62,25 @@ export class UsuarioService{
     console.log(errorMessage);
     return throwError(errorMessage);
   };
-
+ 
   InserirUsuario(usuario : Usuario) : Observable<boolean>{
       return this.http.post<boolean>(`${MEAT_API}/usuario/Incluir` ,usuario)
+  }
+
+  AlterarUsuario(usuario : Usuario) : Observable<boolean>{
+    return null;
+    // return this.http.post<boolean>(`${MEAT_API}/usuario/Incluir` ,usuario)
+  }
+
+  ExcluirUsuario(id : number) : Observable<boolean>{
+    return this.http.delete<boolean>(`${MEAT_API}/usuario/Excluir/${id}`);
+  }
+
+  SalvarUsuario(usuario : Usuario): Observable<boolean>{
+    if (usuario.US_USID){
+      return this.AlterarUsuario(usuario);
+    }
+    return this.InserirUsuario(usuario);
   }
 
   VerificaUsuario(usuario: Usuario): Observable<Usuario>{
@@ -88,10 +104,8 @@ export class UsuarioService{
     return usuarioLocal;
   }
 
-  VerificaLogin(id: String): Observable<Usuario>{
-    var usuarioLocal : Observable<Usuario>
-    usuarioLocal = this.http.get<Usuario>(`${MEAT_API}/usuario/verificaLogin/${id}` ).pipe();
-    return usuarioLocal;
+  VerificaLogin() {
+    return this.http.get<any>(`${MEAT_API}/usuario/verificaLogin`).pipe();
   }
 
   GetIdusuario(id: number):Observable<Usuario>{

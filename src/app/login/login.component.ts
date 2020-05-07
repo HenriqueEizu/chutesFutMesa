@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.loginForm.reset();
           }
           
-        });
+        },(error : any) => alert("erro"));
   } 
   handlerError(){
     this.alertService.showAlertDanger("Login ou senha incorreta")

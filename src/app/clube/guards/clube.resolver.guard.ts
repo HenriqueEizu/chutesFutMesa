@@ -14,7 +14,7 @@ constructor(private service: ClubeService){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Clube> {
         if  (route.params && route.params['id']){
-            return this.service.VerificaClube(route.params['id']) 
+            return this.service.GetClubeId(route.params['id']) 
         }
  
         return of ({

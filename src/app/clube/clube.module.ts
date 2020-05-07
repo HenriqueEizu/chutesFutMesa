@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { ClubeResolverGuard } from './guards/clube.resolver.guard';
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule, HttpClientModule, CursoRoutingModule,SharedModule.forRoot()],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, CursoRoutingModule,SharedModule.forRoot()],
   exports: [],
   declarations: [ClubeComponent,ClubeListComponent,ClubeListSortableHeader],
   providers: [ClubeService, ClubeResolverGuard],
