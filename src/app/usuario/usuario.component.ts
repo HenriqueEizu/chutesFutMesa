@@ -33,6 +33,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
   message: String;
   usuarioExiste : Observable<Usuario>;
   usuarioCarregado : Usuario;
+  usuario : any;
 
   constructor(private usuarioService: UsuarioService
                , private clubeService: ClubeService
@@ -60,9 +61,9 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       this.clubes = cls;
     })
 
-    const usuario = this.route.snapshot.data['usuario'];
+    this.usuario = this.route.snapshot.data['usuario'];
 
-    this.usuarioLocal = usuario;
+    this.usuarioLocal = this.usuario;
 
     this.route.params.subscribe((params:any) => {
       console.log(params);
@@ -71,24 +72,24 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
 
     this.usuarioForm = this.formBuilder.group({
-      US_USID: [usuario.US_USID],
-      US_USLOGIN: this.formBuilder.control(usuario.US_USLOGIN,[Validators.required, Validators.minLength(6)],[this.ValidaLogin.bind(this)]),
-      US_USSENHA: this.formBuilder.control(usuario.US_USSENHA,[Validators.required, Validators.minLength(6)]),
-      US_USSENHA_CONFIRMA: this.formBuilder.control(usuario.US_USSENHA_CONFIRMA,[Validators.required, Validators.minLength(6)]),
-      US_USNOMETRATAMENTO: this.formBuilder.control(usuario.US_USNOMETRATAMENTO,[Validators.required, Validators.minLength(5)]),
-      US_CLID: this.formBuilder.control(usuario.US_CLID,[Validators.required, Validators.pattern(this.numberPattern)]),
-      US_USEMAIL: this.formBuilder.control(usuario.US_USEMAIL,[Validators.required, Validators.pattern(this.emailPattern)],[this.ValidaEmail.bind(this)]),
-      US_USATIVO: this.formBuilder.control(usuario.US_USATIVO),
-      US_GUID: this.formBuilder.control(usuario.US_GUID,[Validators.required]),
+      US_USID: [this.usuario.US_USID],
+      US_USLOGIN: this.formBuilder.control(this.usuario.US_USLOGIN,[Validators.required, Validators.minLength(6)],[this.ValidaLogin.bind(this)]),
+      US_USSENHA: this.formBuilder.control(this.usuario.US_USSENHA, [Validators.required, Validators.minLength(6)]),
+      US_USSENHA_CONFIRMA: this.formBuilder.control(this.usuario.US_USSENHA,[Validators.required, Validators.minLength(6)]),
+      US_USNOMETRATAMENTO: this.formBuilder.control(this.usuario.US_USNOMETRATAMENTO,[Validators.required, Validators.minLength(5)]),
+      US_CLID: this.formBuilder.control(this.usuario.US_CLID,[Validators.required, Validators.pattern(this.numberPattern)]),
+      US_USEMAIL: this.formBuilder.control(this.usuario.US_USEMAIL,[Validators.required, Validators.pattern(this.emailPattern)],[this.ValidaEmail.bind(this)]),
+      US_USATIVO: this.formBuilder.control(this.usuario.US_USATIVO),
+      US_GUID: this.formBuilder.control(this.usuario.US_GUID,[Validators.required]),
     },{validator:UsuarioComponent.equalsTo})
   }
 
-  Verificalogin(Login:string){
+  Verificalogin(Login:string, Login2:string = "login"){
     return this.usuarioService.VerificaLogin().pipe(
       delay(3000),
       map((dados: {usuarios : any[]}) => dados.usuarios),
       tap(console.log),
-      map((dados: {login : string}[]) => dados.filter(v => v.login.toUpperCase() === Login.toUpperCase())),
+      map((dados: {login : string}[]) => dados.filter(v => v.login.toUpperCase() === Login.toUpperCase() && v.login.toUpperCase() != Login2.toUpperCase())),
       tap(console.log ),
       map(dados => dados.length > 0),
       tap(console.log)
@@ -97,18 +98,18 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   ValidaLogin(formControl : FormControl)
   {
-    return this.Verificalogin(formControl.value).pipe(
+    return this.Verificalogin(formControl.value, this.usuario.US_USLOGIN).pipe(
       tap(console.log),
       map(loginExiste => loginExiste ? {loginInvalido: true} : null )
     );
   }
 
-  VerificaEmail(Email:string){
+  VerificaEmail(Email:string, Email2:string = "email"){
     return this.usuarioService.VerificaLogin().pipe(
       delay(3000),
       map((dados: {usuarios : any[]}) => dados.usuarios),
       tap(console.log),
-      map((dados: {email : string}[]) => dados.filter(v => v.email.toUpperCase() === Email.toUpperCase())),
+      map((dados: {email : string}[]) => dados.filter(v => v.email.toUpperCase() === Email.toUpperCase() && v.email.toUpperCase() != Email2.toUpperCase())),
       tap(console.log ),
       map(dados => dados.length > 0),
       tap(console.log)
@@ -117,7 +118,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   ValidaEmail(formControl : FormControl)
   {
-    return this.VerificaEmail(formControl.value).pipe(
+    return this.VerificaEmail(formControl.value, this.usuario.US_USEMAIL).pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {emailInvalido: true} : null )
     );
@@ -136,7 +137,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
     return undefined
   }
  
-  InserirUsuario(usuario: Usuario){
+  SalvarUsuario(usuario: Usuario){
     let msgSuccess = "Usuário inserido com sucesso";
     let msgErro = "Erro ao incluir usuário. Tente novamente";
     let msgQuestãoTitulo = "Confirmação de Inclusão"
@@ -148,7 +149,9 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       msgQuestãoTitulo = "Confirmação de Alteração"
       msgQuestaoCorpo = "Você realmente deseja alterar este usuário?"
       msgBotao = "Alterar"
+      if (this.usuario.US_USSENHA == usuario.US_USSENHA) { usuario.US_USSENHA = null}
     }
+    
     usuario.US_USDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()
@@ -158,7 +161,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       ).subscribe(
         success => {
                     this.alertService.showAlertSuccess(msgSuccess);
-                    this.router.navigate(['usuarios'])
+                    this.router.navigate(['listausuarios'])
                     },
         error =>  {
                   this.alertService.showAlertDanger(msgErro) ;

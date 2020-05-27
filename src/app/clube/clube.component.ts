@@ -36,6 +36,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   clubeSelecionado: Clube;
   clubeCarregado : Clube;
   inscricao :  Subscription;
+  clube : any;
   // pagina : number;
 
    pathImage = DIR_CLUBE;
@@ -89,40 +90,41 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     //   this.updateForm(clube)});
 
 
-    const clube = this.route.snapshot.data['clube'];
+    this.clube = this.route.snapshot.data['clube'];
+    this.clubeCarregado =this.clube;
 
-    this.route.params.subscribe((params:any) => {
-      console.log(params);
-      this.clubeCarregado = params['clube']
-    });
+    // this.route.params.subscribe((params:any) => {
+    //   console.log(params);
+    //   this.clubeCarregado = params['clube']
+    // });
 
-    if (clube.CL_CLEMBLEMA != ""){
-      this.pathimagecomplete = clube.CL_CLEMBLEMA;
+    if (this.clube.CL_CLEMBLEMA != ""){
+      this.pathimagecomplete = this.clube.CL_CLEMBLEMA;
     }
 
 
     this.clubeForm = this.formBuilder.group({
-      CL_CLID : [clube.CL_CLID],
-      CL_CLNOME: this.formBuilder.control(clube.CL_CLNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)],[this.ValidaNomeClube.bind(this)]),
-      CL_CLENDERECO: this.formBuilder.control(clube.CL_CLENDERECO),
-      CL_CLCIDADE: this.formBuilder.control(clube.CL_CLCIDADE),
-      CL_CLSIGLA: this.formBuilder.control(clube.CL_CLSIGLA,[Validators.required, Validators.minLength(2),Validators.maxLength(5)],[this.ValidaSiglaClube.bind(this)]),
-      CL_CLEMBLEMA: this.formBuilder.control(''),
-      CL_CLEMAIL: this.formBuilder.control(clube.CL_CLEMAIL,[Validators.required, Validators.pattern(this.emailPattern)]),
-      CL_CLATIVO: this.formBuilder.control(clube.CL_CLATIVO),
-      CL_CLRESPONSAVEL: this.formBuilder.control(clube.CL_CLRESPONSAVEL,[Validators.required, Validators.minLength(6)]),
-      CL_CLTELEFONE: this.formBuilder.control(clube.CL_CLTELEFONE,[Validators.maxLength(14)]),
-      CL_CLUF: this.formBuilder.control(clube.CL_CLUF),
+      CL_CLID : [this.clube.CL_CLID],
+      CL_CLNOME: this.formBuilder.control(this.clube.CL_CLNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)],[this.ValidaNomeClube.bind(this)]),
+      CL_CLENDERECO: this.formBuilder.control(this.clube.CL_CLENDERECO),
+      CL_CLCIDADE: this.formBuilder.control(this.clube.CL_CLCIDADE),
+      CL_CLSIGLA: this.formBuilder.control(this.clube.CL_CLSIGLA,[Validators.required, Validators.minLength(2),Validators.maxLength(5)],[this.ValidaSiglaClube.bind(this)]),
+      CL_CLEMBLEMA: this.formBuilder.control(this.clube.CL_CLEMBLEMA),
+      CL_CLEMAIL: this.formBuilder.control(this.clube.CL_CLEMAIL,[Validators.required, Validators.pattern(this.emailPattern)]),
+      CL_CLATIVO: this.formBuilder.control(this.clube.CL_CLATIVO),
+      CL_CLRESPONSAVEL: this.formBuilder.control(this.clube.CL_CLRESPONSAVEL,[Validators.required, Validators.minLength(6)]),
+      CL_CLTELEFONE: this.formBuilder.control(this.clube.CL_CLTELEFONE,[Validators.maxLength(14)]),
+      CL_CLUF: this.formBuilder.control(this.clube.CL_CLUF),
     });
 
   }
 
-  VerificaNomeClube(NomeClube:string){
+  VerificaNomeClube(NomeClube:string, NomeClube2:string ="clube"){
     return this.clubeService.VerificaClube().pipe(
       delay(3000),
       map((dados: {clubes : any[]}) => dados.clubes),
       tap(console.log),
-      map((dados: {nomeClube : string}[]) => dados.filter(v => v.nomeClube.toUpperCase() === NomeClube.toUpperCase())),
+      map((dados: {nomeClube : string}[]) => dados.filter(v => v.nomeClube.toUpperCase() === NomeClube.toUpperCase() && v.nomeClube.toUpperCase() != NomeClube2.toUpperCase() )),
       tap(console.log ),
       map(dados => dados.length > 0),
       tap(console.log)
@@ -131,27 +133,29 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
   ValidaNomeClube(formControl : FormControl)
   {
-    return this.VerificaNomeClube(formControl.value).pipe(
+    return this.VerificaNomeClube(formControl.value, this.clube.CL_CLNOME).pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {nomeClubeInvalido: true} : null )
     );
   }
 
-  VerificaSiglaClube(SiglaClube:string){
+  VerificaSiglaClube(SiglaClube:string, SiglaClube2:string = "sigla"){
+    
     return this.clubeService.VerificaClube().pipe(
       delay(3000),
       map((dados: {clubes : any[]}) => dados.clubes),
       tap(console.log),
-      map((dados: {siglaClube : string}[]) => dados.filter(v => v.siglaClube.toUpperCase() === SiglaClube.toUpperCase())),
+      map((dados: {siglaClube : string}[]) => dados.filter(v => v.siglaClube.toUpperCase() === SiglaClube.toUpperCase() && v.siglaClube.toUpperCase() != SiglaClube2.toUpperCase())),
       tap(console.log ),
       map(dados => dados.length > 0),
       tap(console.log)
     )
   }
 
-  ValidaSiglaClube(formControl : FormControl)
+
+  ValidaSiglaClube(formControl : FormControl) 
   {
-    return this.VerificaSiglaClube(formControl.value).pipe(
+    return this.VerificaSiglaClube(formControl.value, this.clube.CL_CLSIGLA).pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {SiglaClubeInvalido: true} : null )
     );
@@ -171,7 +175,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
       CL_CLENDERECO: clube.CL_CLENDERECO,
       CL_CLCIDADE: clube.CL_CLCIDADE,
       CL_CLSIGLA: clube.CL_CLSIGLA,
-      // CL_CLEMBLEMA: clube.CL_CLEMBLEMA,
+      CL_CLEMBLEMA: clube.CL_CLEMBLEMA,
       CL_CLEMAIL: clube.CL_CLEMAIL,
       CL_CLATIVO: clube.CL_CLATIVO,
       CL_CLRESPONSAVEL: clube.CL_CLRESPONSAVEL,
@@ -221,7 +225,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     return sucesso;
   }
 
-  InserirClube(clube: Clube){
+  SalvarClube(clube: Clube){
     let msgSuccess = "Clube inserido com sucesso";
     let msgErro = "Erro ao incluir clube. Tente novamente";
     let msgQuestãoTitulo = "Confirmação de Inclusão"
@@ -237,11 +241,11 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     this.clubeSelecionado = clube;
 
-    if (clube.CL_CLEMBLEMA != ""){
+    if (clube.CL_CLEMBLEMA == ""){
+      clube.CL_CLEMBLEMA = DIR_CLUBE + this.image
+    }else if(clube.CL_CLID == null || this.fileToUpload != null){
       if (this.uploadFileToActivity() == true){
-          clube.CL_CLEMBLEMA = DIR_CLUBE + this.imageEscolhida
-      }else{
-        clube.CL_CLEMBLEMA = DIR_CLUBE + this.image
+        clube.CL_CLEMBLEMA = DIR_CLUBE + this.imageEscolhida
       }
     }
 

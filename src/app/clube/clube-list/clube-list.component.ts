@@ -8,7 +8,7 @@ import {ClubeService} from '../clube.service'
 import {ClubeListSortableHeader, SortEvent} from './sortable.directive';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalService} from '../../shared/alertmodal/alertmodal.service'
-import { take, switchMap } from 'rxjs/operators';
+import { take, switchMap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router'; 
 
 @Component({
@@ -32,7 +32,7 @@ export class ClubeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    delay(3000);
   }
 
   clubes$: Observable<Clube[]>;

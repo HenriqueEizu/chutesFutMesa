@@ -13,8 +13,16 @@
         &nbsp;
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
 
- 
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px"> Cadastro de Clubes</h5></div>
+</div>
 
 <div class="row">
     <div class="col-sm-2 col-xs-2">
@@ -22,11 +30,10 @@
     </div>
     
 <!-- {{clubeForm.valid}} -->
-    <div class="col-sm-8 col-xs-8 card bg-info text-red">
-        <div class="card-body"> <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px"> Cadastro de Clubes</div>
-        <div class="card">
-            <div class="card-body">
-                <h4>Inserir usuário</h4>
+    <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+        <!-- <div class="card">
+            <div class="card-body"> -->
+                <h4>Dados Clubes</h4>
                 <form [formGroup]="clubeForm" novalidate>  
                     <div class="row">
                         <div class="col-sm-2 col-xs-2">
@@ -197,7 +204,7 @@
                         &nbsp;
                     </div>
                     <div class="col-sm-8 col-xs-8">
-                        <button (click)="InserirClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" >
+                        <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" >
                             <i class="fa fa-save"></i> Salvar
                         </button>
                         
@@ -211,8 +218,8 @@
                         <span style="color: red;">{{message}}</span>
                     </div>
                 </div>
-            </div>
-        </div>
+            <!-- </div>
+        </div> -->
     </div>
 </div>
 

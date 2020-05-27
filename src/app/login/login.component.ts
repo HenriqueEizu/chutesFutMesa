@@ -47,18 +47,18 @@ export class LoginComponent implements OnInit {
       US_USSENHA: this.formBuilder.control('',[Validators.required, Validators.minLength(6)])
     })
   }
-
+ 
   VerificaUsuario(usuario: Usuario){
       this.usuarioService.VerificaUsuario(usuario)
         .subscribe((usuarioLocal: Usuario) => {
           this.usuarioLocal = usuarioLocal
           if (this.usuarioLocal == undefined || this.usuarioLocal == null){
-            this.handlerError();
+            
             // this.message = "Login ou Senha não conferem"
             this.loginForm.reset();
           }
           
-        },(error : any) => alert("erro"));
+        },(error : any) => this.handlerError());
   } 
   handlerError(){
     this.alertService.showAlertDanger("Login ou senha incorreta")

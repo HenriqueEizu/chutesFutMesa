@@ -13,16 +13,26 @@
         &nbsp;
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div> 
+
+  <div class="row">
+    <div class="col-sm-3 col-xs-3">&nbsp;</div>
+      <div class="col-sm-6 col-xs-6 badge badge-primary"> <h5><img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px"> Cadastro de Usuários </h5></div>
+  </div>
+  
   
   <div class="row">
     <div class="col-sm-3 col-xs-3">
       &nbsp;
     </div>
   
-    <div class="col-sm-7 col-xs-7 card bg-info text-red">
-      <div class="card-body">  <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px"> Usuarios</div>
-      <div class="card">
-        <div class="card-body">
+    <div class="col-sm-6 col-xs-6 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+      <!-- <div class="card"> -->
+        <!-- <div class="card-body"> -->
           <form>
             <div class="row">
               <div class="form-group form-inline">
@@ -40,7 +50,7 @@
             </div>
   
             <div class="row">
-              <div class="col-sm-12 col-xs-12">
+              <div class="col-sm-12 col-xs-12 table-responsive-xl">
                 <table class="table table-striped col-sm-12 col-xs-12">
                   <thead>
                   <tr>
@@ -62,7 +72,9 @@
                       </span>
                     </td>
                     <td>
-                        <ngb-highlight [result]="usuario.US_USNOMETRATAMENTO " [term]="service.searchTerm"></ngb-highlight>
+                      <span [tooltip]="usuario.US_USNOMETRATAMENTO" placement="top" show-delay="500">
+                        <ngb-highlight [result]="usuario.US_USNOMETRATAMENTO.substring(0,15) " [term]="service.searchTerm"></ngb-highlight>
+                      </span>
                     </td>
                     <td>
                       <span [tooltip]="usuario.OBJ_CLUBE.CL_CLNOME" placement="top" show-delay="500">
@@ -104,8 +116,8 @@
               </select>
             </div>  
           </form>
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
     </div>
   </div>
   <!-- <router-outlet></router-outlet>         -->

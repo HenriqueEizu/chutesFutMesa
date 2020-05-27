@@ -2,7 +2,7 @@ import {Usuario,GrupoUsuario} from "../usuario/usuario.model"
 import { Injectable, EventEmitter } from "@angular/core"
 import {Observable} from 'rxjs'
 import {MEAT_API} from '../app.api'
-import {catchError, tap, map, shareReplay,switchMap,retry,publishReplay, refCount} from  'rxjs/operators'
+import {catchError, tap, map, shareReplay,switchMap,retry,publishReplay, refCount, take} from  'rxjs/operators'
 import { HttpClient ,HttpClientModule,HttpResponse, HttpHeaders,HttpErrorResponse,HttpParams  } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
 import { Router } from '@angular/router'
@@ -68,8 +68,7 @@ export class UsuarioService{
   }
 
   AlterarUsuario(usuario : Usuario) : Observable<boolean>{
-    return null;
-    // return this.http.post<boolean>(`${MEAT_API}/usuario/Incluir` ,usuario)
+    return this.http.put<boolean>(`${MEAT_API}/usuario/Alterar/${usuario.US_USID}`,usuario).pipe(take(1));
   }
 
   ExcluirUsuario(id : number) : Observable<boolean>{
@@ -81,7 +80,7 @@ export class UsuarioService{
       return this.AlterarUsuario(usuario);
     }
     return this.InserirUsuario(usuario);
-  }
+  } 
 
   VerificaUsuario(usuario: Usuario): Observable<Usuario>{
     var usuarioLocal : Observable<Usuario>
