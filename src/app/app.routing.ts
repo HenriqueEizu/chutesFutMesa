@@ -16,8 +16,10 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 
 export const appRoutes: Routes = [
     {path: 'login', component : LoginComponent},
-    {path: 'usuario', component: UsuarioComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},  //canActivateChild
-    {path: 'home', component: HomeComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},
+    // {path: 'usuario', component: UsuarioComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},  //canActivateChild
+    // {path: 'home', component: HomeComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},
+    {path: 'home', component: HomeComponent},
+    
     { path: '', redirectTo : 'home', pathMatch: 'full'},
     // {path: 'clube', component: ClubeComponent,resolve:{clube :ClubeResolverGuard}},
     // {path: 'clube/:id',component : ClubeComponent,resolve:{ clube :ClubeResolverGuard}},

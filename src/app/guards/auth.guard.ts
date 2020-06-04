@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate, CanLoad{
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
     
-      if (this.VerificaLogin() == false){
+      if (this.VerificaLogin() == false ){
           this.route.navigate(['login']);
           this.blnLogado = false;
       }

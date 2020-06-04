@@ -62,4 +62,22 @@ insert into estados (UF_UFNOME,UF_UFSIGLA) values ('CEARA','CE');
 insert into estados (UF_UFNOME,UF_UFSIGLA) values ('MARANHÃP','MA');
 insert into estados (UF_UFNOME,UF_UFSIGLA) values ('PIAUI','PI');
 USE FUTMESACARTOLA;                
-SELECT * FROM ESTADOS;        
+SELECT * FROM ESTADOS;   
+
+USE FUTMESACARTOLA; 
+CREATE TABLE GRUPOUSUARIO 
+(
+	GU_GUID int AUTO_INCREMENT PRIMARY KEY,
+	GU_GUDESCRICAO  VARCHAR(300) not null,
+	CL_CLENDERECO  VARCHAR(300) null,
+	GU_GUATIVO  boolean,
+	CL_CLSIGLA  VARCHAR(5) not null,
+	GU_GUDATACADASTRO  Date );
+
+INSERT INTO grupousuario VALUES ('ADMINISTRADOR',1,NOW());
+INSERT INTO grupousuario VALUES ('CLUBE',1,NOW());
+INSERT INTO grupousuario VALUES ('USUARIO',1,NOW());
+INSERT INTO grupousuario VALUES ('JOGADOR',1,NOW());
+
+USE FUTMESACARTOLA; 
+SELECT * FROM grupousuario;     

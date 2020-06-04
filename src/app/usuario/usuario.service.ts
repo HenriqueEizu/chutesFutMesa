@@ -121,4 +121,19 @@ export class UsuarioService{
   logout() {                           // {4}
     this.loggedIn.next(false);
   }
+
+  EnviarEmail(strEmail:string){
+    const obj = {
+      email: strEmail,
+    };
+    return this.http.post(`${MEAT_API}/usuario/EnviarEmail`, obj);
+  }
+
+  TrocarSenha(strSenha:string, strGuide:string){
+    const obj = {
+      senha: strSenha, 
+      guide: strGuide
+    };
+    return this.http.post(`${MEAT_API}/usuario/TrocarSenha`, obj);
+  }
 }

@@ -65,19 +65,18 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-9 col-xs-9" style="margin-left: 15px;">
-					<a href="#">Esqueceu a senha</a>
+				<div class="col-md-9 col-xs-9" style="margin-left: 15px; cursor: pointer; ">
+					<a (click)="ResetSenha()"  >Esqueceu a senha</a>
 				</div>
 				<div class="col-md-3 col-xs-3"></div>
 			</div>
 			<div class="row" class="col-md-12  col-xs-12 ">&nbsp;  <br></div>
 			<div class="row">
-				<div class="col-md-9 col-xs-9" style="margin-left: 15px;">
-					<a href="#">Ou Cadastre-se</a>
-					<!-- <a [routerLink]="['/usuario']" ><b>Meat</b></a>
-					<a [routerLink]="['/login']" ><b>Meat</b></a> -->
+				<div class="col-md-12 col-xs-12">
+					<button (click)="Cadastrousuario()"type="button" class="btn btn-danger pull-right btn-block" >
+						<i class="fa fa-user"></i> Cadastre-se
+					</button>
 				</div>
-				<div class="col-md-3 col-xs-3"></div>
 			</div>
 		</div>
 		<div class="col-md-5 col-xs-5">&nbsp; </div>

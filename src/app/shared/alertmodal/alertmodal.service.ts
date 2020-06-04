@@ -1,3 +1,5 @@
+import { ResetSenhaComponent } from './../../usuario/reset-senha/reset-senha.component';
+import { UsuarioInicialComponent } from './../../usuario/usuario-inicial/usuario-inicial.component';
 import { Injectable } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalComponent} from './alertmodal.component'
@@ -13,7 +15,7 @@ export enum AlertTypes{
 @Injectable({
   providedIn: 'root'
 })
-export class AlertModalService {
+export class AlertModalService { 
 
   constructor(private modalService: BsModalService) { }
 
@@ -43,5 +45,15 @@ export class AlertModalService {
     }
 
     return (<ConfirmModalComponent>bsModalRef.content).confirmResult;
+  }
+
+  Cadastrousuario(){
+    const bsModalRef: BsModalRef = this.modalService.show(UsuarioInicialComponent);
+    return (<UsuarioInicialComponent>bsModalRef.content).confirmResult;
+  }
+
+  ResetSenha(){
+    const bsModalRef: BsModalRef = this.modalService.show(ResetSenhaComponent);
+    return (<ResetSenhaComponent>bsModalRef.content).confirmResult;
   }
 }

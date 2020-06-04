@@ -3,7 +3,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors, FormControl } from '@angular/forms'
 import {Usuario,GrupoUsuario} from './usuario.model'
 import { formatDate,DatePipe,registerLocaleData} from "@angular/common";
-import {Observable, EMPTY} from 'rxjs'
+import {Observable, EMPTY, Subject} from 'rxjs'
 import {Router, ActivatedRoute} from '@angular/router'
 import localeBR from "@angular/common/locales/br";
 import { IFormCanDeactivate } from '../guards/form-deactivate';
@@ -34,6 +34,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
   usuarioExiste : Observable<Usuario>;
   usuarioCarregado : Usuario;
   usuario : any;
+  confirmResult : Subject<boolean>;
 
   constructor(private usuarioService: UsuarioService
                , private clubeService: ClubeService
@@ -84,7 +85,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
     },{validator:UsuarioComponent.equalsTo})
   }
 
-  Verificalogin(Login:string, Login2:string = "login"){
+  Verificalogin(Login:string, Login2 :string = "login"){
     return this.usuarioService.VerificaLogin().pipe(
       delay(3000),
       map((dados: {usuarios : any[]}) => dados.usuarios),
@@ -98,7 +99,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   ValidaLogin(formControl : FormControl)
   {
-    return this.Verificalogin(formControl.value, this.usuario.US_USLOGIN).pipe(
+    return this.Verificalogin(formControl.value, this.usuario.US_USLOGIN != null ? this.usuario.US_USLOGIN : "").pipe(
       tap(console.log),
       map(loginExiste => loginExiste ? {loginInvalido: true} : null )
     );
@@ -118,7 +119,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
 
   ValidaEmail(formControl : FormControl)
   {
-    return this.VerificaEmail(formControl.value, this.usuario.US_USEMAIL).pipe(
+    return this.VerificaEmail(formControl.value, this.usuario.US_USEMAIL != null ? this.usuario.US_USEMAIL : "").pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {emailInvalido: true} : null )
     );
@@ -151,7 +152,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       msgBotao = "Alterar"
       if (this.usuario.US_USSENHA == usuario.US_USSENHA) { usuario.US_USSENHA = null}
     }
-    
+     
     usuario.US_USDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()

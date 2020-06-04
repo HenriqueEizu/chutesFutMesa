@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UsuarioService} from  '../usuario/usuario.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cft-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  title = 'chutesfutmesa';
+  isLoggedIn$: Observable<boolean>;
+  blnLogado : boolean = false;
+  // mostrarMenuEmmiter : boolean = false;
+
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    this.usuarioService.isLoggedIn.subscribe((bl : boolean) => { this.blnLogado = bl});
   }
 
 }

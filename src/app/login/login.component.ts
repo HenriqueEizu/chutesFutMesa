@@ -68,4 +68,13 @@ export class LoginComponent implements OnInit {
     this.loggedIn.next(false);
   }
 
+  Cadastrousuario(){
+    const result$ = this.alertService.Cadastrousuario();
+  }
+
+  ResetSenha(){
+    const result$ = this.alertService.ResetSenha();
+  }
+  
+
 }

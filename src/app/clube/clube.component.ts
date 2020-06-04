@@ -133,7 +133,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
   ValidaNomeClube(formControl : FormControl)
   {
-    return this.VerificaNomeClube(formControl.value, this.clube.CL_CLNOME).pipe(
+    return this.VerificaNomeClube(formControl.value, this.clube.CL_CLNOME != null ? this.clube.CL_CLNOME : ""  ).pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {nomeClubeInvalido: true} : null )
     );
@@ -155,7 +155,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
   ValidaSiglaClube(formControl : FormControl) 
   {
-    return this.VerificaSiglaClube(formControl.value, this.clube.CL_CLSIGLA).pipe(
+    return this.VerificaSiglaClube(formControl.value, this.clube.CL_CLSIGLA != null ? this.clube.CL_CLSIGLA : "").pipe(
       tap(console.log),
       map(emailExiste => emailExiste ? {SiglaClubeInvalido: true} : null )
     );

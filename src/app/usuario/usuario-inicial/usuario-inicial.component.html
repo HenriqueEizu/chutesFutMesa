@@ -1,0 +1,105 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title"><img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px"> Cadastro de Usuários</h5>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="usuarioForm" novalidate>        
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div> 
+                <div class="col-sm-3 col-xs-3">
+                        Login:
+                </div>
+                <div class="col-sm-5  col-xs-5">
+                    <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="login do usuário">
+                        <input name="US_USLOGIN" class="form-control" formControlName="US_USLOGIN" autocomplete="off" placeholder="Login">
+                    </cft-input>
+                </div>
+                <div class="col-xs-12 col-sm-2" >
+                    <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.get('US_USLOGIN').hasError('loginInvalido')" style="color:red"><i class="fa fa-remove"></i> Login já existente</span>
+                  </div> 
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Senha:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                        <input type="password" name="US_USSENHA" class="form-control" formControlName="US_USSENHA" autocomplete="off" placeholder="Senha">
+                    </cft-input>
+                </div>
+                <div class="col-xs-12 col-sm-2" >
+                    <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.hasError('senhaNoMatch')" style="color:red"><i class="fa fa-remove"></i> Senhas não conferem</span>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Confirma Senha:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Senha do usuário">
+                        <input type="password" name="US_USSENHA_CONFIRMA" class="form-control" formControlName="US_USSENHA_CONFIRMA" autocomplete="off" placeholder="Confirma Senha">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Nome Usuário:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Nome do usuário">
+                        <input name="US_USNOMETRATAMENTO" class="form-control" formControlName="US_USNOMETRATAMENTO" autocomplete="off" placeholder="Nome do Usuário">
+                    </cft-input>
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Email Usuário:
+                </div>
+                <div class="col-sm-5 col-xs-5" >
+                    <cft-input errorMessage="Formato de email inexistente " label="Email usuário">
+                        <input name="US_USEMAIL" class="form-control" formControlName="US_USEMAIL" autocomplete="off" placeholder="Email Usuário">
+                    </cft-input>
+                </div>
+                <div class="col-xs-12 col-sm-2" >
+                    <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.get('US_USEMAIL').hasError('emailInvalido')" style="color:red"><i class="fa fa-remove"></i> Email já existente</span>
+                  </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="SalvarUsuario(usuarioForm.value)"type="button" class="btn btn-primary " [disabled]="!usuarioForm.valid" >
+            <i class="fa fa-save"></i> Salvar
+        </button> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose() ">Cancelar</button>
+        
+    </div>
+</div>
+<!-- <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja Inserir este Clube?</p>
+      <button type="button" class="btn btn-default"  (click) = "onConfirmInsert()">Yes</button>
+      <button type="button" class="btn btn-primary"  (click) = "onDeclineInsert()">No</button>
+    </div>
+  </ng-template> -->
+

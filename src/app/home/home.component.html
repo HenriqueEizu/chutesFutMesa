@@ -1,12 +1,27 @@
-<!-- <section class="content-header"> -->
-    <!-- <cft-header></cft-header> -->
-<!-- </section> -->
-<section class="content">
-    <div class="jumbotron welcome-jumbotron">
-        <h1>Bem vindo ao Meat!</h1>
-        <p>
-          Está com fome? Peça e receba em casa
-        </p>
-        <a class="btn btn-primary btn-lg" [routerLink]="['/usuario']">Ver restaurantes</a>
+<div *ngIf="blnLogado == false ">
+  <nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto"></ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a [routerLink]="['/login']" class="fa fa-user"> Login </a>
+        </li>
+    </ul>
     </div>
-  </section>
+  </nav>
+</div>
+
+
+<section class="content">
+  <div  class="jumbotron welcome-jumbotron" style="height: 600px;">
+      <h1>Bem vindo ao Chutes FutMesa!</h1>
+      <p *ngIf="blnLogado == false" >Quer jogar com a gente? Cadastre- se agora !! </p>
+      <p *ngIf="blnLogado == true" >Começe jogar agora !! </p>
+      <a *ngIf="blnLogado == false" class="btn btn-primary btn-lg" [routerLink]="['/login']"> Entre Aqui</a>
+      <a *ngIf="blnLogado == true" class="btn btn-primary btn-lg" [routerLink]="['/login']"> Jogar Aqui</a>
+  </div>
+</section>
