@@ -111,12 +111,12 @@ export class ResetSenhaComponent implements OnInit {
 
       this.usuarioService.EnviarEmail(usuario.US_USEMAIL).subscribe(
           success => {
-                      this.showAlertSuccess("Jogador inserido com sucesso");
+                      this.showAlertSuccess("Email enviado com sucesso");
                       this.onClose();
                       this.router.navigate(['login'])
                       },
           error =>  {
-                    this.showAlertDanger("Erro ao inserir Jogador") ;
+                    this.showAlertDanger("Erro ao enviar email. Tente novamente.") ;
                     this.onClose();
                     this.router.navigate(['login'])
                     }

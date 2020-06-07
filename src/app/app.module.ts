@@ -40,6 +40,7 @@ import { UsuarioModule} from './usuario/usuario.module'
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactive.guard';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { JogadorModule } from './jogadores/jogador.module';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     DiretivasCustomizadasComponent,
     ExemplosPipeComponent,
     CamelCasePipe,
+    
     
     
     // InputComponent
@@ -79,6 +81,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     // TooltipModule,
     ClubeModule,
     UsuarioModule,
+    JogadorModule,
     AppRoutingModule,
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,

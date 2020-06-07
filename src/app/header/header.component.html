@@ -1,4 +1,5 @@
-<nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+<!-- <nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"> -->
+  <nav  class="navbar navbar-expand-md bg-dark navbar-grey fixed-top">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,20 +8,25 @@
       <ul class="navbar-nav mr-auto">
   
         <li class="nav-item">
-          <a class="nav-link" routerLink="">Home</a>
+          <a class="nav-link" routerLink=""><i class="fa fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['listausuarios']">
-            <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 30px">  Usuarios</a>
+            <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Usuarios</a>
         </li>
         <li class="nav-item">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/clubes']">
-            <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px; color: white;">
+            <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i> Clubes</a>
         </li>
         <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/jogadores']">
+            <img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Jogadores</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/clubes" [queryParams]="{pagina:1}">
-            <i class="fa fa-app-store"></i> queryStrings</a>
+            <i class="fa fa-app-store"></i> Jogadores</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/diretivasCuston']">
@@ -39,14 +45,23 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#" class="fa fa-cog"> {{usuarioLogado.US_USNOMETRATAMENTO}}  </a>
+          <div class="row">
+            <div class="col">
+              <div ngbDropdown >
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img src="/assets/images/icons/userlogo1.png" class="mr-2" style="width: 20px; color: white;">{{usuarioLogado.US_USNOMETRATAMENTO}}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem>Action - 1</button>
+                  <button ngbDropdownItem>Another Action</button>
+                  <button ngbDropdownItem>Something else is here</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
         <li>
-            <a href="#" (click)="logout()" >logout</a>
-            
-          </li>
-        <li>
-          <a href="#" class="fa fa-home"></a>
+            <a href="#" (click)="logout()" > &nbsp;&nbsp;&nbsp;logout
+              <img src="/assets/images/icons/sair.png" class="mr-2" style="width: 20px; color: white;">
+              </a>
         </li>
      </ul>
      <!-- <cft-input errorMessage="Grupo usuario deve ser preenchido " label="Grupo de usuário">

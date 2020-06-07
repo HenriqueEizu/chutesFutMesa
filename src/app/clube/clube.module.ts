@@ -18,5 +18,5 @@ import { ClubeResolverGuard } from './guards/clube.resolver.guard';
   declarations: [ClubeComponent,ClubeListComponent,ClubeListSortableHeader],
   providers: [ClubeService, ClubeResolverGuard],
 })
-export class ClubeModule {}
+export class ClubeModule {} 
 

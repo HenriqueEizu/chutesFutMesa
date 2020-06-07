@@ -6,13 +6,13 @@ import { formatDate,DatePipe,registerLocaleData} from "@angular/common";
 import {Observable, EMPTY, Subject} from 'rxjs'
 import {Router, ActivatedRoute} from '@angular/router'
 import localeBR from "@angular/common/locales/br";
+import { delay, map, tap, filter, take, switchMap } from 'rxjs/operators';
 import { IFormCanDeactivate } from '../guards/form-deactivate';
 registerLocaleData(localeBR, "br");
 
 import { Clube } from '../clube/clube.model';
 import {UsuarioService} from './usuario.service'
 import { ClubeService } from './../clube/clube.service';
-import { delay, map, tap, filter, take, switchMap } from 'rxjs/operators';
 import { AlertModalService } from '../shared/alertmodal/alertmodal.service';
 
 
@@ -61,7 +61,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
     this.clubeService.GetAllClube().subscribe((cls : Clube[]) =>{
       this.clubes = cls;
     })
-
+ 
     this.usuario = this.route.snapshot.data['usuario'];
 
     this.usuarioLocal = this.usuario;

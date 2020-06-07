@@ -6,28 +6,28 @@ import { take, switchMap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router'; 
 
 import { AlertModalService} from '../../shared/alertmodal/alertmodal.service'
-import {Clube} from '../clube.model';
-import {ClubeListService} from './clube-list.service';
-import {ClubeService} from '../clube.service'
-import {ClubeListSortableHeader, SortEvent} from './sortable.directive';
+import {Jogador} from '../jogador.model';
+import {JogadorListService} from './jogador-list.service';
+import {JogadorService} from '../jogador.service'
+import {JogadorListSortableHeader, SortEvent} from './sortable.directive';
 
 @Component({
-  selector: 'cft-clube-list',
-  templateUrl: './clube-list.component.html',
-  styleUrls: ['./clube-list.component.css'],
-  providers: [ClubeListService, DecimalPipe]
+  selector: 'cft-jogador-list',
+  templateUrl: './jogador-list.component.html',
+  styleUrls: ['./jogador-list.component.css'],
+  providers: [JogadorListService, DecimalPipe]
 })
-export class ClubeListComponent implements OnInit {
+export class JogadorListComponent implements OnInit {
 
   insertModalRef : BsModalRef;
   @ViewChild('template') template;
 
-  constructor(public service: ClubeListService,
+  constructor(public service: JogadorListService,
         private modalService: BsModalService,
         private alertService: AlertModalService,
-        private clubeService : ClubeService,
+        private jogadorService : JogadorService,
         private router: Router) {
-    this.clubes$ = service.clubes$;
+    this.jogadores$ = service.jogadores$;
     this.total$ = service.total$;
   }
  
@@ -35,10 +35,10 @@ export class ClubeListComponent implements OnInit {
     delay(3000);
   }
 
-  clubes$: Observable<Clube[]>;
+  jogadores$: Observable<Jogador[]>;
   total$: Observable<number>;
 
-  @ViewChildren(ClubeListSortableHeader) headers: QueryList<ClubeListSortableHeader>;
+  @ViewChildren(JogadorListSortableHeader) headers: QueryList<JogadorListSortableHeader>;
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers
@@ -52,12 +52,12 @@ export class ClubeListComponent implements OnInit {
     this.service.sortDirection = direction;
   }
 
-  ExcluiClube(id: number){
+  ExcluiJogador(id: number){
     const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este clube?","Fechar","Excluir");
     result$.asObservable()
     .pipe(
       take(1),
-      switchMap(result => result ? this.clubeService.ExcluirClube(id) : EMPTY)
+      switchMap(result => result ? this.jogadorService.ExcluirJogador(id) : EMPTY)
     ).subscribe(
       success => {  
                    this.alertService.showAlertSuccess("Clube excluir com sucesso");

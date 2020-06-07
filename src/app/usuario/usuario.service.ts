@@ -1,11 +1,13 @@
-import {Usuario,GrupoUsuario} from "../usuario/usuario.model"
+
 import { Injectable, EventEmitter } from "@angular/core"
 import {Observable} from 'rxjs'
-import {MEAT_API} from '../app.api'
 import {catchError, tap, map, shareReplay,switchMap,retry,publishReplay, refCount, take} from  'rxjs/operators'
 import { HttpClient ,HttpClientModule,HttpResponse, HttpHeaders,HttpErrorResponse,HttpParams  } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
 import { Router } from '@angular/router'
+
+import {MEAT_API} from '../app.api'
+import {Usuario,GrupoUsuario} from "../usuario/usuario.model"
 
 
 @Injectable() 
@@ -120,7 +122,7 @@ export class UsuarioService{
 
   logout() {                           // {4}
     this.loggedIn.next(false);
-  }
+  } 
 
   EnviarEmail(strEmail:string){
     const obj = {

@@ -10,7 +10,7 @@ import { TrocaSenhaComponent } from './troca-senha/troca-senha.component'
 
 
 
-export const clubeRoutes: Routes = [
+export const usuarioRoutes: Routes = [
     {path: 'usuario', component: UsuarioComponent,resolve:{usuario :UsuarioResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},
     {path: 'usuario/:id',component : UsuarioComponent,resolve:{ usuario :UsuarioResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
     {path: 'listausuarios', component: UsuarioListComponent,canActivate : [AuthGuard],canLoad:[AuthGuard]},
@@ -21,7 +21,7 @@ export const clubeRoutes: Routes = [
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forChild(clubeRoutes)],
+  imports: [RouterModule.forChild(usuarioRoutes)],
   exports: [RouterModule]
 })
 export class UsuarioRouting { }

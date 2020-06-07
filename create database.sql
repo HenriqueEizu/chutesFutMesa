@@ -13,7 +13,11 @@ create table Usuario (
         US_USDATACADASTRO  Date);
 ALTER TABLE Usuario ADD UNIQUE (US_USLOGIN);
 ALTER TABLE Usuario ADD UNIQUE (US_USEMAIL);
+
 use futmesacartola;
+ALTER TABLE Usuario ADD CONSTRAINT FK_Usuario_Clube FOREIGN KEY (US_CLID) REFERENCES Clubes(CL_CLID); 
+ALTER TABLE Usuario ADD CONSTRAINT FK_Usuario_Grupousuario FOREIGN KEY (US_GUID) REFERENCES GRUPOUSUARIO(GU_GUID);
+
 create table Clubes (
 		CL_CLID int AUTO_INCREMENT PRIMARY KEY,
 		CL_CLNOME  VARCHAR(300) not null,
@@ -27,6 +31,11 @@ create table Clubes (
         CL_CLRESPONSAVEL VARCHAR(300) not null,
         CL_CLDATACADASTRO  Date,
         CL_CLTELEFONE varchar(300));
+use futmesacartola;
+ALTER TABLE Clubes ADD CONSTRAINT FK_Clube_Estados FOREIGN KEY (CL_CLUF) REFERENCES estados(UF_UFSIGLA);
+use futmesacartola;
+INSERT INTO CLUBES (CL_CLNOME,CL_CLENDERECO,CL_CLCIDADE,CL_CLUF,CL_CLATIVO,CL_CLSIGLA,CL_CLEMBLEMA,CL_CLEMAIL,CL_CLRESPONSAVEL,CL_CLDATACADASTRO,CL_CLTELEFONE )
+VALUES ('Fedeeração Paulista de Futebol de Mesa','Rua Costa Aguiar, 232 - Ipiranga','São Paulo - Ipiranga','SP',1,'FPFM','assets/images/logos clubes/fpfm.png','FUTMESA@FUTMESA.COM.BR','FARAH12','2020-05-25','12121');
 
 use futmesacartola;
 create table estados (
@@ -79,5 +88,23 @@ INSERT INTO grupousuario VALUES ('CLUBE',1,NOW());
 INSERT INTO grupousuario VALUES ('USUARIO',1,NOW());
 INSERT INTO grupousuario VALUES ('JOGADOR',1,NOW());
 
+USE FUTMESACARTOLA;
+CREATE TABLE Jogador (
+        JO_JOID int AUTO_INCREMENT PRIMARY KEY,
+        JO_JONOME VARCHAR(300) not null,
+        JO_JOFOTO VARCHAR(300) ,
+        JO_JOAPELIDO VARCHAR(50) not null,
+        JO_JOATIVO boolean,
+        JO_CLID int,
+        JO_JODATACADASTRO Date
+    );
+
 USE FUTMESACARTOLA; 
-SELECT * FROM grupousuario;     
+ALTER TABLE Jogador ADD CONSTRAINT FK_Jogador_clubes FOREIGN KEY (JO_CLID) REFERENCES Clubes(CL_CLID);
+
+USE FUTMESACARTOLA;
+INSERT INTO Jogador ( JO_JONOME,JO_JOFOTO,JO_JOAPELIDO,JO_JOATIVO, JO_CLID,JO_JODATACADASTRO) VALUES ('Jorge Farah',null,'Farah', 1, 1, '2020-08-07');   
+
+USE FUTMESACARTOLA;
+
+

@@ -24,3 +24,4 @@ import { TrocaSenhaComponent } from './troca-senha/troca-senha.component';
 })
 export class UsuarioModule {}
 
+ 
