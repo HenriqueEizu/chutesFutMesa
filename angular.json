@@ -26,10 +26,13 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/font-awesome/css/font-awesome.css"
-
+              "src/assets/font-awesome/css/font-awesome.css",
+              "node_modules/jquery-typeahead/src/jquery.typeahead.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "scripts": ["node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jquery-typeahead/src/jquery.typeahead.js"
+              ]
           },
           "configurations": {
             "production": {

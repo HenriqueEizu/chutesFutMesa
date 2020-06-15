@@ -25,8 +25,14 @@
             <i class="fa fa-app-store"></i>Jogadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/clubes" [queryParams]="{pagina:1}">
-            <i class="fa fa-app-store"></i> Jogadores</a>
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/jogo']">
+            <img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Jogos</a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicao']">
+            <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Competições</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/diretivasCuston']">

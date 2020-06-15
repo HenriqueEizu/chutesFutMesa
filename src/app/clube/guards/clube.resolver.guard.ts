@@ -33,5 +33,5 @@ constructor(private service: ClubeService){}
 
         });
     }
-  
-}
+   
+} 

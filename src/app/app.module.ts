@@ -41,47 +41,38 @@ import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactive.guard';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { JogadorModule } from './jogadores/jogador.module';
+import { JogosModule} from './jogos/jogos.module';
+import { CompeticaoModule} from './competicao/competicao.module'
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    // UsuarioComponent,
     PaginaNaoEncontradaComponent,
     HeaderComponent,
     HomeComponent,
-    // ClubeComponent,
-    // ClubeListComponent,
-    // ClubeListSortableHeader,
-    // UsuarioListComponent,
     DiretivasCustomizadasComponent,
     ExemplosPipeComponent,
     CamelCasePipe,
-    
-    
-    
-    // InputComponent
   ],
   imports: [
     BrowserModule,
     
     FormsModule,
     ReactiveFormsModule, 
-    // HttpModule,
     CommonModule,
     RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules}),
     FontAwesomeModule,
     HttpClientModule,
     ModalModule.forRoot(),
-    // Ng2SearchPipeModule,
-    // NgxPaginationModule,
     SharedModule.forRoot(),
-    // NgbModule,
-    // TooltipModule,
     ClubeModule,
     UsuarioModule,
     JogadorModule,
+    JogosModule,
+    CompeticaoModule,
     AppRoutingModule,
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,

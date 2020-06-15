@@ -2,14 +2,14 @@ import {Injectable, PipeTransform} from '@angular/core';
 
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
-import {Clube} from '../clube.model';
-import {ClubeService} from '../clube.service';
+import {Jogos} from '../jogos.model';
+import {JogosService} from '../jogos.service';
 import {DecimalPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap, take} from 'rxjs/operators';
 import {SortColumn, SortDirection} from './sortable.directive';
 
 interface SearchResult {
-  clubes: Clube[];
+  jogos: Jogos[];
   total: number;
 }
 
@@ -23,31 +23,32 @@ interface State {
 
 const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(clubes: Clube[], column: SortColumn, direction: string): Clube[] {
+function sort(jogos: Jogos[], column: SortColumn, direction: string): Jogos[] {
   if (direction === '' || column === '') {
-    return clubes;
+    return jogos;
   } else {
-    return [...clubes].sort((a, b) => {
+    return [...jogos].sort((a, b) => {
       const res = compare(`${a[column]}`, `${b[column]}`);
       return direction === 'asc' ? res : -res;
     });
   }
 }
 
-function matches(clube: Clube, term: string, pipe: PipeTransform) {
-  return clube.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
-    || clube.CL_CLEMAIL.toLowerCase().includes(term.toLowerCase())
-    || clube.CL_CLRESPONSAVEL.toLowerCase().includes(term.toLowerCase())
-    || clube.CL_CLSIGLA.toLowerCase().includes(term.toLowerCase())
+function matches(jogo: Jogos, term: string, pipe: PipeTransform) {
+  return jogo.JG_JGDATA
+    || jogo.OBJ_JOGADOR1.JO_JOAPELIDO.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_JOGADOR2.JO_JOAPELIDO.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_JOGADOR1.OBJ_CLUBE.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_JOGADOR2.OBJ_CLUBE.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
 }
 
 @Injectable({providedIn: 'root'})
-export class ClubeListService {
+export class JogosListService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _clubes$ = new BehaviorSubject<Clube[]>([]);
+  private _jogos$ = new BehaviorSubject<Jogos[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-  public CLUBES : Clube[];
+  public JOGOS : Jogos[];
 
   private _state: State = {
     page: 1,
@@ -58,26 +59,26 @@ export class ClubeListService {
   };
 
   constructor(private pipe: DecimalPipe,
-              private clubeServ : ClubeService) {
+              private jogosServ : JogosService) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
       switchMap(() => this._search()),
       delay(200),
-      tap(() => this._loading$.next(false)) 
+      tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._clubes$.next(result.clubes);
+      this._jogos$.next(result.jogos);
       this._total$.next(result.total);
     });
 
-    this.clubeServ.GetAllClube().subscribe((es : Clube[]) => {
-      this.CLUBES = es});
+    this.jogosServ.GetAllJogos().subscribe((es : Jogos[]) => {
+      this.JOGOS = es});
 
     this._search$.next();
   
   }
 
-  get clubes$() { return this._clubes$.asObservable(); }
+  get jogos$() { return this._jogos$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -101,18 +102,18 @@ export class ClubeListService {
 
     var search$ : Observable<SearchResult>;
  
-    let clubes = sort(this.CLUBES, sortColumn, sortDirection);
+    let jogos = sort(this.JOGOS, sortColumn, sortDirection);
 
     // 2. filter
-    clubes = clubes.filter(clube => matches(clube, searchTerm, this.pipe));
-    const total = clubes.length; 
+    jogos = jogos.filter(jogos => matches(jogos, searchTerm, this.pipe));
+    const total = jogos.length; 
 
     // 3. paginate
-    clubes = clubes.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    jogos = jogos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
 
-    search$ = of({clubes, total})
+    search$ = of({jogos, total})
 
-    return of({clubes, total});
+    return of({jogos, total});
     
   }
 }

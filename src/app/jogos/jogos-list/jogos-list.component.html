@@ -21,7 +21,7 @@
 
   <div class="row">
     <div class="col-sm-3 col-xs-3">&nbsp;</div>
-      <div class="col-sm-6 col-xs-6 badge badge-primary"> <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Cadastro de Jogadores </h5></div>
+      <div class="col-sm-6 col-xs-6 badge badge-primary"> <h5><img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 30px"> Cadastro de Jogos </h5></div>
   </div>
   
   
@@ -39,9 +39,9 @@
                 </div>
                 <div class="col-sm-2 col-xs-2"></div>
                 <div class="col-sm-4 col-xs-4">
-                <a class="nav-link" [routerLink]="['/jogador']">
-                    <span tooltip="Adicionar Jogador" placement="top" show-delay="500">
-                    <img src="/assets/images/icons/add.png" class="mr-2" style="width: 30px"> Jogador
+                <a class="nav-link" [routerLink]="['/jogo']">
+                    <span tooltip="Adicionar Jogo" placement="top" show-delay="500">
+                    <img src="/assets/images/icons/add.png" class="mr-2" style="width: 30px"> Jogo
                     </span> 
                     </a>
                 </div>
@@ -52,33 +52,33 @@
                 <table class="table table-striped col-sm-12 col-xs-12">
                     <thead>
                     <tr>
-                        <th scope="col" sortable="JO_JONOME" (sort)="onSort($event)">Nome Jog.</th>
-                        <th scope="col" sortable="JO_JOAPELIDO" (sort)="onSort($event)">Apelido</th>
-                        <th scope="col" sortable="OBJ_CLUBE.CL_CLNOME" (sort)="onSort($event)">Clube</th>
+                        <th scope="col" sortable="JG_JGDATA" (sort)="onSort($event)">Nome Jog.</th>
+                        <th scope="col" sortable="OBJ_JOGADOR1.JO_JOAPLEIDO" (sort)="onSort($event)">jogador</th>
+                        <th scope="col" sortable="OBJ_JOGADOR2.JO_JOAPLEIDO" (sort)="onSort($event)">jogador</th>
                         <th scope="col">Ação</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let jogador of jogadores$ | async">
+                    <tr *ngFor="let jogo of jogos$ | async">
                         <td>
-                            <img [src]="jogador.JO_JOFOTO" class="mr-2" style="width: 30px">
-                            <span [tooltip]="jogador.JO_JONOME" placement="top" show-delay="500">
-                            <ngb-highlight [result]="jogador.JO_JONOME.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
+                            <img [src]="jogo.JO_JOFOTO" class="mr-2" style="width: 30px">
+                            <span [tooltip]="jogo.JO_JONOME" placement="top" show-delay="500">
+                            <ngb-highlight [result]="jogo.JO_JONOME.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
                             </span>
                         </td>
                         <td>
-                            <span [tooltip]="jogador.JO_JOAPELIDO" placement="top" show-delay="500">
-                            <ngb-highlight [result]="jogador.JO_JOAPELIDO.substring(0,15) " [term]="service.searchTerm"></ngb-highlight>
+                            <span [tooltip]="jogo.JO_JOAPELIDO" placement="top" show-delay="500">
+                            <ngb-highlight [result]="jogo.JO_JOAPELIDO.substring(0,15) " [term]="service.searchTerm"></ngb-highlight>
                             </span>
                         </td>
                         <td>
-                            <span [tooltip]="jogador.OBJ_CLUBE.CL_CLNOME" placement="top" show-delay="500">
-                            <img [src]="jogador.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                            <span [tooltip]="jogo.OBJ_CLUBE.CL_CLNOME" placement="top" show-delay="500">
+                            <img [src]="jogo.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
                             </span>
                         </td>
                         <td>
-                            <a class="nav-link" [routerLink]="['/jogador',jogador.JO_JOID]">
+                            <a class="nav-link" [routerLink]="['/jogo',jogo.JO_JOID]">
                             <span tooltip="Editar" placement="top" show-delay="500">
                                 <i class="fa fa-edit"></i>
                             </span> 

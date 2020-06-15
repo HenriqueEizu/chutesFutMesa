@@ -1,7 +1,7 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import {Clube} from '../clube.model';
+import {Jogos} from '../jogos.model';
 
-export type SortColumn = keyof Clube | '';
+export type SortColumn = keyof Jogos | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 
@@ -13,12 +13,12 @@ export interface SortEvent {
 @Directive({
   selector: 'th[sortable]',
   host: {
-    '[class.asc]': 'direction === "asc"', 
+    '[class.asc]': 'direction === "asc"',
     '[class.desc]': 'direction === "desc"',
     '(click)': 'rotate()'
   }
 })
-export class ClubeListSortableHeader {
+export class JogosListSortableHeader {
 
   @Input() sortable: SortColumn = '';
   @Input() direction: SortDirection = '';

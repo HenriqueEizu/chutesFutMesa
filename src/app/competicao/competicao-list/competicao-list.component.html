@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+  </div> 
+   
+  <div class="row">
+    <div class="col-sm-1 col-xs-1">&nbsp;</div>
+      <div class="col-sm-10 col-xs-10 badge badge-primary"> <h5> <img src="/assets/images/icons/competicao1.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5></div>
+  </div>
+  
+  <div class="row ">
+  
+    <div class="col-sm-1 col-xs-1">
+      &nbsp;
+    </div>
+  
+    <!-- <div class="col-sm-7 col-xs-7 card bg-info text-red"> -->
+      
+      <!-- <div class="card">
+        <div class="card-body"> -->
+        <div class="col-sm-10 col-xs-10 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+          <form>
+            <div class="row">
+              <div class="form-group form-inline">
+                  Filtro: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+                  <span class="ml-3" *ngIf="service.loading$ | async">Carregando...</span>
+              </div>
+              <div class="col-sm-2 col-xs-2"></div>
+              <div class="col-sm-4 col-xs-4">
+                <a class="nav-link" [routerLink]="['/clube']">
+                  <span tooltip="Adicionar Competicao" placement="top" show-delay="500">
+                    <img src="/assets/images/icons/add.png" class="mr-2" style="width: 30px"> Competicao
+                    </span> 
+                    </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-xs-12 table-responsive-xl">
+                <table class="table table-striped col-sm-12 col-xs-12">
+                  <thead>
+                  <tr>
+                    <th scope="col" sortable="CP_CPDESCRICAO" (sort)="onSort($event)">Competicao</th>
+                    <th scope="col" sortable="OBJ_Rodada.RO_RODESCRICAO" (sort)="onSort($event)">Rodada</th>
+                    <th scope="col" sortable="OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO" (sort)="onSort($event)">Responsável</th>
+                    <th scope="col" sortable="CP_CPDATAINICIO" (sort)="onSort($event)">Telefone</th> 
+                    <th scope="col" sortable="CP_CPDATALIMITEAPOSTA" (sort)="onSort($event)">Cidade</th>
+                    <th scope="col">Ação</th>
+                    <th scope="col">Ação</th>
+  
+                  </tr> 
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let competicao of competicoes$ | async">
+                    <td>
+                      <img [src]="competicao.CL_CLFOTO" class="mr-2" style="width: 30px">
+                      <span [tooltip]="competicao.CP_CPDESCRICAO" placement="top" show-delay="500">
+                        <ngb-highlight [result]="competicao.CP_CPDESCRICAO.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
+                      </span>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="competicao.RO_RODESCRICAO " [term]="service.searchTerm"></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="competicao.CJ_CJDESCRICAO " [term]="service.searchTerm"></ngb-highlight></td>
+                    <td>
+                        <ngb-highlight [result]="competicao.CP_CPDATAINICIO" [term]="service.searchTerm"></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight [result]="competicao.CP_CPDATALIMITEAPOSTA" [term]="service.searchTerm"></ngb-highlight>
+                  </td>
+                    <td><a class="nav-link" [routerLink]="['/competicao',competicao.CP_CPID]">
+                      <span tooltip="Editar" placement="top" show-delay="500">
+                          <i class="fa fa-edit"></i>
+                        </span> 
+                        </a>
+                    </td>
+                    <td><a class="nav-link exemplo_4"  (click)="ExcluiCompeticao(competicao.CP_CPID);"> 
+                      <span tooltip="Excluir" placement="top" show-delay="500">
+                        <img src="/assets/images/icons/excluir.png" class="mr-2" style="width: 20px" >
+                      </span> 
+                      </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination
+                [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+              </ngb-pagination>
+  
+              <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+                <option [ngValue]="2">2 itens por página</option>
+                <option [ngValue]="4">4 itens por página</option>
+                <option [ngValue]="6">6 itens por página</option>
+              </select>
+            </div>
+          </form>
+  
+        </div>
+      <!-- </div>  -->
+    <!-- </div> -->
+  </div>
+  <router-outlet></router-outlet>        

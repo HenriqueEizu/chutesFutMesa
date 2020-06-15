@@ -14,7 +14,7 @@ constructor(private service: JogadorService){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Jogador> {
         if  (route.params && route.params['id']){
-            return this.service.GetIdjogador(route.params['id']); 
+            return this.service.GetIdJogador(route.params['id']); 
         }
  
         return of ({

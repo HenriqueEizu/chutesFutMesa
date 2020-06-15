@@ -1,0 +1,198 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+    <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+        <h4>Dados Competições</h4>
+        <form [formGroup]="competicaoForm" novalidate>  
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-5  col-xs-5">
+                    <img [src]= "pathimagecomplete"  class="mr-2" style="width: 50px">
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                        Competição:
+                </div>
+                <div class="col-sm-5  col-xs-5">
+                    <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome da competicao">
+                        <input name="CP_CPDESCRICAO" class="form-control" formControlName="CP_CPDESCRICAO" autocomplete="off" placeholder="Competição">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Foto Competição:
+                </div>
+                <div class="col-sm-4 col-xs-4" >
+                    <cft-input errorMessage="Campo obrigatório e com 2 carateres" label="Foto Competição">
+                        <input type="file" name="CP_CPFOTO" class="form-control" formControlName="CP_CPFOTO" autocomplete="off" (change)="handleFileInput($event.target.files)">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Cidade:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="Cidade">
+                        <input name="CP_CPCIDADE" class="form-control" formControlName="CP_CPCIDADE" autocomplete="off" placeholder="Cidade">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Data Limte Aposta:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <div class="row">
+                        <div class="col-sm-10  col-xs-10" >
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="CP_CPDATALIMITEAPOSTA" ngbDatepicker #d1="ngbDatepicker" formControlName="CP_CPDATALIMITEAPOSTA" >
+                        </div>
+                        <div class="col-sm-2  col-xs-2" >
+                            <button class="btn btn-primary" (click)="d1.toggle()" type="button"><i class="fa fa-table "></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Data Inicio:
+                </div>
+                <div class="col-sm-5  col-xs-5" >
+                    <div class="row">
+                        <div class="col-sm-10  col-xs-10" >
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="CP_CPDATAINICIO" ngbDatepicker #d="ngbDatepicker" formControlName="CP_CPDATAINICIO" >
+                        </div>
+                        <div class="col-sm-2  col-xs-2" >
+                            <button class="btn btn-primary" (click)="d.toggle()" type="button"><i class="fa fa-table "></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-2" >
+                    <span class="help-block pull-right has-error-block" *ngIf="competicaoForm.hasError('dataInicioErrada')" style="color:red"><i class="fa fa-remove"></i> Data inicio deve ser maior que data limite</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Rodada:
+                </div>
+                <div class="col-sm-5 col-xs-5" >
+                    <cft-input errorMessage="Rodada deve ser preenchida" label="Rodada">
+                        <select name="CP_ROID" class="form-control" formControlName="CP_ROID">
+                            <option *ngFor=  "let c of (rodadas)" [value]="c.RO_ROID">{{c.RO_RODESCRICAO}}</option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Categoria Jogo:
+                </div>
+                <div class="col-sm-5 col-xs-5" >
+                    <cft-input errorMessage="Categoria jogo deve ser preenchido" label="Categoria Jogo">
+                        <select name="CP_CJID" class="form-control" formControlName="CP_CJID">
+                            <option *ngFor=  "let c of (categoriaJogos)" [value]="c.CJ_CJID">{{c.CJ_CJDESCRICAO}}</option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    Ativo:
+                </div>
+                <div class="row col-sm-7 col-xs-7">
+                    <div class="col-sm-2 col-xs-2" style="text-align: left;">
+                        <input type="checkbox" name="CP_CPATIVO" class="form-control" formControlName="CP_CPATIVO" autocomplete="off" placeholder="Ativo">
+                    </div>
+                    <div class="col-sm-10 col-xs-10"></div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-2 col-xs-2">
+                &nbsp;
+            </div>
+            <div class="col-sm-8 col-xs-8">
+                <button (click)="SalvarCompeticao(competicaoForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!competicaoForm.valid" >
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                
+            </div>
+            <div class="col-sm-3 col-xs-3" >
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>

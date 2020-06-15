@@ -11,7 +11,7 @@ import { CursoRoutingModule } from './clube.routing.module';
 import { SharedModule} from  '../shared/shared.module';
 import { ClubeResolverGuard } from './guards/clube.resolver.guard';
 
-
+ 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, CursoRoutingModule,SharedModule.forRoot()],
   exports: [],
@@ -20,3 +20,4 @@ import { ClubeResolverGuard } from './guards/clube.resolver.guard';
 })
 export class ClubeModule {} 
 
+ 

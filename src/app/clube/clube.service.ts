@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core"
- import {Observable} from 'rxjs'
+import {Observable} from 'rxjs'
 import {MEAT_API, MEAT_APP} from '../app.api'
 import {catchError, retry, take} from  'rxjs/operators'
 import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
+import 'rxjs/Rx';
+
 import {Clube,Estado} from './clube.model'
 
-import 'rxjs/Rx';
+
 
 
 @Injectable() 
@@ -55,11 +57,11 @@ export class ClubeService {
       return this.http.get<any>(`${MEAT_API}/clubes/VerificaClube`).pipe();
     }
 
-  postFile(fileToUpload: File): Observable<string> {
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
-    var teste = this.http.post<string>(`${MEAT_API}/clubes/upload`,formData).pipe();
-    return teste;
+    postFile(fileToUpload: File): Observable<string> {
+      const formData: FormData = new FormData();
+      formData.append('fileKey', fileToUpload, fileToUpload.name);
+      var teste = this.http.post<string>(`${MEAT_API}/clubes/upload`,formData).pipe();
+      return teste;
     }
 
     InserirClube(clube : Clube) : Observable<boolean>{

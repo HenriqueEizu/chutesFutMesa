@@ -13,8 +13,6 @@ import {DIR_CLUBE} from '../app.api'
 import { IFormCanDeactivate } from '../guards/form-deactivate';
 
 
-
-
 @Component({
   selector: 'cft-clube',
   templateUrl: './clube.component.html',
@@ -98,7 +96,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     //   this.clubeCarregado = params['clube']
     // });
 
-    if (this.clube.CL_CLEMBLEMA != ""){
+    if (this.clube.CL_CLEMBLEMA != "" && this.clube.CL_CLEMBLEMA != null){
       this.pathimagecomplete = this.clube.CL_CLEMBLEMA;
     }
 
@@ -226,6 +224,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   }
 
   SalvarClube(clube: Clube){
+
     let msgSuccess = "Clube inserido com sucesso";
     let msgErro = "Erro ao incluir clube. Tente novamente";
     let msgQuestãoTitulo = "Confirmação de Inclusão"
@@ -241,7 +240,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     this.clubeSelecionado = clube;
 
-    if (clube.CL_CLEMBLEMA == ""){
+    if (clube.CL_CLEMBLEMA == "" || clube.CL_CLEMBLEMA == null){
       clube.CL_CLEMBLEMA = DIR_CLUBE + this.image
     }else if(clube.CL_CLID == null || this.fileToUpload != null){
       if (this.uploadFileToActivity() == true){
@@ -250,6 +249,8 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     }
 
     clube.CL_CLDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
+
+
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()
       .pipe(

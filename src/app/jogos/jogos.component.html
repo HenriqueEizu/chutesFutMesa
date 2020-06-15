@@ -1,0 +1,44 @@
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 30px"> Cadastro de Jogos</h5></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>  
+</div>
+
+<label for="typeahead-focus">Search for a state:</label>
+<input
+  id="typeahead-focus"
+  type="text"
+  class="form-control"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  (focus)="focus$.next($any($event).target.value)"
+  (click)="click$.next($any($event).target.value)"
+  #instance="ngbTypeahead"
+/>
+

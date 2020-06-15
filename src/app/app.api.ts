@@ -5,3 +5,6 @@ export const MEAT_APP = 'http://localhost:4200'
 export const DIR_CLUBE = 'assets/images/logos clubes/'
 
 export const DIR_JOGADOR = 'assets/images/fotosJogadores/'
+
+export const DIR_COMPETICAO = 'assets/images/fotosCompeticoes/'
+

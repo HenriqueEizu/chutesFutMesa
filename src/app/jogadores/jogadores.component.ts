@@ -51,7 +51,7 @@ export class JogadoresComponent implements OnInit {
     this.clubeService.GetAllClube().subscribe((cls : Clube[]) =>{
       this.clubes = cls;
     })
-
+ 
     this.jogador = this.route.snapshot.data['jogador'];
 
     if (this.jogador.JO_JOFOTO != "" && this.jogador.JO_JOFOTO != null){
@@ -157,6 +157,7 @@ export class JogadoresComponent implements OnInit {
         switchMap(result => result ? this.jogadorService.SalvarJogador(jodador) : EMPTY)
       ).subscribe(
         success => {
+                    delay(30000);
                     this.alertService.showAlertSuccess(msgSuccess);
                     this.router.navigate(['jogadores'])
                     },

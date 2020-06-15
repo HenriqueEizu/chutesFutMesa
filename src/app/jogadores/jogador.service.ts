@@ -50,9 +50,9 @@ export class JogadorService {
     return teste;
     }
 
-  GetIdjogador(id: number):Observable<Jogador>{
+  GetIdJogador(id: number):Observable<Jogador>{
     var jogadorLocal : Observable<Jogador>
-    jogadorLocal = this.http.get<Jogador>(`${MEAT_API}/jogador/GetIdjogador/${id}` ).pipe();
+    jogadorLocal = this.http.get<Jogador>(`${MEAT_API}/jogador/GetIdJogador/${id}` ).pipe();
     return jogadorLocal;
   }
 

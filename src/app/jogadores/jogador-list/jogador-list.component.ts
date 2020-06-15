@@ -32,7 +32,7 @@ export class JogadorListComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    delay(3000);
+    delay(3000); 
   }
 
   jogadores$: Observable<Jogador[]>;
@@ -53,19 +53,19 @@ export class JogadorListComponent implements OnInit {
   }
 
   ExcluiJogador(id: number){
-    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este clube?","Fechar","Excluir");
+    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este Jogador?","Fechar","Excluir");
     result$.asObservable()
     .pipe(
       take(1),
       switchMap(result => result ? this.jogadorService.ExcluirJogador(id) : EMPTY)
     ).subscribe(
       success => {  
-                   this.alertService.showAlertSuccess("Clube excluir com sucesso");
+                   this.alertService.showAlertSuccess("Jogador excluído com sucesso");
                   //  window.location.reload();
                    this.router.navigate(['home'])
                    },
       error =>  { 
-                this.alertService.showAlertDanger("Erro ao excluir clube. Tente novamente") ;
+                this.alertService.showAlertDanger("Erro ao excluir jogador. Tente novamente") ;
                 }
     )
   }

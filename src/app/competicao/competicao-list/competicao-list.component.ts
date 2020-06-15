@@ -6,28 +6,28 @@ import { take, switchMap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router'; 
 
 import { AlertModalService} from '../../shared/alertmodal/alertmodal.service'
-import {Clube} from '../clube.model';
-import {ClubeListService} from './clube-list.service';
-import {ClubeService} from '../clube.service'
-import {ClubeListSortableHeader, SortEvent} from './sortable.directive';
+import {Competicao} from '../competicao.model';
+import {CompeticaoListService} from './competicao-list.service';
+import {CompeticaoService} from '../competicao.service'
+import {CompeticaoListSortableHeader, SortEvent} from './sortable.directive';
 
 @Component({
-  selector: 'cft-clube-list',
-  templateUrl: './clube-list.component.html',
-  styleUrls: ['./clube-list.component.css'],
-  providers: [ClubeListService, DecimalPipe]
+  selector: 'cft-competicao-list',
+  templateUrl: './competicao-list.component.html',
+  styleUrls: ['./competicao-list.component.css'],
+  providers: [CompeticaoService, DecimalPipe]
 })
-export class ClubeListComponent implements OnInit {
+export class CompeticaoListComponent implements OnInit {
 
   insertModalRef : BsModalRef;
   @ViewChild('template') template;
 
-  constructor(public service: ClubeListService,
+  constructor(public service: CompeticaoListService,
         private modalService: BsModalService,
         private alertService: AlertModalService,
-        private clubeService : ClubeService,
+        private competicaoService : CompeticaoService,
         private router: Router) {
-    this.clubes$ = service.clubes$;
+    this.competicoes$ = service.competicoes$;
     this.total$ = service.total$;
   }
  
@@ -35,10 +35,10 @@ export class ClubeListComponent implements OnInit {
     delay(3000);
   }
 
-  clubes$: Observable<Clube[]>;
+  competicoes$: Observable<Competicao[]>;
   total$: Observable<number>;
 
-  @ViewChildren(ClubeListSortableHeader) headers: QueryList<ClubeListSortableHeader>;
+  @ViewChildren(CompeticaoListSortableHeader) headers: QueryList<CompeticaoListSortableHeader>;
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers
@@ -52,20 +52,20 @@ export class ClubeListComponent implements OnInit {
     this.service.sortDirection = direction;
   }
 
-  ExcluiClube(id: number){
-    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este clube?","Fechar","Excluir");
+  ExcluiCompeticao(id: number){
+    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir esta competicao?","Fechar","Excluir");
     result$.asObservable()
     .pipe(
       take(1),
-      switchMap(result => result ? this.clubeService.ExcluirClube(id) : EMPTY)
+      switchMap(result => result ? this.competicaoService.ExcluirCompeticao(id) : EMPTY)
     ).subscribe(
       success => {  
-                   this.alertService.showAlertSuccess("Clube excluir com sucesso");
+                   this.alertService.showAlertSuccess("Competicao excluir com sucesso");
                   //  window.location.reload();
                    this.router.navigate(['home'])
                    },
       error =>  { 
-                this.alertService.showAlertDanger("Erro ao excluir clube. Tente novamente") ;
+                this.alertService.showAlertDanger("Erro ao excluir competicao. Tente novamente") ;
                 }
     )
   }
@@ -74,5 +74,5 @@ export class ClubeListComponent implements OnInit {
     this.insertModalRef.hide();
   }
 
-}
  
+}

@@ -15,7 +15,7 @@ import {UsuarioService} from './usuario.service'
 import { ClubeService } from './../clube/clube.service';
 import { AlertModalService } from '../shared/alertmodal/alertmodal.service';
 
-
+ 
 @Component({
   selector: 'cft-usuario',
   templateUrl: './usuario.component.html',
@@ -44,7 +44,7 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
                ,private alertService: AlertModalService){
 
                 }
-  podeDesativar() {
+  podeDesativar() { 
     return true;
   }
 
