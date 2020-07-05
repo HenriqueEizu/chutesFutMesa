@@ -1,5 +1,6 @@
 <!-- <nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"> -->
-  <nav  class="navbar navbar-expand-md bg-dark navbar-grey fixed-top">
+  <nav  class="navbar navbar-expand-md navbar-default">
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -30,14 +31,21 @@
             <i class="fa fa-app-store"></i>Jogos</a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicao']">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicoes']">
             <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Competições</a>
-        </li>
+        </li> 
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/diretivasCuston']">
-            <i class="fa fa-app-store"></i> Diretivas Customizadas</a>
-        </li>
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/ptscompeticoesjogadores']">
+            <img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Pontos Competições</a>
+        </li> 
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe']">
+            <img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Equipes</a>
+        </li> 
+       
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/exemplosPipes']">
           <i class="fa fa-app-store"></i> pipes</a>

@@ -141,9 +141,9 @@ export class JogadoresComponent implements OnInit {
       msgBotao = "Alterar"
     }
 
-    if (jodador.JO_JOFOTO == ""){
+    if (jodador.JO_JOFOTO == "" || jodador.JO_JOFOTO == null){
       jodador.JO_JOFOTO = DIR_JOGADOR + this.image
-    }else if(jodador.JO_JOID == null || this.fileToUpload != null){
+    }else if(jodador.JO_JOID == null && this.fileToUpload != null){
       if (this.uploadFileToActivity() == true){
         jodador.JO_JOFOTO = DIR_JOGADOR + this.imageEscolhida
       }

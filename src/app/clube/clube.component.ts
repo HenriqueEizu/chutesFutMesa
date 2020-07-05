@@ -242,7 +242,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     if (clube.CL_CLEMBLEMA == "" || clube.CL_CLEMBLEMA == null){
       clube.CL_CLEMBLEMA = DIR_CLUBE + this.image
-    }else if(clube.CL_CLID == null || this.fileToUpload != null){
+    }else if(clube.CL_CLID == null && this.fileToUpload != null){
       if (this.uploadFileToActivity() == true){
         clube.CL_CLEMBLEMA = DIR_CLUBE + this.imageEscolhida
       }

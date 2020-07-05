@@ -15,10 +15,10 @@ import {CompeticaoListSortableHeader, SortEvent} from './sortable.directive';
   selector: 'cft-competicao-list',
   templateUrl: './competicao-list.component.html',
   styleUrls: ['./competicao-list.component.css'],
-  providers: [CompeticaoService, DecimalPipe]
+  providers: [CompeticaoListService, DecimalPipe] 
 })
 export class CompeticaoListComponent implements OnInit {
-
+  
   insertModalRef : BsModalRef;
   @ViewChild('template') template;
 
@@ -47,11 +47,11 @@ export class CompeticaoListComponent implements OnInit {
         header.direction = '';
       }
     });
-
+ 
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
   }
-
+ 
   ExcluiCompeticao(id: number){
     const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir esta competicao?","Fechar","Excluir");
     result$.asObservable()
@@ -73,6 +73,6 @@ export class CompeticaoListComponent implements OnInit {
   onDeclineInsert(){
     this.insertModalRef.hide();
   }
-
+ 
  
 }

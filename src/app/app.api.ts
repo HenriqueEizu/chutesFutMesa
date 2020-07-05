@@ -8,3 +8,5 @@ export const DIR_JOGADOR = 'assets/images/fotosJogadores/'
 
 export const DIR_COMPETICAO = 'assets/images/fotosCompeticoes/'
 
+export const DIR_EQUIPE = 'assets/images/fotosEquipes/'
+

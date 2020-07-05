@@ -5,9 +5,9 @@ import {catchError, retry, take} from  'rxjs/operators'
 import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
 import 'rxjs/Rx';
-
+ 
 import {Competicao,Rodadas,Categoriajogo} from './competicao.model'
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -40,21 +40,21 @@ export class CompeticaoService {
 
   GetAllCompeticao(): Observable<Competicao[]>{
     let competicoes$ = new Observable<Competicao[]>();
-    competicoes$ = this.http.get<Competicao[]>(`${MEAT_API}/competicoes`).pipe();
+    competicoes$ = this.http.get<Competicao[]>(`${MEAT_API}/competicao`).pipe();
     return competicoes$;
     // return this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
   }
 
   GetCompeticaoId(id: number):Observable<Competicao>{
     var competicaoLocal : Observable<Competicao>
-    competicaoLocal = this.http.get<Competicao>(`${MEAT_API}/competicoes/GetCompeticaoId/${id}` ).pipe();
+    competicaoLocal = this.http.get<Competicao>(`${MEAT_API}/competicao/GetCompeticaoId/${id}` ).pipe();
     return competicaoLocal;
   }
 
   postFile(fileToUpload: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
-    var teste = this.http.post<string>(`${MEAT_API}/competicoes/upload`,formData).pipe();
+    var teste = this.http.post<string>(`${MEAT_API}/competicao/upload`,formData).pipe();
     return teste;
   }
 

@@ -1,0 +1,196 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+ 
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 30px"> Cadastro de Pontuação do Jogador por Competição </h5></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+    <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+        <h4>Dados da Pontuação de Competições</h4>
+        <form [formGroup]="ptscompeticaojogadorForm" novalidate>  
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Competição: 
+                </div>
+                <div class="col-sm-7 col-xs-7" >
+                    <cft-input errorMessage="Competição deve ser preenchida" label="Competição">
+                        <select #PJ_CPID name="PJ_CPID" class="form-control" formControlName="PJ_CPID" (click)="MostraRodada(PJ_CPID.value)">
+                            <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}} - {{c.OBJ_Rodada.RO_RODESCRICAO}} </option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div *ngIf="show" >
+                    <ngb-toast *ngIf="show" header="{{competicaoId.CP_CPDESCRICAO}}" [delay]="5000"
+                        [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true"
+                        (hide)="show = false; autohide = true" [class.bg-warning]="!autohide" >
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="competicaoId.CP_CPFOTO" class="mr-2" style="width: 30px">
+                                    <!-- </div>
+                                    <div class="col-sm-11 col-xs-11"> -->
+                                        {{ competicaoId.CP_CPDESCRICAO }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        {{ competicaoId.OBJ_Rodada.RO_RODESCRICAO }} Inicio:{{ competicaoId.CP_CPDATAINICIO  | date: 'dd/MM/yyyy' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-toast>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Jogador:
+                </div>
+                <div class="col-sm-7 col-xs-7" >
+                    <cft-input errorMessage="Competição deve ser preenchida" label="Jogador">
+                        <select #PJ_JOID name="PJ_JOID" class="form-control" formControlName="PJ_JOID" (click)="MostraJogador(PJ_JOID.value)">
+                            <option *ngFor=  "let j of (jogadores)" [value]="j.JO_JOID">{{j.JO_JOAPELIDO}}</option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div *ngIf="showJogadores" >
+                    <ngb-toast *ngIf="showJogadores" header="{{jogadorId.JO_JONOME}}" [delay]="5000"
+                        [autohide]="autohideJog" (mouseenter)="autohideJog = false" (mouseleave)="autohideJog = true"
+                        (hide)="showJogadores = false; autohideJog = true" [class.bg-warning]="!autohideJog" >
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="jogadorId.JO_JOFOTO" class="mr-2" style="width: 30px">
+                                        {{ jogadorId.JO_JONOME }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="jogadorId.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                        {{ jogadorId.OBJ_CLUBE.CL_CLNOME }}  Ranking: ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-toast>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Pontos:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJPONTOS" class="form-control" formControlName="PJ_PJPONTOS" autocomplete="off" placeholder="Pontos">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Pontos:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é Campo obrigatório " label="Observação">
+                        <input name="PJ_PJOBSERVACAO" class="form-control" formControlName="PJ_PJOBSERVACAO" autocomplete="off" placeholder="Observação">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Ativo:
+                </div>
+                <div class="row col-sm-7 col-xs-7">
+                    <div class="col-sm-2 col-xs-2" style="text-align: left;">
+                        <input type="checkbox" name="PJ_PJATIVO" class="form-control" formControlName="PJ_PJATIVO" autocomplete="off" placeholder="Ativo">
+                    </div>
+                    <div class="col-sm-10 col-xs-10"></div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-1 col-xs-1">
+                &nbsp;
+            </div>
+            <div class="col-sm-9 col-xs-9">
+                <button (click)="SalvarCompeticao(ptscompeticaojogadorForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!ptscompeticaojogadorForm.valid" >
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                
+            </div>
+            <div class="col-sm-3 col-xs-3" >
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>

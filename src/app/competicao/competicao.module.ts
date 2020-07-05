@@ -10,7 +10,7 @@ import { CompeticaoListSortableHeader } from './competicao-list/sortable.directi
 import { CompeticaoRoutingModule } from './competicao.route';
 import { SharedModule} from  '../shared/shared.module';
 import { CompeticaoResolverGuard } from './guards/competicao.resolver.guard';
-
+ 
 
 
 @NgModule({
@@ -20,4 +20,4 @@ import { CompeticaoResolverGuard } from './guards/competicao.resolver.guard';
   providers: [CompeticaoService, CompeticaoResolverGuard],
 })
 export class CompeticaoModule { }
-  
+     

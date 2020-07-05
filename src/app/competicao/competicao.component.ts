@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors, FormControl } from '@angular/forms'
-import { formatDate} from "@angular/common";
+import { formatDate, DatePipe} from "@angular/common";
 import {switchMap, take, map, delay, tap} from  'rxjs/operators'
 import {Observable} from 'rxjs'
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -8,17 +8,17 @@ import { AlertModalService} from '../shared/alertmodal/alertmodal.service'
 import {  EMPTY , Subscription } from 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router'
 import { IFormCanDeactivate } from '../guards/form-deactivate';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import {CompeticaoService} from './competicao.service'
 import {DIR_COMPETICAO} from '../app.api'
 import {Competicao, Rodadas,Categoriajogo} from './competicao.model'
-
+ 
 
 @Component({
   selector: 'cft-competicao',
   templateUrl: './competicao.component.html',
-  styleUrls: ['./competicao.component.css']
+  styleUrls: ['./competicao.component.css'],
 })
 export class CompeticaoComponent implements OnInit {
 
@@ -32,20 +32,27 @@ export class CompeticaoComponent implements OnInit {
   competicao : any;
   competicaoForm: FormGroup
   competicaoSelecionado: Competicao;
-  model: NgbDateStruct;
+  // model: NgbDateStruct;
   model1: NgbDateStruct;
   myDate = new Date();
   fileToUpload: File = null;
-
+  CP_CPDATALIMITEAPOSTA: NgbDateStruct ;
+  CP_CPDATAINICIO: NgbDateStruct ;
+ 
   constructor(private competicaoService: CompeticaoService
             , private router: Router
             , private formBuilder : FormBuilder
             , private modalService: BsModalService
             ,private alertService: AlertModalService
-            ,private route: ActivatedRoute){
+            ,private route: ActivatedRoute
+            ,private calendar: NgbCalendar){
+
      }
 
   ngOnInit(): void {
+
+    let DateLimnite : Date;
+    let DateInicio : Date;
 
     this.competicaoService.GetAllRodadas().subscribe((rd : Rodadas[]) => {
       this.rodadas = rd;
@@ -56,19 +63,34 @@ export class CompeticaoComponent implements OnInit {
       });
 
       
-    this.competicao = this.route.snapshot.data['clube'];
+    this.competicao = this.route.snapshot.data['competicao'];
     this.competicaoCarregada =this.competicao;
+    
 
     if (this.competicao.CP_CPFOTO != "" && this.competicao.CP_CPFOTO != null){
-      this.competicao = this.competicao.CP_CPFOTO;
+      this.pathimagecomplete = this.competicao.CP_CPFOTO;
+    }
+    if (this.competicao != "" && this.competicao != null){
+      DateLimnite = new Date(this.competicao.CP_CPDATALIMITEAPOSTA);
+      DateInicio = new Date(this.competicao.CP_CPDATAINICIO);
+      this.CP_CPDATALIMITEAPOSTA = {
+        day: DateLimnite.getDate(),
+        month: DateLimnite.getMonth() + 1,
+        year: DateLimnite.getFullYear()
+      };
+      this.CP_CPDATAINICIO = {
+        day: DateInicio.getDate(),
+        month: DateInicio.getMonth() + 1,
+        year: DateInicio.getFullYear()
+      };
     }
 
     this.competicaoForm = this.formBuilder.group({
       CP_CPID : [this.competicao.CP_CPID],
       CP_CPDESCRICAO: this.formBuilder.control(this.competicao.CP_CPDESCRICAO,[Validators.required, Validators.minLength(6),Validators.maxLength(300)]),
       CP_CPCIDADE: this.formBuilder.control(this.competicao.CP_CPCIDADE,[Validators.required, Validators.minLength(6),Validators.maxLength(300)]),
-      CP_CPDATALIMITEAPOSTA: this.formBuilder.control(this.competicao.CP_CPDATALIMITEAPOSTA,[Validators.required]),
-      CP_CPDATAINICIO: this.formBuilder.control(this.competicao.CP_CPDATAINICIO,[Validators.required]),
+      CP_CPDATALIMITEAPOSTA: this.formBuilder.control(this.CP_CPDATALIMITEAPOSTA ,[Validators.required]),
+      CP_CPDATAINICIO: this.formBuilder.control(this.CP_CPDATAINICIO,[Validators.required]),
       CP_CPATIVO: this.formBuilder.control(this.competicao.CP_CPATIVO),
       CP_CPFOTO: this.formBuilder.control(this.competicao.CP_CPFOTO),
       CP_ROID: this.formBuilder.control(this.competicao.CP_ROID,[Validators.required]),
@@ -101,7 +123,7 @@ export class CompeticaoComponent implements OnInit {
       return {dataInicioErrada:true}
     }
   }
-
+ 
   podeDesativar() {
     return true;
   }
@@ -130,7 +152,7 @@ export class CompeticaoComponent implements OnInit {
     let msgQuestãoTitulo = "Confirmação de Inclusão"
     let msgQuestaoCorpo = "Você realmente deseja inserir esta competicao?"
     let msgBotao = "Inserir"
-    if (this.competicaoForm.value.US_USID != null){
+    if (this.competicaoForm.value.CP_CPID != null){
       msgSuccess = "Competição alterado com sucesso";
       msgErro = "Erro ao atualizar competição. Tente novamente"
       msgQuestãoTitulo = "Confirmação de Alteração"
@@ -145,7 +167,7 @@ export class CompeticaoComponent implements OnInit {
 
     if (competicao.CP_CPFOTO == "" || competicao.CP_CPFOTO == null){
       competicao.CP_CPFOTO = DIR_COMPETICAO + this.image
-    }else if(competicao.CP_CPID == null || this.fileToUpload != null){
+    }else if(competicao.CP_CPID == null && this.fileToUpload != null){
       if (this.uploadFileToActivity() == true){
         competicao.CP_CPFOTO = DIR_COMPETICAO + this.imageEscolhida
       }

@@ -30,7 +30,7 @@
     </div>  
 </div>
 
-<label for="typeahead-focus">Search for a state:</label>
+<!-- <label for="typeahead-focus">Search for a state:</label>
 <input
   id="typeahead-focus"
   type="text"
@@ -40,5 +40,39 @@
   (focus)="focus$.next($any($event).target.value)"
   (click)="click$.next($any($event).target.value)"
   #instance="ngbTypeahead"
-/>
+/> -->
+
+<div class="example-container">
+    <h2>To do</h2>
+  
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="Jogadores"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of Jogadores" cdkDrag>
+        <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">{{item.JO_JOAPELIDO}}</div>
+    </div>
+</div>
+  
+  <div class="example-container">
+    <h2>Done</h2>
+  
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="JogadoresCislpa"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of JogadoresCislpa" cdkDrag>
+        <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">{{item.JO_JOAPELIDO}}</div>
+    </div>
+  </div>
+
+   
+  
+  
 

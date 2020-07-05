@@ -21,7 +21,7 @@
    
   <div class="row">
     <div class="col-sm-1 col-xs-1">&nbsp;</div>
-      <div class="col-sm-10 col-xs-10 badge badge-primary"> <h5> <img src="/assets/images/icons/competicao1.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5></div>
+      <div class="col-sm-10 col-xs-10 badge badge-primary"> <h5> <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5></div>
   </div>
   
   <div class="row ">
@@ -29,7 +29,7 @@
     <div class="col-sm-1 col-xs-1">
       &nbsp;
     </div>
-  
+   
     <!-- <div class="col-sm-7 col-xs-7 card bg-info text-red"> -->
       
       <!-- <div class="card">
@@ -43,12 +43,12 @@
               </div>
               <div class="col-sm-2 col-xs-2"></div>
               <div class="col-sm-4 col-xs-4">
-                <a class="nav-link" [routerLink]="['/clube']">
+                <a class="nav-link" [routerLink]="['/competicao']">
                   <span tooltip="Adicionar Competicao" placement="top" show-delay="500">
                     <img src="/assets/images/icons/add.png" class="mr-2" style="width: 30px"> Competicao
                     </span> 
                     </a>
-              </div>
+              </div> 
             </div>
             <div class="row">
               <div class="col-sm-12 col-xs-12 table-responsive-xl">
@@ -57,9 +57,9 @@
                   <tr>
                     <th scope="col" sortable="CP_CPDESCRICAO" (sort)="onSort($event)">Competicao</th>
                     <th scope="col" sortable="OBJ_Rodada.RO_RODESCRICAO" (sort)="onSort($event)">Rodada</th>
-                    <th scope="col" sortable="OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO" (sort)="onSort($event)">Responsável</th>
-                    <th scope="col" sortable="CP_CPDATAINICIO" (sort)="onSort($event)">Telefone</th> 
-                    <th scope="col" sortable="CP_CPDATALIMITEAPOSTA" (sort)="onSort($event)">Cidade</th>
+                    <th scope="col" sortable="OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO" (sort)="onSort($event)">Categoria Jogo</th>
+                    <th scope="col" sortable="CP_CPDATAINICIO" (sort)="onSort($event)">Data Inicio</th> 
+                    <th scope="col" sortable="CP_CPDATALIMITEAPOSTA" (sort)="onSort($event)">Data Limite</th>
                     <th scope="col">Ação</th>
                     <th scope="col">Ação</th>
   
@@ -68,21 +68,21 @@
                   <tbody>
                   <tr *ngFor="let competicao of competicoes$ | async">
                     <td>
-                      <img [src]="competicao.CL_CLFOTO" class="mr-2" style="width: 30px">
+                      <img [src]="competicao.CP_CPFOTO" class="mr-2" style="width: 30px">
                       <span [tooltip]="competicao.CP_CPDESCRICAO" placement="top" show-delay="500">
                         <ngb-highlight [result]="competicao.CP_CPDESCRICAO.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
                       </span>
                     </td>
                     <td>
-                        <ngb-highlight [result]="competicao.RO_RODESCRICAO " [term]="service.searchTerm"></ngb-highlight>
+                        <ngb-highlight [result]="competicao.OBJ_Rodada.RO_RODESCRICAO " [term]="service.searchTerm"></ngb-highlight>
                     </td>
                     <td>
-                        <ngb-highlight [result]="competicao.CJ_CJDESCRICAO " [term]="service.searchTerm"></ngb-highlight></td>
+                        <ngb-highlight [result]="competicao.OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO " [term]="service.searchTerm"></ngb-highlight></td>
                     <td>
-                        <ngb-highlight [result]="competicao.CP_CPDATAINICIO" [term]="service.searchTerm"></ngb-highlight>
+                        <ngb-highlight [result]="competicao.CP_CPDATAINICIO  | date: 'dd/MM/yyyy'" [term]="service.searchTerm"></ngb-highlight>
                     </td>
                     <td>
-                      <ngb-highlight [result]="competicao.CP_CPDATALIMITEAPOSTA" [term]="service.searchTerm"></ngb-highlight>
+                      <ngb-highlight [result]="competicao.CP_CPDATALIMITEAPOSTA | date: 'dd/MM/yyyy'" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                     <td><a class="nav-link" [routerLink]="['/competicao',competicao.CP_CPID]">
                       <span tooltip="Editar" placement="top" show-delay="500">

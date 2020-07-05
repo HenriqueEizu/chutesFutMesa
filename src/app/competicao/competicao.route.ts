@@ -10,8 +10,8 @@ import { DeactivateGuard } from '../guards/deactive.guard'
 
 
 export const competicaoRoutes: Routes = [
-    {path: 'competicao', component: CompeticaoComponent,resolve:{clube :CompeticaoResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},
-    {path: 'competicao/:id',component : CompeticaoComponent,resolve:{ clube :CompeticaoResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
+    {path: 'competicao', component: CompeticaoComponent,resolve:{competicao :CompeticaoResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},
+    {path: 'competicao/:id',component : CompeticaoComponent,resolve:{ competicao :CompeticaoResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
     {path: 'competicoes', component: CompeticaoListComponent,canActivate : [AuthGuard],canLoad:[AuthGuard]},
 ]
 
@@ -22,4 +22,4 @@ const routes: Routes = [];
   exports: [RouterModule]
 })
 export class CompeticaoRoutingModule { }
-  
+   

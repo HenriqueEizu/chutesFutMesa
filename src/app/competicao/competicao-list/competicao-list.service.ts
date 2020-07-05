@@ -11,7 +11,7 @@ interface SearchResult {
   competicoes: Competicao[];
   total: number;
 }
-
+ 
 interface State {
   page: number;
   pageSize: number;
@@ -19,7 +19,7 @@ interface State {
   sortColumn: SortColumn;
   sortDirection: SortDirection;
 }
-
+ 
 const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(competicoes: Competicao[], column: SortColumn, direction: string): Competicao[] {
@@ -31,14 +31,14 @@ function sort(competicoes: Competicao[], column: SortColumn, direction: string):
       return direction === 'asc' ? res : -res;
     });
   }
-}
+} 
 
 function matches(competicao: Competicao, term: string, pipe: PipeTransform) {
   return competicao.CP_CPDESCRICAO.toLowerCase().includes(term.toLowerCase())
     || competicao.OBJ_Rodada.RO_RODESCRICAO.toLowerCase().includes(term.toLowerCase())
     || competicao.OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO.toLowerCase().includes(term.toLowerCase())
-    || competicao.CP_CPDATAINICIO
-    || competicao.CP_CPDATALIMITEAPOSTA
+    || String(competicao.CP_CPDATAINICIO).toLowerCase().includes(term.toLowerCase())
+    || String(competicao.CP_CPDATALIMITEAPOSTA).toLowerCase().includes(term.toLowerCase())
 }
 
 @Injectable({providedIn: 'root'})

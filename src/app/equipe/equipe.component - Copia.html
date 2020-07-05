@@ -1,0 +1,338 @@
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+ 
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 30px"> Cadastro de Equipes </h5></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+    <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+        <h4>Dados da Equipe</h4>
+        <form [formGroup]="equipeForm" novalidate>  
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-5  col-xs-5">
+                    <img [src]= "pathimagecomplete"  class="mr-2" style="width: 50px">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Nome Equipe:
+                </div>
+                <div class="col-sm-7  col-xs-7">
+                    <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome da equipe">
+                        <input name="EQ_EQNOME" class="form-control" formControlName="EQ_EQNOME" autocomplete="off" placeholder="Equipe">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">&nbsp;</div>
+                <div class="col-sm-4 col-xs-4 ">
+                </div>
+                <div class="col-sm-1 col-xs-2">&nbsp;</div>
+                <div class="col-sm-4 col-xs-4 ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="col-sm-12 col-xs-12 badge badge-info " ><h6>Escudos</h6></div>
+                    <div class="teste border border-primary rounded shadow-lg p-4 mb-4 bg-white gallery" id="gallery">
+                        <div class="">
+                            <div
+                            cdkDropList
+                            #todoListEscudo="cdkDropList"
+                            [cdkDropListData]="EscudosFiltro"
+                            [cdkDropListConnectedTo]="[doneListEscudo]"
+                            (cdkDropListDropped)="dropEscudo($event)">
+                                <div *ngFor="let item of EscudosFiltro" cdkDrag>
+                                    <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <span class="blink" tooltip="Arraste da esquerda para a direita" placement="top" show-delay="500">
+                            <img src="/assets/images/icons/setaDireita.png" class="mr-2" style="width: 40px">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3" >
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 badge badge-info "  > <h6>Escolher escudo</h6></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-3"></div>
+                                <div class="col-sm-6 col-xs-6 ">
+                                    <div class="example-containerEscudoEscolha">
+                                        <div
+                                            cdkDropList
+                                            #doneListEscudo="cdkDropList"
+                                            [cdkDropListData]="EscudosEscolhido"
+                                            [cdkDropListConnectedTo]="[todoListEscudo]"
+                                            class="example-listEscudo"
+                                            (cdkDropListDropped)="dropEscudo($event)">
+                                            <div class="example-boxEscudo" *ngFor="let item of EscudosEscolhido" cdkDrag >
+                                                <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="col-sm-12 col-xs-12 badge badge-info " ><h6>Escudos</h6></div>
+                    <div class="teste border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                        <div class="example-containerEscudo ">
+                            <div
+                            cdkDropList
+                            #todoListEscudo="cdkDropList"
+                            [cdkDropListData]="EscudosFiltro"
+                            [cdkDropListConnectedTo]="[doneListEscudo]"
+                            class="example-listEscudo"
+                            (cdkDropListDropped)="dropEscudo($event)">
+                                <div *ngFor="let item of EscudosFiltro" cdkDrag>
+                                    <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <span class="blink" tooltip="Arraste da esquerda para a direita" placement="top" show-delay="500">
+                            <img src="/assets/images/icons/setaDireita.png" class="mr-2" style="width: 40px">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3" >
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 badge badge-info "  > <h6>Escolher escudo</h6></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-3"></div>
+                                <div class="col-sm-6 col-xs-6 ">
+                                    <div class="example-containerEscudoEscolha">
+                                        <div
+                                            cdkDropList
+                                            #doneListEscudo="cdkDropList"
+                                            [cdkDropListData]="EscudosEscolhido"
+                                            [cdkDropListConnectedTo]="[todoListEscudo]"
+                                            class="example-listEscudo"
+                                            (cdkDropListDropped)="dropEscudo($event)">
+                                            <div class="example-boxEscudo" *ngFor="let item of EscudosEscolhido" cdkDrag >
+                                                <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Escolha Jogadores-->
+            <div class="row">
+                <!-- <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div> -->
+                <div class="col-sm-5 col-xs-5 ">
+                    <div class="col-sm-12 col-xs-12 badge badge-info " ><h6> <input  #filtro placeholder="Filtro"  (keyup)="FiltraJogador(filtro.value)" > </h6></div>
+                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                        <div class="example-container col-sm-12 col-xs-12">
+                            <div
+                            cdkDropList
+                            #todoList="cdkDropList"
+                            [cdkDropListData]="JogadoresFiltro"
+                            [cdkDropListConnectedTo]="[doneList]"
+                            class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                                <div class="example-box" *ngFor="let item of JogadoresFiltro" cdkDrag>
+                                    <div class="row ">
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-sm-3 col-xs-3">
+                                                    <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3">
+                                                    Valor:
+                                                </div>
+                                                <div class="col-sm-2 col-xs-2">
+                                                    <b><h6>{{item.PR_PRPRECO}}</h6></b>
+                                                </div>
+                                                <div class="col-sm-2 col-xs-2">
+                                                    Rank.:
+                                                </div>
+                                                <div class="col-sm-2 col-xs-2">
+                                                    {{item.RJ_RJPOSICAOATUAL}} 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-sm-3 col-xs-3">
+                                            {{item.JO_JOAPELIDO}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3">
+                                        posições:
+                                    </div>
+                                    <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-2 col-xs-2">
+                                        <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px">
+                                    </div>
+                                    <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-2 col-xs-2">
+                                        <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px">
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2">
+                                        posição : {{item.POSICOES}}
+                                    </div>
+
+                                    </div> 
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <span class="blink" tooltip="Arraste da esquerda para a direita" placement="top" show-delay="500">
+                            <img src="/assets/images/icons/setaDireita.png" class="mr-2" style="width: 40px">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-xs-5">
+                    <div class="col-sm-12 col-xs-12 badge badge-info " style="height: 45px;" > <h6 style="margin-top: 7px;">Escolher escudo</h6></div>
+                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                        <div class="example-container col-sm-12 col-xs-12">
+                            <div
+                                cdkDropList
+                                #doneList="cdkDropList"
+                                [cdkDropListData]="JogadoresCislpa"
+                                [cdkDropListConnectedTo]="[todoList]"
+                                  (cdkDropListDropped)="drop($event)"
+                                  class="example-list">
+                                <div class="row">
+                                    <div class="example-box col-sm-12 col-xs-12" *ngFor="let item of JogadoresCislpa" cdkDrag >
+                                        <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">{{item.JO_JOAPELIDO}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Ativo:
+                </div>
+                <div class="row col-sm-7 col-xs-7">
+                    <div class="col-sm-2 col-xs-2" style="text-align: left;">
+                        <input type="checkbox" name="EQ_EQATIVO" class="form-control" formControlName="EQ_EQATIVO" autocomplete="off" placeholder="Ativo">
+                    </div>
+                    <div class="col-sm-10 col-xs-10"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Comentários:
+                </div>
+                <div class="col-sm-7  col-xs-7">
+                    <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome da equipe">
+                        <input name="EQ_EQOBSERVACAO" class="form-control" formControlName="EQ_EQOBSERVACAO" autocomplete="off" placeholder="Comentários">
+                    </cft-input>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-2 col-xs-2">
+                &nbsp;
+            </div>
+            <div class="col-sm-9 col-xs-9">
+                <button (click)="SalvarEquipe(equipeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!equipeForm.valid" >
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                
+            </div>
+            <div class="col-sm-3 col-xs-3" >
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>

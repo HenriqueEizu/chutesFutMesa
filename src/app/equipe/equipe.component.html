@@ -1,0 +1,399 @@
+
+<!-- <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div> -->
+<!-- <div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div> -->
+ 
+<!-- <body> -->
+
+    <!-- Navigation -->
+  
+    <!-- Page Content -->
+    <div class="container">
+           <!-- Page Features -->
+      
+          <!-- /.row -->
+          <mat-accordion> <!--Cabeçalho-->
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Self aware panel -->
+                </mat-panel-title>
+                <mat-panel-description>
+                  <h5><img src="/assets/images/icons/escolha.png" class="mr-2" style="width: 30px"> Resumo Escalação</h5> 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row text-center">
+  
+                <div class="col-lg-3 col-md-6 mb-6">
+                  <div *ngIf="!imageCardEquipe == null" class="card h-100"> 
+                    <img [src]="imageCardEquipe.IM_IMPATH" class="mr-2" style="width: 30px">
+                    {{imageCardEquipe.IM_IMPATH}}
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Equipe: {{nomeEquipe}} <img src="{{strImageEscudo }}" class="mr-2" style="width: 30px"></h4>
+                  </div>
+                </div>
+          
+                <div class="col-lg-3 col-md-6 mb-6">
+                  <div class="card h-100">
+                    <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                    <div class="card-body">
+                      <h4 class="card-title">Mesa 1</h4>
+                      <img src="{{imgJogadoresEscalados[0]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[0]}}
+                      <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="#" class="btn btn-primary">Find Out More!</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-6">
+                    <div class="card h-100">
+                      <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                      <div class="card-body">
+                        <h4 class="card-title">Mesa 2</h4>
+                        <img src="{{imgJogadoresEscalados[1]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[1]}}
+                        <p class="card-text"></p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Find Out More!</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-6">
+                    <div class="card h-100">
+                      <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                      <div class="card-body">
+                        <h4 class="card-title">Mesa 3</h4>
+                        <img src="{{imgJogadoresEscalados[2]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[2]}}
+                        <p class="card-text"></p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Find Out More!</a>
+                      </div>
+                    </div>
+                  </div>
+          
+                <div class="col-lg-3 col-md-6 mb-6">
+                  <div class="card h-100">
+                    <!-- <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px"> -->
+                    <div class="card-body">
+                      <h4 class="card-title">Detail</h4>
+                      <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="#" class="btn btn-primary">Find Out More!</a>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="col-lg-3 col-md-6 mb-6">
+                  <div class="card h-100">
+                    <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                    <div class="card-body">
+                      <h4 class="card-title">Mesa 4</h4>
+                      <img src="{{imgJogadoresEscalados[3]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[3]}}
+                      <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="#" class="btn btn-primary">Find Out More!</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-6">
+                    <div class="card h-100">
+                        <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                      <div class="card-body">
+                        <h4 class="card-title">Mesa 5</h4>
+                        <img src="{{imgJogadoresEscalados[4]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[4]}}
+                        <p class="card-text"></p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Find Out More!</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-6">
+                    <div class="card h-100">
+                        <img src="/assets/images/icons/CampoHorizontal.png" class="mr-2" style="width: 255px">
+                      <div class="card-body">
+                        <h4 class="card-title">Mesa 6</h4>
+                        <img src="{{imgJogadoresEscalados[5]}}" class="mr-2" style="width: 30px">
+                      {{NomeJogadoresEscalados[5]}}
+                        <p class="card-text"></p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Find Out More!</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+              
+            </mat-expansion-panel>
+        </mat-accordion> <!--Cabeçalho *********** FIM -->
+          
+  
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Monte sua Equipe</h1>
+        <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p> -->
+        <!-- <a href="#" class="btn btn-primary btn-lg">Call to action!</a> -->
+    <form [formGroup]="equipeForm" novalidate>     
+        <mat-accordion > <!--Cabeçalho-->
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Self aware panel -->
+                </mat-panel-title>
+                <mat-panel-description >
+                    <h5><img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 30px"> Equipe - Dados Gerais</h5> 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Nome Equipe:
+                </div>
+                <div class="col-sm-7  col-xs-7">
+                    <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome da equipe">
+                        <input name="EQ_EQNOME" class="form-control" formControlName="EQ_EQNOME" autocomplete="off" placeholder="Equipe" (change)="nomeEquipe = $event.target.value">
+                    </cft-input>
+                </div>
+               </div> 
+               <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Ativo:
+                </div>
+                <div class="row col-sm-7 col-xs-7">
+                    <div class="col-sm-2 col-xs-2" style="text-align: left;">
+                        <input type="checkbox" name="EQ_EQATIVO" class="form-control" formControlName="EQ_EQATIVO" autocomplete="off" placeholder="Ativo">
+                    </div>
+                    <div class="col-sm-10 col-xs-10"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Comentários:
+                </div>
+                <div class="col-sm-7  col-xs-7">
+                    <cft-input errorMessage="Campo obrigatório e com 5 carateres" label="Nome da equipe">
+                        <input name="EQ_EQOBSERVACAO" class="form-control" formControlName="EQ_EQOBSERVACAO" autocomplete="off" placeholder="Comentários">
+                    </cft-input>
+                </div>
+            </div>   
+            </mat-expansion-panel>
+        </mat-accordion> <!--Cabeçalho *********** FIM -->
+        <div class="row">
+            <div class="col-sm-2 col-xs-2">
+                &nbsp;
+            </div>
+        </div> 
+        <mat-accordion ><!--ESCUDO-->
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Self aware panel -->
+                </mat-panel-title>
+                <mat-panel-description>
+                    <h5><img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 30px"> Equipe - Escudo </h5> 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3 ">
+                    <div class="col-sm-12 col-xs-12 badge badge-info " ><h6>Escudos</h6></div>
+                    <div class="teste border border-primary rounded shadow-lg p-4 mb-4 bg-white gallery" id="gallery">
+                        <div class="">
+                            <div
+                            cdkDropList
+                            #todoListEscudo="cdkDropList"
+                            [cdkDropListData]="EscudosFiltro"
+                            [cdkDropListConnectedTo]="[doneListEscudo]"
+                            (cdkDropListDropped)="dropEscudo($event)">
+                                <div *ngFor="let item of EscudosFiltro" cdkDrag>
+                                    <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <span class="blink" tooltip="Arraste da esquerda para a direita" placement="top" show-delay="500">
+                            <img src="/assets/images/icons/setaDireita.png" class="mr-2" style="width: 40px">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3" >
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 badge badge-info "  > <h6>Escolher escudo</h6></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-3"></div>
+                                <div class="col-sm-6 col-xs-6 ">
+                                    <div class="example-containerEscudoEscolha">
+                                        <div
+                                            cdkDropList
+                                            #doneListEscudo="cdkDropList"
+                                            [cdkDropListData]="EscudosEscolhido"
+                                            [cdkDropListConnectedTo]="[todoListEscudo]"
+                                            class="example-listEscudo"
+                                            (cdkDropListDropped)="dropEscudo($event)">
+                                            <div class="example-boxEscudo" *ngFor="let item of EscudosEscolhido" cdkDrag >
+                                                <img [src]="item.IM_IMPATH" class="mr-2" style="width: 40px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </mat-expansion-panel>
+        </mat-accordion><!--ESCUDO ****** FIM-->
+        <div class="row">
+            <div class="col-sm-2 col-xs-2">
+                &nbsp;
+            </div>
+        </div> 
+         <mat-accordion><!--Jogadores-->
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Self aware panel -->
+                </mat-panel-title>
+                <mat-panel-description>
+                    <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Equipe - Jogadores </h5> 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                    <div class="col-sm-12 col-xs-12" >
+                        <div class="col-sm-12 col-xs-12 badge badge-info " ><h6> <input  #filtro placeholder="Filtro"  (keyup)="FiltraJogador(filtro.value)" > </h6></div>
+                        <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                            <div class="example-container col-sm-12 col-xs-12 ">
+                                <div>
+                                  <div *ngFor="let item of JogadoresFiltro" cdkDrag>
+                                      <div class="row border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                          <div class="col-sm-10 col-xs-10">
+                                              <div class="row">
+                                                  <div class="col-sm-1 col-xs-1">
+                                                    <img [src]="item.CL_CLEMBLEMA" class="mr-2" style="width: 50px">
+                                                    {{item.CL_CLSIGLA}}
+                                                  </div>
+                                                  <div class="col-sm-1 col-xs-1">
+                                                      <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 50px">
+                                                  </div>
+                                                  <div class="col-sm-2 col-xs-2">
+                                                    <h4><strong> {{item.JO_JOAPELIDO}}</strong></h4>
+                                                </div>
+                                                <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2">
+                                                    Status: <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 20px"> 
+                                                </div>
+                                                <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2">
+                                                    Status: <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 20px"> 
+                                                </div>
+                                                  <div class="col-sm-1 col-xs-1">
+                                                      Valor: <b><h4><strong>{{item.PR_PRPRECO}}</strong></h4></b>
+                                                  </div>
+                                                  <div class="col-sm-2 col-xs-2">
+                                                      Rank.: <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
+                                                  </div>
+                                              <!-- <div class="row "> -->
+                                                <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-2 col-xs-2">
+                                                    Evolução: <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
+                                                </div>
+                                                <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-2 col-xs-2">
+                                                    Evolução: <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
+                                                </div>
+                                              </div> 
+                                          </div>
+                                          <div class="col-sm-2 col-xs-2">
+                                            <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                            <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item)">
+                                                <i class="fa fa-check"></i> Convocar
+                                            </button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+            </mat-expansion-panel>
+        </mat-accordion><!--Jogadores ****** FIM-->
+         
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">&nbsp;</div>
+                <div class="col-sm-4 col-xs-4 ">
+                </div>
+                <div class="col-sm-1 col-xs-2">&nbsp;</div>
+                <div class="col-sm-4 col-xs-4 ">
+                </div>
+            </div>
+            
+            <!-- Escolha Jogadores-->
+
+
+        </form>
+      </header>
+  
+ 
+  
+    </div>
+    <!-- /.container -->
+  
+    <!-- Footer -->
+ 
+  
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- </body> -->
+  

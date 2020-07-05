@@ -6,8 +6,8 @@ import { CompeticaoService } from '../competicao.service';
 
 @Injectable({
     providedIn: 'root'
-})
-
+}) 
+  
 export class CompeticaoResolverGuard implements Resolve<Competicao> {
 
 constructor(private service: CompeticaoService){}

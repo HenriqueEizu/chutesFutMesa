@@ -26,3 +26,4 @@ export interface Competicao{
     CP_CPDATACADASTRO : string
     CP_CPFOTO : string
 }
+ 

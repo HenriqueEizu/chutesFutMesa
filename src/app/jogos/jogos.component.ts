@@ -8,6 +8,7 @@ import { delay, map, tap, filter, take, switchMap, distinctUntilChanged, debounc
 import { IFormCanDeactivate } from '../guards/form-deactivate';
 registerLocaleData(localeBR, "br");
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 //import * as jquery from 'jquery';
 import * as $$ from 'jquery-typeahead'
 let $: any = $$;
@@ -26,7 +27,6 @@ const states = ['<html><img src="/assets/images/icons/jogo1.png" class="mr-2" st
   'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
   'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
   
 
 @Component({
@@ -40,10 +40,27 @@ export class JogosComponent implements OnInit {
   jogo : any;
   numberPattern = /^[1-9]*$/
   Jogadores : Jogador[]
+  JogadoresCislpa : Jogador[]
   $: any;
+
+  todo = [
+    'Get to work',
+    'Pick up groceries',
+    'Go home',
+    'Fall asleep'
+  ];
+
+  done = [
+    
+    'Get up',
+    'Brush teeth',
+    'Take a shower',
+    'Check e-mail',
+    'Walk dog'
+  ];
   
 
-  model: any;
+  public model: any;
 
   @ViewChild('instance', {static: true}) instance: NgbTypeahead;
   focus$ = new Subject<string>();
@@ -68,6 +85,17 @@ export class JogosComponent implements OnInit {
             ,private alertService: AlertModalService){
             }
 
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
+
   podeDesativar() {
     return true;
   }
@@ -78,29 +106,34 @@ export class JogosComponent implements OnInit {
   ngOnInit(): void {
    //************************************************** */
 
-   $.typeahead({
-    input: ".js-typeahead-user_v1",
-    order: "asc",
-    source: {
-        groupName: {
-            // Ajax Request
-            // ajax: {
-            //     url: "..."
-            // }
-        }
-    },
-    callback: {
-        onClickBefore: function () 
-        // { ... }
-    {}}
-})
+//    $.typeahead({
+//     input: ".js-typeahead-user_v1",
+//     order: "asc",
+//     source: {
+//         groupName: {
+//             // Ajax Request
+//             // ajax: {
+//             //     url: "..."
+//             // }
+//         }
+//     },
+//     callback: {
+//         onClickBefore: function () 
+//         // { ... }
+//     {}}
+// })
 
    //**************************************************** */
     
 
     this.jogadorService.GetAllJogador ().subscribe((jog : Jogador[]) => {
-      this.Jogadores = jog;
+      this.Jogadores = jog.filter(c => c.JO_CLID != 7);;
     });
+
+    this.jogadorService.GetAllJogador ().subscribe((jog : Jogador[]) => {
+      this.JogadoresCislpa = jog.filter(c => c.JO_CLID == 7);
+    });
+    
 
 
     this.jogo = this.route.snapshot.data['jogo'];
