@@ -6,7 +6,6 @@ export interface Equipe{
     EQ_EQNOME : string,
     EQ_USID : number,
     OBJ_USUARIO : Usuario
-    OBJ_JOGADOR : Jogador,
     EQ_EQESCUDO : string,
     EQ_EQOBSERVACAO : string,
     EQ_EQATIVO : boolean,
@@ -34,5 +33,19 @@ export interface RankingJogadorStatus{
     CL_CLID : number,
     CL_CLEMBLEMA : string,
     CL_CLSIGLA : string,
-    JO_JOATIVO : boolean
+    JO_JOATIVO : boolean,
+    EJ_EJID : number,
+    EQ_EQID : number,
+    EQ_EQNOME : string,
+    EQ_EQESCUDO : string,
+}
+
+export interface RankingEquipe{
+     POSICAO : Number,
+     TOTAL : number
+     AJ_CPDESCRICAO : string,
+     AJ_RODESCRICAO : string,
+     AJ_EQNOME : string,
+     AJ_USNOMETRATAMENTO : string,
+     AJ_EQESCUDO : string
 }

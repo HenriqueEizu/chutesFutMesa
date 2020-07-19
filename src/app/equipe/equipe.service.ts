@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core"
 import {Observable} from 'rxjs'
 import {MEAT_API, MEAT_APP} from '../app.api'
 import {catchError, retry, take} from  'rxjs/operators'
-import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor } from '@angular/common/http'; 
+import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor, HttpParams } from '@angular/common/http'; 
 import {BehaviorSubject,throwError} from 'rxjs'
 import 'rxjs/Rx';
  
-import {Equipe,ImagemEscudo,RankingJogadorStatus} from './equipe.model'
+import {Equipe,ImagemEscudo,RankingJogadorStatus, RankingEquipe} from './equipe.model'
  
 
 @Injectable({
@@ -15,6 +15,10 @@ import {Equipe,ImagemEscudo,RankingJogadorStatus} from './equipe.model'
 export class EquipeService {
  
   constructor(private http: HttpClient) { }
+
+  VerificaEquipe(){
+    return this.http.get<any>(`${MEAT_API}/equipe/VerificaEquipe`).pipe();
+  }
 
   GetAllEquipe(): Observable<Equipe[]>{
     let equipes$ = new Observable<Equipe[]>();
@@ -30,9 +34,9 @@ export class EquipeService {
     // return this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
   }
 
-  GetRankingJogadorStatus() : Observable<RankingJogadorStatus[]>{
+  GetRankingJogadorStatus(id: number) : Observable<RankingJogadorStatus[]>{
     let rkJogStatus$ = new Observable<RankingJogadorStatus[]>();
-    rkJogStatus$ = this.http.get<RankingJogadorStatus[]>(`${MEAT_API}/equipe/RankingJogadorStatus`).pipe();
+    rkJogStatus$ = this.http.get<RankingJogadorStatus[]>(`${MEAT_API}/equipe/RankingJogadorStatus/${id}`).pipe();
     return rkJogStatus$;
   }
 
@@ -51,22 +55,31 @@ export class EquipeService {
     return teste;
   }
 
-  InserirEquipe(equipe : Equipe) : Observable<boolean>{ 
-      return this.http.post<boolean>(`${MEAT_API}/equipe/Incluir` ,equipe)
+  InserirEquipe(equipe : Equipe,params : string) : Observable<boolean>{ 
+    return this.http.put<boolean>(`${MEAT_API}/equipe/Incluir/${params}`,equipe).pipe(take(1));    
   }
 
   ExcluirEquipe(id : number) : Observable<boolean>{
     return this.http.delete<boolean>(`${MEAT_API}/equipe/Excluir/${id}`);
   }
 
-  AlterarEquipe(equipe : Equipe) : Observable<boolean>{
-    return this.http.put<boolean>(`${MEAT_API}/equipe/Alterar/${equipe.EQ_EQID}`,equipe).pipe(take(1));
+  AlterarEquipe(equipe : Equipe, params :string) : Observable<boolean>{
+    return this.http.put<boolean>(`${MEAT_API}/equipe/Alterar/${params}`,equipe).pipe(take(1));    
   }
 
-  SalvarEquipe(equipe : Equipe): Observable<boolean>{
+  SalvarEquipe(equipe : Equipe, idJogadoreEscalado : number[]): Observable<boolean>{
+    let params : string;
+    params =  idJogadoreEscalado.join(', ');
     if (equipe.EQ_EQID){
-      return this.AlterarEquipe(equipe);
+      return this.AlterarEquipe(equipe,params);
     }
-    return this.InserirEquipe(equipe);
+    return this.InserirEquipe(equipe,params);
+  } 
+
+  GetRankingEquipes(blnPorRodada: boolean): Observable<RankingEquipe[]>{
+    let rkEquipes$ = new Observable<RankingEquipe[]>();
+    rkEquipes$ =  this.http.get<RankingEquipe[]>(`${MEAT_API}/equipe/GetRankingEquipes/${blnPorRodada}`).pipe();
+    return rkEquipes$;
   }
-}
+} 
+     

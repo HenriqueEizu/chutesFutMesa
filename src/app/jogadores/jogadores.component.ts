@@ -33,6 +33,7 @@ export class JogadoresComponent implements OnInit {
   image = "jogador.png"
   pathimagecomplete = DIR_JOGADOR + this.image;
   imageEscolhida : string;
+  numberPattern = /^-?(0|[1-9]\d*)?$/
 
   constructor(private jogadorService: JogadorService
     , private clubeService: ClubeService
@@ -65,6 +66,7 @@ export class JogadoresComponent implements OnInit {
       JO_CLID: this.formBuilder.control(this.jogador.JO_CLID,[Validators.required]),
       JO_JOATIVO: this.formBuilder.control(this.jogador.JO_JOATIVO),
       JO_JOFOTO: this.formBuilder.control(this.jogador.JO_JOFOTO),
+      JO_JOMATRICULA: this.formBuilder.control(this.jogador.JO_JOMATRICULA,[Validators.required,Validators.pattern(this.numberPattern)],[this.ValidaMatricula.bind(this)]),
     })
   }
 
@@ -108,6 +110,26 @@ export class JogadoresComponent implements OnInit {
     );
   }
 
+  VerificaMatricula(Matricula:number, Matricula2 :number = 99999999){
+    return this.jogadorService.VerificaApelido().pipe(
+      delay(3000),
+      map((dados: {jogadores : any[]}) => dados.jogadores),
+      tap(console.log),
+      map((dados: {matriculaJogador : string}[]) => dados.filter(v => Number(v.matriculaJogador) == Matricula && Number(v.matriculaJogador) != Matricula2)),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
+  }
+
+  ValidaMatricula(formControl : FormControl)
+  {
+    return this.VerificaMatricula(formControl.value, this.jogador.JO_JOMATRICULA != null ? this.jogador.JO_JOMATRICULA : "").pipe(
+      tap(console.log),
+      map(ApelidoExiste => ApelidoExiste ? {matriculaInvalida: true} : null )
+    );
+  }
+
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.imageEscolhida = files.item(0).name;
@@ -126,7 +148,7 @@ export class JogadoresComponent implements OnInit {
 
     return sucesso;
   }
-
+ 
   SalvarJogador(jodador: Jogador){
     let msgSuccess = "Jogador inserido com sucesso";
     let msgErro = "Erro ao incluir Jogador. Tente novamente";
@@ -141,12 +163,10 @@ export class JogadoresComponent implements OnInit {
       msgBotao = "Alterar"
     }
 
-    if (jodador.JO_JOFOTO == "" || jodador.JO_JOFOTO == null){
+    if (jodador.JO_JOFOTO == "" || jodador.JO_JOFOTO == null && jodador.JO_JOID == null){
       jodador.JO_JOFOTO = DIR_JOGADOR + this.image
-    }else if(jodador.JO_JOID == null && this.fileToUpload != null){
-      if (this.uploadFileToActivity() == true){
-        jodador.JO_JOFOTO = DIR_JOGADOR + this.imageEscolhida
-      }
+    }else if (jodador.JO_JOFOTO != "" && this.imageEscolhida != undefined){
+      jodador.JO_JOFOTO = DIR_JOGADOR + this.imageEscolhida
     }
 
     jodador.JO_JODATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");

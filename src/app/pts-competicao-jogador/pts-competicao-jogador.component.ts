@@ -28,7 +28,7 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
   ptscompeticaojogador : any;
   ptscompeticaojogadorForm: FormGroup
   ptscompeticaojogadorSelecionado: PtsCompeticaoJogador;
-  numberPattern = /^[1-9]*$/
+  numberPattern = /^-?(0|[1-9]\d*)?$/
   myDate = new Date();
   competicoes : Competicao[];
   jogadores : Jogador[];

@@ -22,7 +22,6 @@ constructor(private service: EquipeService){}
             EQ_EQNOME : null,
             EQ_USID : null,
             OBJ_USUARIO : null,
-            OBJ_JOGADOR : null,
             EQ_EQESCUDO : null,
             EQ_EQOBSERVACAO : null,
             EQ_EQATIVO : null,

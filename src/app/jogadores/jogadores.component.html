@@ -72,7 +72,7 @@
                     &nbsp;
                 </div> 
                 <div class="col-sm-3 col-xs-3">
-                        Login:
+                        Apelido:
                 </div>
                 <div class="col-sm-5  col-xs-5">
                     <cft-input errorMessage="Campo obrigatório e com 6 carateres" label="login do usuário">
@@ -82,6 +82,23 @@
                 <div class="col-xs-12 col-sm-2" >
                     <!-- <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.get('US_USLOGIN').hasError('loginInvalido') === 'VALID'" style="color:red"><i class="fa fa-remove"></i> Login já existente</span> -->
                     <span class="help-block pull-right has-error-block" *ngIf="jogadorForm.get('JO_JOAPELIDO').hasError('apelidoInvalido')" style="color:red"><i class="fa fa-remove"></i> Apelido já existente</span>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div> 
+                <div class="col-sm-3 col-xs-3">
+                        Nº Matricula:
+                </div>
+                <div class="col-sm-5  col-xs-5">
+                    <cft-input errorMessage="Matricula é um campo numérico e obrigatório" label="nº matricula">
+                        <input name="JO_JOMATRICULA" class="form-control" formControlName="JO_JOMATRICULA" autocomplete="off" placeholder="Nº Matricula">
+                    </cft-input>
+                </div>
+                <div class="col-xs-12 col-sm-2" >
+                    <!-- <span class="help-block pull-right has-error-block" *ngIf="usuarioForm.get('US_USLOGIN').hasError('loginInvalido') === 'VALID'" style="color:red"><i class="fa fa-remove"></i> Login já existente</span> -->
+                    <span class="help-block pull-right has-error-block" *ngIf="jogadorForm.get('JO_JOMATRICULA').hasError('matriculaInvalida')" style="color:red"><i class="fa fa-remove"></i> Matricula já cadastrada</span>
                 </div> 
             </div>
             <div class="row">

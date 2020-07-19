@@ -41,11 +41,11 @@
             <i class="fa fa-app-store"></i>Pontos Competições</a>
         </li> 
         <li class="nav-item">
-          <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe']">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe',usuarioLogado.US_USID]">
             <img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 20px; color: white;">
-            <i class="fa fa-app-store"></i>Equipes</a>
+            <i class="fa fa-app-store"></i>Equipes</a> 
         </li> 
-       
+
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/exemplosPipes']">
           <i class="fa fa-app-store"></i> pipes</a>

@@ -13,10 +13,11 @@ import { EquipeRouting } from './equipe.route';
 import { SharedModule} from  '../shared/shared.module';
 import { EquipeResolverGuard } from './guards/equipe.resolver.guard';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxScrollTopModule } from 'ngx-scrolltop';
  
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, DragDropModule,EquipeRouting,SharedModule.forRoot(),MatExpansionModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, DragDropModule,EquipeRouting,SharedModule.forRoot(),MatExpansionModule,NgxScrollTopModule],
   exports: [],
   declarations: [EquipeComponent,EquipeListComponent,EquipeListSortableHeader],
   providers: [EquipeService, EquipeResolverGuard],

@@ -15,8 +15,10 @@ import {MatAccordion} from '@angular/material/expansion';
 import {EquipeService} from './equipe.service'
 import {JogadorService} from '../jogadores/jogador.service'
 import {DIR_EQUIPE} from '../app.api'
-import {Equipe,ImagemEscudo,RankingJogadorStatus} from './equipe.model'
+import {Equipe,ImagemEscudo,RankingJogadorStatus, RankingEquipe} from './equipe.model'
 import { Jogador } from '../jogadores/jogador.model';
+import { Usuario } from '../usuario/usuario.model';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'cft-equipe',
@@ -28,9 +30,9 @@ export class EquipeComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-
+ 
    
-  panelOpenState = false;
+  panelOpenState = true;
   pathImage = DIR_EQUIPE;
   image = "Equipe.png"
   pathimagecomplete = DIR_EQUIPE + this.image;
@@ -50,10 +52,22 @@ export class EquipeComponent implements OnInit {
   imageCardEquipe : ImagemEscudo ;
   strImageEscudo : string;
   nomeEquipe : string;
-  JogadoreEscalados: Jogador[];
+  JogadoreEscalados: RankingJogadorStatus[];
+  rankingEquipe :RankingEquipe[];
+  posicaoEquipe : RankingEquipe;
+  PosicaoEquipe : Number;
+  pontosEquipe : Number;
   imgJogadoresEscalados: string[];
   NomeJogadoresEscalados: string[];
+  idJogadoresEscalados : number[];
+  valoresJogadores : number[];
   intNumeroJogEscalados: number = 0;
+  escalado: boolean = false;
+  isLoggedIn$: Observable<boolean>;
+  usuarioLogadoObs : Observable<Usuario>;
+  usuarioLogado : Usuario;
+  intTotalPtsEquipe : number = 0;
+  blnBotaoOrdenarRank : boolean = true;
 
   constructor(private equipeService: EquipeService
     , private router: Router
@@ -62,46 +76,70 @@ export class EquipeComponent implements OnInit {
     ,private alertService: AlertModalService
     ,private route: ActivatedRoute
     ,private jogadorService : JogadorService
+    ,private usuarioService: UsuarioService
     ){
 
 }
 
 
-step = 0;
-
-setStep(index: number) {
-  this.step = index;
-}
-
-nextStep() {
-  this.step++;
-}
-
-prevStep() {
-  this.step--;
-}
-
   ngOnInit(): void {
+    var i:number; 
+    
     this.imgJogadoresEscalados = ["","","","","",""];
     this.NomeJogadoresEscalados = ["","","","","",""];
+    this.valoresJogadores = [0,0,0,0,0,0];
+    this.idJogadoresEscalados = [0,0,0,0,0,0];
     this.JogadoreEscalados= [null,null,null,null,null,null];
-
-    this.equipeService.GetRankingJogadorStatus ().subscribe((jog : RankingJogadorStatus[]) => {
-      this.Jogadores = jog;
-      this.JogadoresFiltro = this.Jogadores
+    
+    this.isLoggedIn$ = this.usuarioService.isLoggedIn;
+    this.usuarioService.usuarioCacheFunc.subscribe((u : Usuario) =>{
+      this.usuarioLogado = u
     });
 
-    this.equipeService.GetRankingJogadorStatus().subscribe((jog : RankingJogadorStatus[]) => {
+    this.equipeService.GetRankingJogadorStatus(this.usuarioLogado.US_USID).subscribe((jog : RankingJogadorStatus[]) => {
+      this.Jogadores = jog;
+      this.JogadoresFiltro = jog;
+      this.JogadoreEscalados = this.Jogadores.filter(f => f.EQ_EQID > 0)
+      if (this.JogadoreEscalados.length > 0){
+        for( i = 0;i< this.JogadoreEscalados.length;i++) {
+          this.imgJogadoresEscalados[i] = this.JogadoreEscalados[i].JO_JOFOTO
+          this.NomeJogadoresEscalados[i] = this.JogadoreEscalados[i].JO_JOAPELIDO
+          this.valoresJogadores[i] = this.JogadoreEscalados[i].PR_PRPRECO
+          this.idJogadoresEscalados[i] = this.JogadoreEscalados[i].JO_JOID
+          this.strImageEscudo = this.JogadoreEscalados[i].EQ_EQESCUDO
+          this.nomeEquipe = this.JogadoreEscalados[i].EQ_EQNOME
+          this.intNumeroJogEscalados ++;
+          this.intTotalPtsEquipe = this.intTotalPtsEquipe + this.JogadoreEscalados[i].PR_PRPRECO
+        } 
+      }
+      this.equipeService.GetImagemEscudo().subscribe((jog : ImagemEscudo[]) => {
+        this.EscudosEscolhido = jog.filter(c => c.IM_IMPATH == this.strImageEscudo);
+        this.imageCardEquipe = jog.filter(c => c.IM_IMATIVO == false)[0];
+      });
+      this.equipeService.GetRankingEquipes(false).subscribe((rEqui : RankingEquipe[]) => {
+        this.posicaoEquipe = rEqui.filter(e => e.AJ_EQNOME == this.nomeEquipe)[0];
+        this.PosicaoEquipe = this.posicaoEquipe.POSICAO;
+        this.pontosEquipe = this.posicaoEquipe.TOTAL;
+      })
+    });
+
+    this.equipeService.GetRankingEquipes(false).subscribe((rEqui : RankingEquipe[]) => {
+      this.posicaoEquipe = rEqui.filter(e => e.AJ_EQNOME == this.nomeEquipe)[0];
+    })
+
+    this.equipeService.GetRankingEquipes(false).subscribe((rEqui : RankingEquipe[]) => {
+      this.rankingEquipe = rEqui;
+    })
+
+    
+
+    this.equipeService.GetRankingJogadorStatus(this.usuarioLogado.US_USID).subscribe((jog : RankingJogadorStatus[]) => {
       this.JogadoresCislpa = jog.filter( j => j.JO_JOAPELIDO == 'zzzz');
+
     });
 
     this.equipeService.GetImagemEscudo().subscribe((jog : ImagemEscudo[]) => {
       this.EscudosFiltro = jog.filter(c => c.IM_IMATIVO == true);;
-    });
-
-    this.equipeService.GetImagemEscudo().subscribe((jog : ImagemEscudo[]) => {
-      this.EscudosEscolhido = jog.filter(c => c.IM_IMATIVO == false);
-      this.imageCardEquipe = jog.filter(c => c.IM_IMATIVO == false)[0];
     });
 
     this.equipe = this.route.snapshot.data['equipe'];
@@ -114,7 +152,7 @@ prevStep() {
 
     this.equipeForm = this.formBuilder.group({
       EQ_EQID : [this.equipe.EQ_EQID],
-      EQ_EQNOME: this.formBuilder.control(this.equipe.EQ_EQNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)]),
+      EQ_EQNOME: this.formBuilder.control(this.equipe.EQ_EQNOME,[Validators.required, Validators.minLength(6),Validators.maxLength(300)],[this.ValidaNomeEquipe.bind(this)]),
       EQ_EQESCUDO: this.formBuilder.control(this.equipe.EQ_EQESCUDO),
       EQ_EQATIVO: this.formBuilder.control(this.equipe.EQ_EQATIVO),
       EQ_EQOBSERVACAO: this.formBuilder.control(this.equipe.EQ_EQOBSERVACAO,Validators.maxLength(300)),
@@ -122,6 +160,26 @@ prevStep() {
 
   }
 
+  VerificaNomeEquipe(NomeEquipe:string, NomeEquipe2:string ="clube"){
+    return this.equipeService.VerificaEquipe().pipe(
+      delay(3000),
+      map((dados: {clubes : any[]}) => dados.clubes),
+      tap(console.log),
+      map((dados: {nomeEquipe : string}[]) => dados.filter(v => v.nomeEquipe.toUpperCase() === NomeEquipe.toUpperCase() && v.nomeEquipe.toUpperCase() != NomeEquipe2.toUpperCase() )),
+      tap(console.log ),
+      map(dados => dados.length > 0),
+      tap(console.log)
+    )
+  }
+
+  ValidaNomeEquipe(formControl : FormControl)
+  {
+    return this.VerificaNomeEquipe(formControl.value, this.equipe.EQ_EQNOME != null ? this.equipe.EQ_EQNOME : ""  ).pipe(
+      tap(console.log),
+      map(equipeExiste => equipeExiste ? {nomeEquipeInvalido: true} : null )
+    );
+  }
+ 
   drop(event: CdkDragDrop<string[]>) {
     let countJog = this.JogadoresFiltro.length;
     if (event.previousContainer === event.container) {
@@ -156,30 +214,67 @@ prevStep() {
     }
   }
 
-  EscalaJogador(jogador :  Jogador){
+  RemoverJogador(id :number){
+    var strJogador : string;
+    strJogador = this.NomeJogadoresEscalados[id]
+    let jogadorCortado : RankingJogadorStatus;
+    jogadorCortado = this.JogadoresFiltro.filter(c=> c.JO_JOAPELIDO == this.NomeJogadoresEscalados[id])[0];
+    this.JogadoresFiltro.filter(c=> c.JO_JOID == jogadorCortado.JO_JOID).map( h=> h.EQ_EQID = 0);
+    this.imgJogadoresEscalados[id] = "";
+    this.NomeJogadoresEscalados[id] = "";
+    this.valoresJogadores[id] = 0;
+    this.idJogadoresEscalados[id] = 0;
+    this.intNumeroJogEscalados --;
+    this.intTotalPtsEquipe = this.intTotalPtsEquipe - jogadorCortado.PR_PRPRECO;
+    this.alertService.showAlertSuccess("Jogador  " + strJogador + "  removido com sucesso");
+  }
 
+  EscalaJogador(jogador :  RankingJogadorStatus){
+    var j : number;
+    
     if (this.intNumeroJogEscalados < 6)
     {
-      this.imgJogadoresEscalados[this.intNumeroJogEscalados] = jogador.JO_JOFOTO;
-      this.NomeJogadoresEscalados[this.intNumeroJogEscalados] = jogador.JO_JOAPELIDO;
-      this.JogadoreEscalados[this.intNumeroJogEscalados] = jogador;
-      this.intNumeroJogEscalados ++;
+      for(j=0; j <= this.intNumeroJogEscalados; j ++ ){
+        if (this.imgJogadoresEscalados[j] == ""){
+          this.imgJogadoresEscalados[j] = jogador.JO_JOFOTO;
+          this.NomeJogadoresEscalados[j] = jogador.JO_JOAPELIDO;
+          this.valoresJogadores[j] = jogador.PR_PRPRECO;
+          this.idJogadoresEscalados[j] = jogador.JO_JOID;
+          this.JogadoreEscalados[j] = jogador;
+          this.escalado = true;
+          this.intTotalPtsEquipe = this.intTotalPtsEquipe + jogador.PR_PRPRECO
+          break;
+        }
+      }
+       this.intNumeroJogEscalados ++;
+      jogador.EQ_EQID = 1;
+      this.alertService.showAlertSuccess("Jogador  " + jogador.JO_JOAPELIDO + "  inserido com sucesso");
     }
     else{
       this.alertService.showAlertDanger("Já foram escalados 6 jogadores.") ;
     }
   }
 
-  podeDesativar() {
+  HabilitarSalvar(): boolean{
+
+    var blnEscalados : boolean = true ;
+    var j : number;
+
+    for(j=0; j <= this.NomeJogadoresEscalados.length; j ++ ){
+      if (this.NomeJogadoresEscalados[j] == ""){
+        blnEscalados = false;
+        break;
+      }
+    }
+
+    if (this.equipeForm.valid == true && this.EscudosEscolhido.length > 0 && blnEscalados){
+      return false;
+    }
     return true;
   }
 
-  EscudoEsc(equipe: Equipe){
-    alert(equipe.EQ_EQESCUDO);
-  }
-
-  EscudoImagem(strImagem: string){
-    alert(strImagem);
+  podeDesativar() {
+    return true;
   }
 
   FiltraJogador(strCriterio : string){
@@ -198,21 +293,20 @@ prevStep() {
     }
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    this.imageEscolhida = files.item(0).name;
-  }
-  uploadFileToActivity() :boolean{
-    var sucesso : boolean = true;
-    this.equipeService.postFile(this.fileToUpload).pipe(take(1)).subscribe((file : string) => {
-      if (file != undefined){
-        this.image = file;
-        }
-      else{
-        sucesso = false;
-      }
-    });
-    return sucesso;
+  OrdenarPorRanking(){
+    if (this.blnBotaoOrdenarRank ==  true){
+      this.JogadoresFiltro.sort(function(a, b){return a.RJ_RJPOSICAOATUAL - b.RJ_RJPOSICAOATUAL});
+      this.blnBotaoOrdenarRank = false;
+    }
+    else{
+      this.JogadoresFiltro.sort(function(a, b){return b.RJ_RJPOSICAOATUAL - a.RJ_RJPOSICAOATUAL});
+      this.blnBotaoOrdenarRank = true;
+    }
+
+
+    // if (this.blnBotaoOrdenarRank ==  true){
+    //   this.JogadoresFiltro = this.Jogadores.sort(function(a, b){return a - b})
+    // }
   }
 
 
@@ -231,21 +325,15 @@ prevStep() {
     }
 
     this.equipeSelecionado = equipe;
+    equipe.EQ_EQESCUDO = this.strImageEscudo;
+    equipe.EQ_USID = this.usuarioLogado.US_USID
 
-    if (equipe.EQ_EQESCUDO == "" || equipe.EQ_EQESCUDO == null){
-      equipe.EQ_EQESCUDO = DIR_EQUIPE + this.image
-    }else if(equipe.EQ_EQID == null && this.fileToUpload != null){
-      if (this.uploadFileToActivity() == true){
-        equipe.EQ_EQESCUDO = DIR_EQUIPE + this.imageEscolhida
-      }
-    }
-     
     equipe.EQ_EQDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()
       .pipe(
         take(1),
-        switchMap(result => result ? this.equipeService.SalvarEquipe(equipe) : EMPTY)
+        switchMap(result => result ? this.equipeService.SalvarEquipe(equipe,this.idJogadoresEscalados) : EMPTY)
       ).subscribe(
         success => {
                     this.alertService.showAlertSuccess(msgSuccess);

@@ -10,3 +10,5 @@ export const DIR_COMPETICAO = 'assets/images/fotosCompeticoes/'
 
 export const DIR_EQUIPE = 'assets/images/fotosEquipes/'
 
+export const DIR_EXCEL_RANKINHG = 'assets/rankingFPFM/'
+

@@ -12,12 +12,18 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 //import * as jquery from 'jquery';
 import * as $$ from 'jquery-typeahead'
 let $: any = $$;
+import { DIR_EXCEL_RANKINHG } from '../app.api';
+import readXlsxFile from 'read-excel-file'
 
 import { Jogador } from './../jogadores/jogador.model';
 import {JogosService} from './jogos.service'
 import { AlertModalService } from '../shared/alertmodal/alertmodal.service';
 import { JogadorService } from '../jogadores/jogador.service';
 import {Jogos} from './jogos.model'
+
+import * as XLSX from 'xlsx';
+
+type AOA = any[][];
 
 const states = ['<html><img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 30px"></html>', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
   'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
@@ -61,6 +67,10 @@ export class JogosComponent implements OnInit {
   
 
   public model: any;
+  input = document.getElementById('input')
+  data: AOA = [[1, 2], [3, 4]];
+  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
+  fileName: string = 'SheetJS.xlsx';
 
   @ViewChild('instance', {static: true}) instance: NgbTypeahead;
   focus$ = new Subject<string>();
@@ -100,10 +110,33 @@ export class JogosComponent implements OnInit {
     return true;
   }
 
+  onFileChange(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+      /* grab first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
+      console.log(this.data);
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
   // pipe = new DatePipe('pt-BR'); // Use your own locale
   myDate = new Date();
     
   ngOnInit(): void {
+
+   
    //************************************************** */
 
 //    $.typeahead({
@@ -150,6 +183,17 @@ export class JogosComponent implements OnInit {
     })
 
   }
+
+  LerExcel(strPathExcel : String){
+    let strFile : string  = DIR_EXCEL_RANKINHG + strPathExcel
+    readXlsxFile(strPathExcel).then((rows) => {
+      // `rows` is an array of rows
+      console.log(rows);
+      // each row being an array of cells. 
+    })
+
+  }
+
   
   SalvarJogo(jogo: Jogos){
     let msgSuccess = "Jogador inserido com sucesso";

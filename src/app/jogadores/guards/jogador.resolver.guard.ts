@@ -26,7 +26,8 @@ constructor(private service: JogadorService){}
             JO_JOATIVO: null,
             JO_CLID : null,
             OBJ_CLUBE : null,
-            JO_JODATACADASTRO : null
+            JO_JODATACADASTRO : null,
+            JO_JOMATRICULA : null
 
         });
     }
