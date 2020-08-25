@@ -71,9 +71,9 @@ export class PtsCompeticaoJogadorListService {
     });
 
     this.PtsCompeticaoJogadorServ.GetAllPtsCompeticaoJogador().subscribe((cp : PtsCompeticaoJogador[]) => {
-      this.PTSCOMPETICOESJOGADORES = cp});
-
-    this._search$.next(); 
+      this.PTSCOMPETICOESJOGADORES = cp
+      this._search$.next(); 
+    });
   
   }
 

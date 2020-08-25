@@ -8,7 +8,7 @@ import 'rxjs/Rx';
  
 import {Equipe,ImagemEscudo,RankingJogadorStatus, RankingEquipe} from './equipe.model'
  
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -48,32 +48,30 @@ export class EquipeService {
     return equipeLocal;
   }
 
-  postFile(fileToUpload: File): Observable<string> {
+   postFile(fileToUpload: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
     var teste = this.http.post<string>(`${MEAT_API}/equipe/upload`,formData).pipe();
     return teste;
   }
 
-  InserirEquipe(equipe : Equipe,params : string) : Observable<boolean>{ 
-    return this.http.put<boolean>(`${MEAT_API}/equipe/Incluir/${params}`,equipe).pipe(take(1));    
+  InserirEquipe(equipe : Equipe) : Observable<boolean>{ 
+    return this.http.put<boolean>(`${MEAT_API}/equipe/Incluir`,equipe).pipe(take(1));    
   }
 
   ExcluirEquipe(id : number) : Observable<boolean>{
     return this.http.delete<boolean>(`${MEAT_API}/equipe/Excluir/${id}`);
   }
 
-  AlterarEquipe(equipe : Equipe, params :string) : Observable<boolean>{
-    return this.http.put<boolean>(`${MEAT_API}/equipe/Alterar/${params}`,equipe).pipe(take(1));    
+  AlterarEquipe(equipe : Equipe) : Observable<boolean>{
+    return this.http.put<boolean>(`${MEAT_API}/equipe/Alterar`,equipe).pipe(take(1));    
   }
 
-  SalvarEquipe(equipe : Equipe, idJogadoreEscalado : number[]): Observable<boolean>{
-    let params : string;
-    params =  idJogadoreEscalado.join(', ');
+  SalvarEquipe(equipe : Equipe): Observable<boolean>{
     if (equipe.EQ_EQID){
-      return this.AlterarEquipe(equipe,params);
+      return this.AlterarEquipe(equipe);
     }
-    return this.InserirEquipe(equipe,params);
+    return this.InserirEquipe(equipe);
   } 
 
   GetRankingEquipes(blnPorRodada: boolean): Observable<RankingEquipe[]>{

@@ -70,9 +70,11 @@ export class EquipeListService {
     });
 
     this.competicaoServ.GetAllEquipe().subscribe((cp : Equipe[]) => {
-      this.EQUIPES = cp});
+      this.EQUIPES = cp
+      this._search$.next(); 
+    });
 
-    this._search$.next(); 
+   
   
   }
 

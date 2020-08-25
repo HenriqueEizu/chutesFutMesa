@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-// import {appRoutes} from './app-routes'
 import {appRoutes} from './app.routing'
 import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CommonModule} from '@angular/common'
@@ -15,39 +14,15 @@ import { ModalModule} from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
-// import {NgxPaginationModule} from 'ngx-pagination';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { TooltipModule } from 'ng2-tooltip-directive';
-
-
 import { SharedModule} from  './shared/shared.module';
 import { LoginComponent } from './login/login.component';
-// import { UsuarioComponent } from './usuario/usuario.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component'
-// import { ClubeComponent } from './clube/clube.component';
-// import { ClubeListComponent } from './clube/clube-list/clube-list.component';
-// import { ClubeListSortableHeader } from './clube/clube-list/sortable.directive';
-// import { UsuarioService} from './usuario/usuario.service'
-// import { ClubeService} from  './clube/clube.service';
-// import { UsuarioListComponent } from './usuario/usuario-list/usuario-list.component';
-import { DiretivasCustomizadasComponent } from './diretivas-customizadas/diretivas-customizadas.component';
-import { ExemplosPipeComponent } from './exemplos-pipe/exemplos-pipe.component';
-import { CamelCasePipe } from './camel-case.pipe'
-import { ClubeModule } from './clube/clube.module';
-import { UsuarioModule} from './usuario/usuario.module'
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactive.guard';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-import { JogadorModule } from './jogadores/jogador.module';
-import { JogosModule} from './jogos/jogos.module';
-import { CompeticaoModule} from './competicao/competicao.module';
-import { PtsCompeticaoJogadorModule } from './pts-competicao-jogador/pts-competicao-jogador.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { EquipeModule } from './equipe/equipe.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -85,6 +60,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { NgxScrollTopModule } from 'ngx-scrolltop';
 
+import { DiretivasCustomizadasComponent } from './diretivas-customizadas/diretivas-customizadas.component';
+import { ExemplosPipeComponent } from './exemplos-pipe/exemplos-pipe.component';
+import { CamelCasePipe } from './camel-case.pipe'
+import { ClubeModule } from './clube/clube.module';
+import { UsuarioModule} from './usuario/usuario.module'
+import { RankingModule } from './ranking/ranking.module';
+import { JogadorModule } from './jogadores/jogador.module';
+import { JogosModule} from './jogos/jogos.module';
+import { CompeticaoModule} from './competicao/competicao.module';
+import { PtsCompeticaoJogadorModule } from './pts-competicao-jogador/pts-competicao-jogador.module';
+import { EquipeModule } from './equipe/equipe.module';
+import { EquipeJogadorModule } from './equipe-jogador/equipe-jogador.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,13 +97,6 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
     HttpClientModule,
     ModalModule.forRoot(),
     SharedModule.forRoot(),
-    ClubeModule,
-    UsuarioModule,
-    JogadorModule,
-    JogosModule,
-    CompeticaoModule,
-    PtsCompeticaoJogadorModule,
-    EquipeModule,
     AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule,
@@ -154,6 +136,17 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
     MatTooltipModule,
     MatTreeModule,
     NgxScrollTopModule,
+
+    ClubeModule,
+    UsuarioModule,
+    JogadorModule,
+    JogosModule,
+    CompeticaoModule,
+    PtsCompeticaoJogadorModule,
+    EquipeModule,
+    RankingModule,
+    EquipeJogadorModule,
+    DashboardModule
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,
               { provide: HTTP_INTERCEPTORS,

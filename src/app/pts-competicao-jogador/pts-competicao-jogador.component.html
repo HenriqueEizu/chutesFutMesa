@@ -95,7 +95,7 @@
                     Jogador:
                 </div>
                 <div class="col-sm-7 col-xs-7" >
-                    <cft-input errorMessage="Competição deve ser preenchida" label="Jogador">
+                    <cft-input errorMessage="Jogador deve ser preenchido" label="Jogador">
                         <select #PJ_JOID name="PJ_JOID" class="form-control" formControlName="PJ_JOID" (click)="MostraJogador(PJ_JOID.value)">
                             <option *ngFor=  "let j of (jogadores)" [value]="j.JO_JOID">{{j.JO_JOAPELIDO}}</option>
                         </select>
@@ -155,7 +155,111 @@
                     &nbsp;
                 </div>
                 <div class="col-sm-2 col-xs-2">
-                    Pontos:
+                    Colocação:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJCOLOCACAO" class="form-control" formControlName="PJ_PJCOLOCACAO" autocomplete="off" placeholder="Colocação">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Pontos Ganhos:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJPONTOSGANHOS" class="form-control" formControlName="PJ_PJPONTOSGANHOS" autocomplete="off" placeholder="Pontos Ganhos">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Jogos:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJJOGOS" class="form-control" formControlName="PJ_PJJOGOS" autocomplete="off" placeholder="Jogos">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Vitórias:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJVITORIAS" class="form-control" formControlName="PJ_PJVITORIAS" autocomplete="off" placeholder="Vitórias">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Empates:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJEMPATE" class="form-control" formControlName="PJ_PJEMPATE" autocomplete="off" placeholder="Empates">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Derrotas:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJDERROTA" class="form-control" formControlName="PJ_PJDERROTA" autocomplete="off" placeholder="Derrotas">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Gols-Pro:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJGOLSPRO" class="form-control" formControlName="PJ_PJGOLSPRO" autocomplete="off" placeholder="Gols-Pro">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Gols-Contra:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <cft-input errorMessage="Pontos é um campo numérico e obrigatório " label="Pontos">
+                        <input name="PJ_PJGOLCONTRA" class="form-control" formControlName="PJ_PJGOLCONTRA" autocomplete="off" placeholder="Gols-Contra">
+                    </cft-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Observação:
                 </div>
                 <div class="col-sm-7  col-xs-7" >
                     <cft-input errorMessage="Pontos é Campo obrigatório " label="Observação">

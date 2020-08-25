@@ -20,24 +20,27 @@ constructor(private service: JogosService){}
  
         return of ({
             JG_JGID : null,
-            JG_JGDATA : null,
-            JG_CJID : null,
-            OBJ_CATEGORIAJOGO : null,
-            JG_JOID1 : null,
-            OBJ_JOGADOR1 : null,
-            JG_JGGOL1 : null,
+            ano : null,
+            JG_CPID: null,
+            OBJ_COMPETICAO : null,
+            JG_CLID1 : null,
+            OBJ_CLUBE1 : null,
+            JG_JGPTS1 : null,
+            JG_JGPG1 : null,
+            JG_JGSG1 : null,
             JG_JGVITORIA1 : null,
             JG_JGEMPATE1 : null,
             JG_DERROTA1 : null,
-            JG_JOID2 : null,
-            OBJ_JOGADOR2 : null,
-            JG_JGGOL2 : null,
+            JG_CLID2 : null,
+            OBJ_CLUBE2 : null,
+            JG_JGPTS2 : null,
+            JG_JGPG2 : null,
+            JG_JGSG2 : null,
             JG_JGVITORIA2 : null,
             JG_JGEMPATE2 : null,
             JG_DERROTA2 : null,
             JG_JGATIVO : null,
             JG_JGDATACADASTRO : null
-
         });
     }
   

@@ -1,0 +1,35 @@
+.align-items-center {
+    -ms-flex-align: center!important;
+    align-items: center!important;
+  }
+  .d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+  }
+
+  .campo {
+    background-image: url(/assets/images/icons/CampoHorizontal.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+  }
+  .botonista{
+    background-color: white;
+    width: 80px;
+    height: 80px;
+  }
+  .botonista:hover{
+    border-style: solid;
+    border-color: red;
+  }
+
+  .excluir:hover .remover{
+    display: block;
+    position: absolute;
+    top:16%;
+    right:12%;
+  }
+
+  .remover{
+    display: none;
+  }

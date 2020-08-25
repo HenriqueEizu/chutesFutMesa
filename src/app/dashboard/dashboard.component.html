@@ -1,0 +1,427 @@
+<!-- <div class="container"> -->
+    <div class="row jumbotron">
+        <div class="col-sm-3 col-xs-3 " >
+            <div class="row ">
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-10 col-xs-10 card mb-3" style="text-align: center;">
+                    <h6> Mercado Fecha em:</h6>
+                    <h2> 1 dia</h2>
+                    <div *ngIf="EquipeUsuario != null" class="card h-100 d-flex align-items-center" style="text-align: center;"> 
+                        <img [src]="EquipeUsuario.EQ_EQESCUDO" class="mr-2" style="width: 80px;">
+                        <h5>{{ EquipeUsuario.EQ_EQNOME }}</h5>
+                        <h4>{{ usuarioLogado.US_USNOMETRATAMENTO}} </h4>
+                    </div>
+                    <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe',usuarioLogado.US_USID]">
+                        <img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 20px; color: white; ">
+                        <i class="fa fa-app-store"></i>Perfil
+                    </a> 
+                    <!-- <button class="btn btn-primary pull-right btn-block"></button> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-5 col-xs-5 card ">
+                    <div class="card-body">
+                        Patrimonio
+                    </div>
+                </div>
+                <div class="col-sm-5 col-xs-5 card">
+                    <div class="card-body">
+                        Pontuação/Rodada
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-9 " >
+            <div class="row">
+                <div class="col-sm-11 col-xs-11  card mb-5">
+                    <div class="card-body">Basic card</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 col-xs-5 card mb-5">
+                    <div class="card-header">Escalação</div>
+                    <div class="card-body">
+                        <!-- <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador',usuarioLogado.US_USID]"> -->
+                        <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador']">
+                            <img src="/assets/images/icons/escalacao.png" class="mr-2" style="width: 50px; color: white; ">
+                            <i class="fa fa-app-store"></i>Substituir Jogadores
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                
+                <div class="col-sm-5 col-xs-5 card mb-5">
+                    <div class="card-header">
+                        <h5> <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5>
+                    </div>
+                    <div class="card-body">
+                        <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicoes']">
+                            Competições
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11 col-xs-11 mb-1 " >
+                    Top Escalados
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-xs-3 card mb-5 rounded p-1 ">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{maisEscaladosFoto[0]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>1º</strong></h2>
+                            <h4><strong>{{maisEscaladosJogador[0].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{maisEscaladosEmblema[0]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{maisEscaladodClube[0]}}</h5></div>
+                            <div class="row"> <h5>{{maisEscaladosTotal[0]}} pessoas escalaram</h5></div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                
+                <div class="col-sm-3 col-xs-3 card mb-5 ">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{maisEscaladosFoto[1]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>2º</strong></h2>
+                            <h4><strong>{{maisEscaladosJogador[1].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{maisEscaladosEmblema[1]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{maisEscaladodClube[1]}}</h5></div>
+                            <div class="row"> <h5>{{maisEscaladosTotal[1]}} pessoas escalaram</h5></div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                
+                <div class="col-sm-3 col-xs-3 card mb-5">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{maisEscaladosFoto[2]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>3º</strong></h2>
+                            <h4><strong>{{maisEscaladosJogador[2].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{maisEscaladosEmblema[2]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{maisEscaladodClube[2]}}</h5></div>
+                            <div class="row"> <h5>{{maisEscaladosTotal[2]}} pessoas escalaram</h5></div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11 col-xs-11  card mb-5">
+                    <mat-accordion><!--Escalados-->
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false" [expanded]="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                            <!-- Self aware panel -->
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Top Escalados </h5> 
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                                <div class="col-sm-12 col-xs-12" >
+                                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div class="col-sm-12 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-sm-2 col-xs-2">
+                                                        CLUBE
+                                                    </div>
+                                                    <div class="col-sm-3 col-xs-3">
+                                                        JOGADORES
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-4 col-xs-4"></div>
+                                                    <div class="col-sm-2 col-xs-2">
+                                                        Qtd. Escalação
+                                                    </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div *ngFor="let item of osMaiEscalados" >
+                                                <div class="row border rounded shadow-lg bg-white mb-3">
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-2 col-xs-2 mt-3">
+                                                                <img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="width: 50px">
+                                                                {{item.AJ_CLSIGLA}}
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2">
+                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="width: 80px">
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <strong>{{item.AJ_JOAPELIDO}}</strong>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-4 col-xs-4"></div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <h4><strong> {{item.AJ_AJPONTOS}}</strong> </h4>
+                                                            </div>
+                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </mat-expansion-panel>
+                    </mat-accordion><!--Escalados ****** FIM-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11 col-xs-11 mb-1 " >
+                    Seus Pontuadores
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-xs-3 card mb-5">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{seusEscaladosFoto[0]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>{{seusEscaladosTotal[0]}} PTS</strong></h2>
+                            <h4><strong>{{seusEscaladosJogador[0].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{seusEscaladosEmblema[0]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{seusEscaladodClube[0]}}</h5></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-1 card mb-5">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{seusEscaladosFoto[1]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>{{seusEscaladosTotal[1]}} PTS</strong></h2>
+                            <h4><strong>{{seusEscaladosJogador[1].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{seusEscaladosEmblema[1]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{seusEscaladodClube[1]}}</h5></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-1 card mb-5">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4" >
+                            <img src="{{seusEscaladosFoto[2]}}" style="width:90px">
+                        </div>
+                        <div class="col-sm-8 col-xs-8 " style="text-align: center;">
+                            <h2><strong>{{seusEscaladosTotal[2]}} PTS</strong></h2>
+                            <h4><strong>{{seusEscaladosJogador[2].substring(0,15)}} </strong></h4> 
+                            <div class="row"><img src="{{seusEscaladosEmblema[2]}}" style="width:40px"></div>
+                            <div class="row"> <h5>{{seusEscaladodClube[2]}}</h5></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11 col-xs-11  card mb-5">
+                    <mat-accordion><!--Seus Pontuadores-->
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false" [expanded]="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                            <!-- Self aware panel -->
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Seus Pontuadores </h5> 
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                                <div class="col-sm-12 col-xs-12" >
+                                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div class="col-sm-12 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-sm-2 col-xs-2">
+                                                        CLUBE
+                                                    </div>
+                                                    <div class="col-sm-3 col-xs-3">
+                                                        JOGADORES
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-4 col-xs-4"></div>
+                                                    <div class="col-sm-3 col-xs-3">
+                                                        Pontos
+                                                    </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div *ngFor="let item of osSeusEscalados" >
+                                                <div class="row border rounded shadow-lg bg-white mb-3">
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-2 col-xs-2 mt-3">
+                                                                <img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="width: 50px">
+                                                                {{item.AJ_CLSIGLA}}
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2">
+                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="width: 80px">
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <strong>{{item.AJ_JOAPELIDO}}</strong>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-4 col-xs-4"></div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <h4><strong> {{item.AJ_AJPONTOS}}</strong> Pontos</h4>
+                                                            </div>
+                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </mat-expansion-panel>
+                    </mat-accordion><!--Seus Pontuadores ****** FIM-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11 col-xs-11  card mb-5">
+                    <mat-accordion><!--top  pontuadores-->
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false" [expanded]="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                            <!-- Self aware panel -->
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Top Pontuadores </h5> 
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                                <div class="col-sm-12 col-xs-12" >
+                                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div class="col-sm-12 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-sm-1 col-xs-1 mt-3" style="text-align: center;">
+                                                        CLUBE
+                                                    </div>
+                                                    <div class="col-sm-2 col-xs-2">
+                                                        JOGADOR
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        PTS
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        PG
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        JG
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        V
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        E
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        D
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        GP
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        GC
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        SG
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="example-container col-sm-12 col-xs-12 ">
+                                            <div *ngFor="let item of ptsCompeticao" >
+                                                <div class="row border rounded shadow-lg bg-white mb-3">
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div class="row" style="text-align: center;">
+                                                            <div class="col-sm-1 col-xs-1 mt-3" style="text-align: center;">
+                                                                <img [src]="item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 50px">
+                                                                {{item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2">
+                                                                <img [src]="item.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="width: 50px">
+                                                                {{item.OBJ_JOGADOR.JO_JOAPELIDO}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJPONTOS}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJPONTOSGANHOS}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJJOGOS}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJVITORIAS}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJEMPATE}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJDERROTA}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJGOLSPRO}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJGOLCONTRA}}
+                                                            </div>
+                                                            <div class="col-sm-1 col-xs-1 mt-5">
+                                                                {{item.PJ_PJSALDOGOLS}}
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </mat-expansion-panel>
+                    </mat-accordion><!--top  pontuadores ****** FIM-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!-- </div> -->

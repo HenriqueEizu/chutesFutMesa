@@ -29,4 +29,23 @@ export class JogosService {
     // return this.http.get<Clube[]>(`${MEAT_API}/clubes`).pipe();
   }
 
+  InserirJogo(jogo : Jogos) : Observable<boolean>{
+    return this.http.post<boolean>(`${MEAT_API}/jogos/Incluir` ,jogo)
+  }
+
+  AlterarJogo(jogo : Jogos) : Observable<boolean>{
+    return this.http.put<boolean>(`${MEAT_API}/jogos/Alterar/${jogo.JG_JGID}`,jogo).pipe(take(1));
+  }
+
+  ExcluirJogo(id : number) : Observable<boolean>{
+    return this.http.delete<boolean>(`${MEAT_API}/jogos/Excluir/${id}`);
+  }
+
+  SalvarJogos(jogo : Jogos): Observable<boolean>{
+    if (jogo.JG_JGID){
+      return this.AlterarJogo(jogo);
+    }
+    return this.InserirJogo(jogo);
+  } 
+
 }

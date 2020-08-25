@@ -1,95 +1,193 @@
-
 <div class="row">
-    <div class="col-sm-2 col-xs-2">
-        &nbsp;
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2 col-xs-2">
-        &nbsp;
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2 col-xs-2">
-        &nbsp;
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2 col-xs-2">
-        &nbsp;
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2 col-xs-2">&nbsp;</div>
-    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 30px"> Cadastro de Jogos</h5></div>
-</div>
-
-<div class="row">
-    <div class="col-sm-2 col-xs-2">
-        &nbsp;
-    </div>  
-</div>
-
-<!-- <label for="typeahead-focus">Search for a state:</label>
-<input
-  id="typeahead-focus"
-  type="text"
-  class="form-control"
-  [(ngModel)]="model"
-  [ngbTypeahead]="search"
-  (focus)="focus$.next($any($event).target.value)"
-  (click)="click$.next($any($event).target.value)"
-  #instance="ngbTypeahead"
-/> -->
-
-<div class="example-container">
-    <h2>To do</h2>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="Jogadores"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of Jogadores" cdkDrag>
-        <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">{{item.JO_JOAPELIDO}}</div>
-    </div>
-</div>
-  
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="JogadoresCislpa"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of JogadoresCislpa" cdkDrag>
-        <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 30px">{{item.JO_JOAPELIDO}}</div>
-    </div>
+  <div class="col-sm-2 col-xs-2">
+      &nbsp;
   </div>
-
-  <input type="file" (change)="onFileChange($event)" multiple="false" />
-	<table class="sjs-table">
-		<tbody>
-      <tr *ngFor="let row of data">
-			<td *ngFor="let val of row">
-				{{val}}
-			</td>
-		</tr>
-    </tbody>
-	</table>
-
-  <div class="card-footer">
-    <button class="btn btn-danger" (click)="LerExcel('TESTE.xlsx')">
-      <i class="fa fa-times"></i> Remover
-    </button>
+</div>
+<div class="row">
+  <div class="col-sm-2 col-xs-2">
+      &nbsp;
   </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 col-xs-2">
+      &nbsp;
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 col-xs-2">
+      &nbsp;
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 col-xs-2">&nbsp;</div>
+  <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 30px"> Cadastro de Jogos</h5></div>
+</div>
 
-   
+
+
+<div class="row">
+  <div class="col-sm-2 col-xs-2">
+      &nbsp;
+  </div> 
   
-  
+  <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+      <h4>Dados do Jogo</h4>
+      <form [formGroup]="jogosForm" novalidate>  
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3">
+              Ano:
+          </div>
+          <div class="col-sm-6  col-xs-6" >
+              <select name="ano" class="form-control" formControlName="ano" #filtro  (change)="FiltraCompeticao(filtro.value)">
+                  <option *ngFor=  "let c of (anos)" [value]="c.ANO">{{c.ANO}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3">
+              Competição:
+          </div>
+          <div class="col-sm-6  col-xs-6" >
+              <select #JG_CPID name="JG_CPID" class="form-control" formControlName="JG_CPID" (click)="MostraRodada(JG_CPID.value)">
+                  <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3">
+            &nbsp;
+          </div>
+          <div class="col-sm-8  col-xs-8" >
+            <div *ngIf="show" > 
+              <ngb-toast *ngIf="show" header="{{competicaoId.CP_CPDESCRICAO}}" [delay]="5000"
+                  [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true"
+                  (hide)="show = false; autohide = true" [class.bg-warning]="!autohide" >
+                  <div class="row">
+                      <div class="col-sm-12 col-xs-12">
+                          <div class="row">
+                              <div class="col-sm-12 col-xs-12">
+                                  <img [src]="competicaoId.CP_CPFOTO" class="mr-2" style="width: 30px">
+                              <!-- </div>
+                              <div class="col-sm-11 col-xs-11"> -->
+                                  {{ competicaoId.CP_CPDESCRICAO }}
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-12 col-xs-12">
+                                  {{ competicaoId.OBJ_Rodada.RO_RODESCRICAO }} Inicio:{{ competicaoId.CP_CPDATAINICIO  | date: 'dd/MM/yyyy' }}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </ngb-toast>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2 col-xs-2">
+              &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3">
+              Ativo:
+          </div>
+          <div class="col-sm-5 col-xs-5" style="text-align: left;">
+              <input type="checkbox" name="JG_JGATIVO" class="form-control" formControlName="JG_JGATIVO" autocomplete="off" placeholder="Ativo">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3 ">
+              Clube 1:
+          </div>
+          <div class="col-sm-1  col-xs-1 " >
+              &nbsp;
+          </div>
+          <div class="col-sm-1  col-xs-1" >
+            &nbsp;
+          </div>
+          <div class="col-sm-1  col-xs-1 " >
+            &nbsp;
+          </div>
+          <div class="col-sm-3 col-xs-3">
+            Clube 2:
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-xs-1">
+            <img src="{{imagemClube1}}" class="mr-2" style="width: 30px">
+          </div>
+          <div class="col-sm-3 col-xs-3 ">
+            <select name="JG_CLID1" class="form-control" formControlName="JG_CLID1" #filtroClube  (change)="FiltraClube(filtroClube.value)">
+                <option *ngFor=  "let c of (clubes1)" [value]="c.CL_CLID">{{c.CL_CLNOME}}</option>
+            </select>
+          </div>
+          <div class="col-sm-1  col-xs-1 " >
+            <cft-input errorMessage="Inválido" label="pontos clube 1">
+              <input name="JG_JGPTS1" class="form-control" formControlName="JG_JGPTS1" autocomplete="off" placeholder="Pts">
+            </cft-input>
+          </div>
+          <div class="col-sm-1  col-xs-1" style="text-align: center;" >
+            <h2>X</h2>
+          </div>
+          <div class="col-sm-1  col-xs-1 " >
+            <cft-input errorMessage="Inválido" label="pontos clube 2">
+                <input name="JG_JGPTS2" class="form-control" formControlName="JG_JGPTS2" autocomplete="off" placeholder="Pts">
+              </cft-input>
+          </div>
+          <div class="col-sm-3 col-xs-3">
+            <select name="JG_CLID2" class="form-control" formControlName="JG_CLID2" #filtroClube2  (change)="FiltraClube2(filtroClube2.value)">
+                <option *ngFor=  "let c of (clubes2)" [value]="c.CL_CLID">{{c.CL_CLNOME}}</option>
+            </select>
+          </div>
+          <div class="col-sm-1 col-xs-1">
+            <img src="{{imagemClube2}}" class="mr-2" style="width: 30px">
+          </div>
+        </div>
+      </form>
+      <div class="row">
+          <div class="col-sm-1 col-xs-1">
+              &nbsp;
+          </div>
+          <div class="col-sm-9 col-xs-9">
+              <button (click)="SalvarJogo(jogosForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!jogosForm.valid" >
+                  <i class="fa fa-save"></i> Salvar
+              </button>
+          </div>
+          <div class="col-sm-2 col-xs-2" >
+              &nbsp;
+          </div>
+      </div>
+  </div>
+</div>
 

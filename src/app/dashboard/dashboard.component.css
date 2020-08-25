@@ -1,0 +1,189 @@
+.align-items-center {
+    -ms-flex-align: center!important;
+    align-items: center!important;
+  }
+  .d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+  }
+
+  .fundo {
+    background-color: lightgray;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  body {
+    background-color: lightgray;
+  }
+  
+  .gallery {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-width: 33%;
+    -moz-column-width: 33%;
+    column-width: 33%; }
+    .gallery .pics {
+    -webkit-transition: all 350ms ease;
+    transition: all 350ms ease; }
+    .gallery .animation {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1); }
+    
+    @media (max-width: 450px) {
+    .gallery {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-width: 100%;
+    -moz-column-width: 100%;
+    column-width: 100%;
+    }
+    }
+    
+    @media (max-width: 400px) {
+    .btn.filter {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    }
+    }
+  
+    .example-containerEscudoEscolha {
+      max-width: 100%;
+      vertical-align: text-bottom;
+      text-align: center;
+      border: dashed blue 1px;
+    }
+  
+    .example-containerEscudo {
+      width: 100px;
+      max-width: 100%;
+      vertical-align: text-bottom;
+      text-align: center;
+    }
+    
+    .example-listEscudo {
+      border: solid 1px #ccc;
+      min-height: 50px;
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      display: block;
+      text-align: center;
+    }
+    .example-boxEscudo {
+      border-bottom: solid 1px #ccc;
+      color: rgba(0, 0, 0, 0.87);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-align: center;
+      box-sizing: border-box;
+      cursor: move;
+      background: white;
+      font-size: 14px;
+      height: 60px;
+    }
+  
+    .example-container {
+      
+      max-width: 100%;
+      display: inline-block;
+      vertical-align: top;
+    }
+    
+    .example-list {
+      border: solid 1px #ccc;
+      min-height: 60px;
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      display: block;
+    }
+    
+    .example-box {
+      padding: 5px 5px;
+      border-bottom: solid 1px #ccc;
+      color: rgba(0, 0, 0, 0.87);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      cursor: move;
+      background: white;
+      font-size: 14px;
+    }
+    
+    .cdk-drag-preview {
+      box-sizing: border-box;
+      border-radius: 4px;
+      box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    }
+    
+    .cdk-drag-placeholder {
+      opacity: 0;
+    }
+    
+    .cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .example-box:last-child {
+      border: none;
+    }
+  
+    .teste {
+      height: 102px;
+      overflow:auto;
+      text-align: center;
+      border: solid blue ;
+    }
+  
+    .testeJogadores {
+      text-align: center;
+      border: solid blue ;
+      background-color: #CEECF5;
+    }
+  
+    .alinhar{    width: 70%;
+    }
+  
+    .blink {
+      animation: blink-animation 1s steps(5, start) infinite;
+      -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    }
+  
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+    @-webkit-keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+  
+    .example-action-buttons {
+      padding-bottom: 20px;
+    }
+    
+    .example-headers-align .mat-expansion-panel-header-title,
+    .example-headers-align .mat-expansion-panel-header-description {
+      flex-basis: 0;
+    }
+    
+    .example-headers-align .mat-expansion-panel-header-description {
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .example-headers-align .mat-form-field + .mat-form-field {
+      margin-left: 8px;
+    }

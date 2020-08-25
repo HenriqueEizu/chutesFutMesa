@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 import {Clube,Estado} from './clube.model'
 
 
-
+ 
 
 @Injectable() 
 export class ClubeService {

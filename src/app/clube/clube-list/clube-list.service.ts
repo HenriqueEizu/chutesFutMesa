@@ -71,9 +71,11 @@ export class ClubeListService {
     });
 
     this.clubeServ.GetAllClube().subscribe((es : Clube[]) => {
-      this.CLUBES = es});
+      this.CLUBES = es
+      this._search$.next();
+    });
 
-    this._search$.next();
+    
   
   }
 

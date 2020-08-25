@@ -50,7 +50,7 @@ export class JogadorListService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 50,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -70,9 +70,11 @@ export class JogadorListService {
     });
 
     this.jogadorServ.GetAllJogador().subscribe((es : Jogador[]) => {
-      this.JOGADORES = es});
+      this.JOGADORES = es
+      this._search$.next();
+    });
 
-    this._search$.next();
+    
   
   }
 

@@ -71,10 +71,19 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
       PJ_PJPONTOS: this.formBuilder.control(this.ptscompeticaojogador.PJ_PJPONTOS,[Validators.required,Validators.pattern(this.numberPattern)]),
       PJ_PJOBSERVACAO: this.formBuilder.control(this.ptscompeticaojogador.PJ_PJOBSERVACAO),
       PJ_PJATIVO: this.formBuilder.control(this.ptscompeticaojogador.PJ_PJATIVO),
+      PJ_PJCOLOCACAO : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJCOLOCACAO,[Validators.required,Validators.pattern(this.numberPattern)]),
+      PJ_PJPONTOSGANHOS : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJPONTOSGANHOS,[Validators.pattern(this.numberPattern)]),
+      PJ_PJJOGOS : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJJOGOS,[Validators.pattern(this.numberPattern)]),
+      PJ_PJVITORIAS : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJVITORIAS,[Validators.pattern(this.numberPattern)]),
+      PJ_PJEMPATE : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJEMPATE,[Validators.pattern(this.numberPattern)]),
+      PJ_PJDERROTA : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJDERROTA,[Validators.pattern(this.numberPattern)]),
+      PJ_PJGOLSPRO : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJGOLSPRO,[Validators.pattern(this.numberPattern)]),
+      PJ_PJGOLCONTRA : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJGOLCONTRA,[Validators.pattern(this.numberPattern)]),
+      
     });
 
   }
- 
+  
   MostraRodada(id: number)
   {
     this.show = true
@@ -84,10 +93,9 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
   {
     this.showJogadores = true
     this.jogadorId = this.jogadores.filter(j => j.JO_JOID == id)[0];
+    
   }
 
-
-  PJ_JOID
 
   podeDesativar() {
     return true;
@@ -108,6 +116,8 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
     }
 
     ptscompeticaojogador.PJ_PJDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
+    ptscompeticaojogador.PJ_JOMATRICULA = this.jogadorId.JO_JOMATRICULA;
+    ptscompeticaojogador.PJ_PJSALDOGOLS = ptscompeticaojogador.PJ_PJGOLSPRO - ptscompeticaojogador.PJ_PJGOLCONTRA
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()
       .pipe(

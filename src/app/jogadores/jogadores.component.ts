@@ -72,7 +72,7 @@ export class JogadoresComponent implements OnInit {
 
   VerificaNomeJogador(NomeJogador:string, NomeJogador2 :string = "NomeJogador"){
     return this.jogadorService.VerificaNomeJogador().pipe(
-      delay(3000),
+      delay(6000),
       map((dados: {jogadores : any[]}) => dados.jogadores),
       tap(console.log),
       map((dados: {nomeJogador : string}[]) => dados.filter(v => v.nomeJogador.toUpperCase() === NomeJogador.toUpperCase() && v.nomeJogador.toUpperCase() != NomeJogador2.toUpperCase())),
@@ -92,7 +92,7 @@ export class JogadoresComponent implements OnInit {
 
   VerificaApelido(Apelido:string, Apelido2 :string = "NomeJogador"){
     return this.jogadorService.VerificaApelido().pipe(
-      delay(3000),
+      delay(6000),
       map((dados: {jogadores : any[]}) => dados.jogadores),
       tap(console.log),
       map((dados: {apelidoJogador : string}[]) => dados.filter(v => v.apelidoJogador.toUpperCase() === Apelido.toUpperCase() && v.apelidoJogador.toUpperCase() != Apelido2.toUpperCase())),
@@ -162,7 +162,7 @@ export class JogadoresComponent implements OnInit {
       msgQuestaoCorpo = "Você realmente deseja alterar este Jogador?"
       msgBotao = "Alterar"
     }
-
+ 
     if (jodador.JO_JOFOTO == "" || jodador.JO_JOFOTO == null && jodador.JO_JOID == null){
       jodador.JO_JOFOTO = DIR_JOGADOR + this.image
     }else if (jodador.JO_JOFOTO != "" && this.imageEscolhida != undefined){

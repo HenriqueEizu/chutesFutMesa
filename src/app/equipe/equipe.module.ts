@@ -23,3 +23,4 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
   providers: [EquipeService, EquipeResolverGuard],
 })
 export class EquipeModule { }
+ 

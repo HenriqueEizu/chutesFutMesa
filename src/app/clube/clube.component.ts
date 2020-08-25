@@ -222,7 +222,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     return sucesso;
   }
-
+ 
   SalvarClube(clube: Clube){
 
     let msgSuccess = "Clube inserido com sucesso";
@@ -240,12 +240,10 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     this.clubeSelecionado = clube;
 
-    if (clube.CL_CLEMBLEMA == "" || clube.CL_CLEMBLEMA == null){
+    if (clube.CL_CLEMBLEMA == "" || clube.CL_CLEMBLEMA == null && clube.CL_CLID == null){
       clube.CL_CLEMBLEMA = DIR_CLUBE + this.image
-    }else if(clube.CL_CLID != null && this.fileToUpload != null){
-      // if (this.uploadFileToActivity() == true){
-        clube.CL_CLEMBLEMA = DIR_CLUBE + this.imageEscolhida
-      // }
+    }else if (clube.CL_CLEMBLEMA != "" && this.imageEscolhida != undefined){
+      clube.CL_CLEMBLEMA = DIR_CLUBE + this.imageEscolhida
     }
 
     clube.CL_CLDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");

@@ -32,7 +32,6 @@ export class UsuarioListComponent implements OnInit {
   }
  
   ngOnInit(): void {
-
   }
 
   usuarios$: Observable<Usuario[]>;

@@ -35,11 +35,11 @@ function sort(jogos: Jogos[], column: SortColumn, direction: string): Jogos[] {
 }
 
 function matches(jogo: Jogos, term: string, pipe: PipeTransform) {
-  return jogo.JG_JGDATA
-    || jogo.OBJ_JOGADOR1.JO_JOAPELIDO.toLowerCase().includes(term.toLowerCase())
-    || jogo.OBJ_JOGADOR2.JO_JOAPELIDO.toLowerCase().includes(term.toLowerCase())
-    || jogo.OBJ_JOGADOR1.OBJ_CLUBE.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
-    || jogo.OBJ_JOGADOR2.OBJ_CLUBE.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
+  return jogo.OBJ_CLUBE1.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_CLUBE2.CL_CLNOME.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_CLUBE1.CL_CLSIGLA.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_CLUBE2.CL_CLSIGLA.toLowerCase().includes(term.toLowerCase())
+    || jogo.OBJ_COMPETICAO.CP_CPDESCRICAO.toLowerCase().includes(term.toLowerCase())
 }
 
 @Injectable({providedIn: 'root'})
@@ -72,9 +72,11 @@ export class JogosListService {
     });
 
     this.jogosServ.GetAllJogos().subscribe((es : Jogos[]) => {
-      this.JOGOS = es});
+      this.JOGOS = es
+      this._search$.next();
+    });
 
-    this._search$.next();
+    
   
   }
 
@@ -105,7 +107,7 @@ export class JogosListService {
     let jogos = sort(this.JOGOS, sortColumn, sortDirection);
 
     // 2. filter
-    jogos = jogos.filter(jogos => matches(jogos, searchTerm, this.pipe));
+    jogos = jogos.filter(jogo => matches(jogo, searchTerm, this.pipe));
     const total = jogos.length; 
 
     // 3. paginate

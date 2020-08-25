@@ -7,7 +7,7 @@ import {EquipeResolverGuard} from './guards/equipe.resolver.guard'
 import { AuthGuard } from '../guards/auth.guard'
 import { DeactivateGuard } from '../guards/deactive.guard'
 
-
+ 
 
 export const equipeRoutes: Routes = [
     {path: 'equipe', component: EquipeComponent,resolve:{equipe :EquipeResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},

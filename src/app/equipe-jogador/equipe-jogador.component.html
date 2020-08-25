@@ -1,0 +1,336 @@
+<div class="row border border-top-0 border-primary mb-3" >
+    <div class="col-sm-1 col-xs-1  "> 
+        <div *ngIf="EquipeUsuario != null"  style="text-align: center;"> 
+            <img [src]="EquipeUsuario.EQ_EQESCUDO" class="mr-2" style="width: 80px;">
+        </div>    
+    </div>
+    <div *ngIf="EquipeUsuario != null" class="col-sm-5 col-xs-5 "> 
+        <h5>{{ EquipeUsuario.EQ_EQNOME }}</h5>
+        <h2>{{ usuarioLogado.US_USNOMETRATAMENTO}} </h2>
+    </div>
+    <div class="col-sm-6 col-xs-6 "> 
+        <h5> Mercado Fecha em:</h5>
+        <h2> 1 dia</h2>    
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex mb-3">
+        <div class="col-sm-8 col-xs-8 mb-4">  
+            <div class="row mb-5">
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 1</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(0)">
+                                <img src="{{imgJogadoresEscalados[0]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[0]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[0]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[0]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 2</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(1)">
+                                <img src="{{imgJogadoresEscalados[1]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[1]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[1]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[1]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 3</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(2)">
+                                <img src="{{imgJogadoresEscalados[2]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[2]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[2]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[2]}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 4</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(3)">
+                                <img src="{{imgJogadoresEscalados[3]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[3]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[3]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[3]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 5</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(4)">
+                                <img src="{{imgJogadoresEscalados[4]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[4]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[4]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[4]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-4 "> 
+                    <div class="card " style="text-align: center;">
+                        <div class="card-header" style="text-align: center;">Mesa 6</div>
+                        <div class="card-body  campo " >
+                            <div class="excluir mb-5" (click)="RemoverJogadorImagem(5)">
+                                <img src="{{imgJogadoresEscalados[5]}}" class="mr-2 rounded-circle botonista" >
+                                <img src="/assets/images/icons/inativo.png" style="width:20px" class="remover"/>
+                            </div>
+                            <img src="{{NomeClubeJogadoresEscalados[5]}}" class="mr-2 " style="width:50px;" >
+                            <div class="mt-2">
+                                <strong>{{NomeJogadoresEscalados[5]}}</strong> 
+                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <p class="card-text">Valor: D$ {{valoresJogadores[5]}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <div class="col-sm-4 col-xs-4 mb-3">  
+            <table class="table table-striped col-sm-12 col-xs-12">
+                <thead>
+                    <tr>
+                        <th scope="col" >Jogador</th>
+                        <th scope="col" > Preço</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[0]}}</td>
+                        <td> D$ {{valoresJogadores[0]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[1]}}</td>
+                        <td> D$ {{valoresJogadores[1]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[2]}}</td>
+                        <td> D$ {{valoresJogadores[2]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[3]}}</td>
+                        <td> D$ {{valoresJogadores[3]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[4]}}</td>
+                        <td> D$ {{valoresJogadores[4]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{NomeJogadoresEscalados[5]}}</td>
+                        <td> D$ {{valoresJogadores[5]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 col-xs-4 ">  
+            <table class="table table col-sm-12 col-xs-12">
+                <thead>
+                    <tr>
+                        <th scope="col" >Avise aos amigos</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 col-xs-4 ">  
+        </div>
+        <div class="col-sm-4 col-xs-4 ">  
+            <table class="table table col-sm-12 col-xs-12">
+                <thead>
+                    <tr>
+                        <th scope="col" >Preço do Time</th>
+                        <th scope="col" >Você ainda tem</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>D$ {{intTotalPtsEquipe}}</td>
+                        <td>D$ 12,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-xs-12 border border-left-0 border-right-0 border-botton-0 pt-2 pb-2">
+        <div class="row">
+            <div class="col-sm-3 col-xs-3 ">Entenda as regras do Chutes FutMesa</div>
+            <div class="col-sm-3 col-xs-3 "></div>
+            <div class="col-sm-3 col-xs-3 ">
+                <button class="btn btn-danger pull-right btn-block rounded-sm" (click)="VenderTudo()" [disabled]="faltaEscalar == 6">Vender todo o time</button>
+            </div>
+            <div *ngIf="HabilitarSalvar() == true" class="col-sm-3 col-xs-3 ">
+                <button class="btn btn-info pull-right btn-block rounded-sm" [disabled]="HabilitarSalvar()">Confirmar Escalação</button>
+                <h3>Faltam escalar  {{faltaEscalar}} jogador(s)</h3>
+            </div>
+            <div *ngIf="HabilitarSalvar() == false" class="col-sm-3 col-xs-3 ">
+                <button class="btn btn-success pull-right btn-block rounded-sm" (click)="SalvarEscalacaoEquipe()">Confirmar Escalação</button>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div class="row jumbotron pl-5 pr-5">
+    <div class="col-sm-12 col-xs-12 "> 
+        <div class="row">
+            <div class="col-sm-2 col-xs-2 "></div>
+            <div class="col-sm-2 col-xs-2 "><h1>Mercado</h1></div>
+            <div class="col-sm-2 col-xs-2 "></div>
+            <div class="col-sm-2 col-xs-2 ">
+                <button class="btn btn-success pull-right btn-block rounded-sm">
+                    <img src="/assets/images/icons/SoccerBall.png" class="mr-2" style="width: 20px">
+                    Tabela de Jogos
+                </button>
+            </div>
+            <div class="col-sm-2 col-xs-2 "></div>
+            <div class="col-sm-2 col-xs-2 ">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input  class="form-control" placeholder="Nome Jogador" type="text" #filtro  (keyup)="FiltraJogador(filtro.value)" >
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-xs-12 "> 
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 ">
+                <mat-accordion><!--Jogadores-->
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false" [expanded]="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        <!-- Self aware panel -->
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Equipe - Jogadores </h5> 
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                            <div class="col-sm-12 col-xs-12" >
+                                <div class="col-sm-12 col-xs-12 badge badge-info ">
+                                <h4>  </h4>
+                                <!-- </div>
+                                <div class="col-sm-6 col-xs-6 badge badge-info "> -->
+                                <div *ngIf="blnBotaoOrdenarRank " class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                                    <h4>Ranking/Valor: <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                </div>
+                                <div *ngIf="!blnBotaoOrdenarRank" class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                                    <h4> Ranking/Valor: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                </div>
+                                </div>
+                                
+                                <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                    <div class="example-container col-sm-12 col-xs-12 ">
+                                        <div>
+                                        <div *ngFor="let item of JogadoresFiltro" cdkDrag>
+                                            <div class="row border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                                <div class="col-sm-10 col-xs-10">
+                                                    <div class="row">
+                                                        <div class="col-sm-1 col-xs-1">
+                                                            <img [src]="item.CL_CLEMBLEMA" class="mr-2" style="width: 50px">
+                                                            {{item.CL_CLSIGLA}}
+                                                        </div>
+                                                        <div class="col-sm-1 col-xs-1">
+                                                            <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 50px">
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2">
+                                                            <h4><strong> {{item.JO_JOAPELIDO}}</strong></h4>
+                                                        </div>
+                                                        <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2">
+                                                            Status: <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 20px"> 
+                                                        </div>
+                                                        <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2">
+                                                            Status: <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 20px"> 
+                                                        </div>
+                                                        <div class="col-sm-1 col-xs-1">
+                                                            Valor: <b><h4><strong>{{item.PR_PRPRECO}}</strong></h4></b>
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2">
+                                                            Rank.: <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
+                                                        </div>
+                                                    <!-- <div class="row "> -->
+                                                        <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-2 col-xs-2">
+                                                            Evolução: <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
+                                                        </div>
+                                                        <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-2 col-xs-2">
+                                                            Evolução: <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px"> {{item.POSICOES}} {{item.EJ_EJID}}
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <div *ngIf="item.EQ_EQID == null" class="col-sm-2 col-xs-2">
+                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                    <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item);" >
+                                                        <i class="fa fa-check"></i> Comprar
+                                                    </button>
+                                                </div>
+                                                <div *ngIf="item.EQ_EQID > 0" class="col-sm-2 col-xs-2">
+                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="RemoverJogador(item);" >
+                                                        <i class="fa fa-check"></i> Vender
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </mat-expansion-panel>
+                </mat-accordion><!--Jogadores ****** FIM-->
+            </div>
+        </div>
+    </div>
+</div>
+
+

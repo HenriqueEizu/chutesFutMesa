@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">&nbsp;</div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/rankinggeral.png" class="mr-2" style="width: 30px"> Importar Dados Ranking</h5></div>
+</div>
+
+<form [formGroup]="rankingForm" novalidate> 
+    <div class="row">
+        <div class="col-sm-2 col-xs-2">
+            &nbsp;
+        </div> 
+        
+        <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        Data Ranking:
+                    </div>
+                    <div class="col-sm-5  col-xs-5" >
+                        <div class="row">
+                            <div class="col-sm-10  col-xs-10" >
+                                <!-- <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d1="ngbDatepicker" formControlName="CP_CPDATALIMITEAPOSTA" > -->
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d1="ngbDatepicker"  formControlName="RJ_RJDATA">
+                            </div>
+                            <div class="col-sm-2  col-xs-2" >
+                                <button class="btn btn-primary" (click)="d1.toggle()" type="button"><i class="fa fa-table "></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        Arquivo:
+                    </div>
+                    <div class="col-sm-5  col-xs-5" >
+                        <input type="file" (change)="onFileChange($event)" multiple="false" class="form-control" formControlName="RJ_RJOBSERVACAO"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        &nbsp;
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-2 col-xs-2">
+                        
+                    </div>
+                    
+                    <div class="col-sm-8 col-xs-8" >
+                        <button (click)="PercorrerPlanilha(rankingForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!rankingForm.valid" >
+                            <i class="fa fa-upload"></i> Importar
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>

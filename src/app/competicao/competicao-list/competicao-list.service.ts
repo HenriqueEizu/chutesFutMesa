@@ -71,9 +71,11 @@ export class CompeticaoListService {
     });
 
     this.competicaoServ.GetAllCompeticao().subscribe((cp : Competicao[]) => {
-      this.COMPETICOES = cp});
+      this.COMPETICOES = cp
+      this._search$.next(); 
+    });
 
-    this._search$.next(); 
+    
   
   }
 

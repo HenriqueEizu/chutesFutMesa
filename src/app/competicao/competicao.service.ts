@@ -25,6 +25,12 @@ export class CompeticaoService {
     catchError(this.handleError)) ;
   }
 
+  GetAnoCompeticao(): Observable<number[]>{
+    return this.http.get<number[]>(`${MEAT_API}/competicao/GetAnoCompeticao`).pipe(retry(10),
+    catchError(this.handleError)) ;
+  }
+  
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -76,5 +82,9 @@ export class CompeticaoService {
     }
     return this.InserirCompeticao(competicao);
   }
+
+  
+
+  
  
 }

@@ -71,9 +71,11 @@ export class UsuarioListService {
     });
 
     this.usuarioServ.GetAllUsuarios().subscribe((es : any[]) => {
-      this.USUARIOS = es});
+      this.USUARIOS = es;
+      this._search$.next();
+    });
 
-    this._search$.next();
+    
   
   }
 
@@ -100,19 +102,20 @@ export class UsuarioListService {
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     var search$ : Observable<SearchResult>;
- 
-    let usuarios = sort(this.USUARIOS, sortColumn, sortDirection);
 
-    // 2. filter
-    usuarios = usuarios.filter(usuario => matches(usuario, searchTerm, this.pipe));
-    const total = usuarios.length;
+      let usuarios = sort(this.USUARIOS, sortColumn, sortDirection);
 
-    // 3. paginate
-    usuarios = usuarios.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+      // 2. filter
+      
+      usuarios = usuarios.filter(usuario => matches(usuario, searchTerm, this.pipe));
+      const total = usuarios.length;
 
-    search$ = of({usuarios, total})
+      // 3. paginate
+      usuarios = usuarios.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
 
-    return of({usuarios, total});
-    
+      search$ = of({usuarios, total})
+
+      return of({usuarios, total});
+
   }
 }
