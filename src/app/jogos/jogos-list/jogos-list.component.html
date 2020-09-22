@@ -54,7 +54,9 @@
                     <tr>
                         <th scope="col" sortable="OBJ_COMPETICAO.CP_CPDESCRICAO" (sort)="onSort($event)">Competição</th>
                         <th scope="col" sortable="OBJ_CLUBE1.CL_CLSIGLA" (sort)="onSort($event)">Clube</th>
+                        <th scope="col" >X</th>
                         <th scope="col" sortable="OBJ_CLUBE2.CL_CLSIGLA" (sort)="onSort($event)">Clube</th>
+                        <th scope="col">Ação</th>
                         <th scope="col">Ação</th>
 
                     </tr>
@@ -62,35 +64,38 @@
                     <tbody>
                     <tr *ngFor="let jogo of jogos$ | async">
                         <td>
+                            <img [src]="jogo.OBJ_COMPETICAO.CP_CPFOTO" class="mr-2" style="width: 30px">
                             <span [tooltip]="jogo.OBJ_COMPETICAO.CP_CPDESCRICAO" placement="top" show-delay="500">
                                 <ngb-highlight [result]="jogo.OBJ_COMPETICAO.CP_CPDESCRICAO.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
                             </span>
                         </td>
+                        
                         <td>
                             <img [src]="jogo.OBJ_CLUBE1.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
-                            <span [tooltip]="jogo.OBJ_CLUBE1.CL_CLSIGLA" placement="top" show-delay="500">
-                            <ngb-highlight [result]="jogo.OBJ_CLUBE1.CL_CLNOME.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
+                            <span [tooltip]="jogo.OBJ_CLUBE1.CL_CLNOME" placement="top" show-delay="500">
+                            <ngb-highlight [result]="jogo.OBJ_CLUBE1.CL_CLSIGLA" [term]="service.searchTerm"></ngb-highlight>
                             </span>
                         </td>
+                        <td>X</td>
                         <td>
                             <img [src]="jogo.OBJ_CLUBE2.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
-                            <span [tooltip]="jogo.OBJ_CLUBE2.CL_CLSIGLA" placement="top" show-delay="500">
-                            <ngb-highlight [result]="jogo.OBJ_CLUBE2.CL_CLNOME.substring(0,15)" [term]="service.searchTerm"></ngb-highlight>
+                            <span [tooltip]="jogo.OBJ_CLUBE2.CL_CLNOME" placement="top" show-delay="500">
+                            <ngb-highlight [result]="jogo.OBJ_CLUBE2.CL_CLSIGLA" [term]="service.searchTerm"></ngb-highlight>
                             </span>
                         </td>
                         <td>
-                            <span [tooltip]="jogo.OBJ_COMPETICAO.CP_CPDESCRICAO" placement="top" show-delay="500">
-                            <img [src]="jogo.OBJ_COMPETICAO.CP_CPFOTO" class="mr-2" style="width: 30px">
-                            </span>
-                            {{jogo.OBJ_COMPETICAO.CP_CPDESCRICAO.substr(0,15)}}
-                        </td>
-                        <td>
-                            <a class="nav-link" [routerLink]="['/jogo',jogo.JO_JOID]">
+                            <a class="nav-link" [routerLink]="['/jogo',jogo.JG_JGID]">
                             <span tooltip="Editar" placement="top" show-delay="500">
                                 <i class="fa fa-edit"></i>
                             </span> 
                             </a>
                         </td>
+                        <td><a class="nav-link exemplo_4"  (click)="ExcluiJogo(jogo.JG_JGID);"> 
+                            <span tooltip="Excluir" placement="top" show-delay="500">
+                              <img src="/assets/images/icons/excluir.png" class="mr-2" style="width: 10px" >
+                            </span> 
+                            </a>
+                          </td>
                     </tr>
                     </tbody>
                 </table>

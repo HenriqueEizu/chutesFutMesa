@@ -35,6 +35,20 @@
                 <div class="col-sm-1 col-xs-1">
                     &nbsp;
                 </div>
+                <div class="col-sm-2 col-xs-2">
+                    Ano:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <select name="ano" class="form-control" formControlName="ano" #ano (change) ="FiltraCompeticao(ano.value)" [attr.disabled]="this.ptscompeticaojogador.PJ_PJID">
+                        
+                        <option *ngFor=  "let c of (anos)" [value]="c.ANO">{{c.ANO}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
             </div> 
             <div class="row">
                 <div class="col-sm-1 col-xs-1">
@@ -45,7 +59,8 @@
                 </div>
                 <div class="col-sm-7 col-xs-7" >
                     <cft-input errorMessage="Competição deve ser preenchida" label="Competição">
-                        <select #PJ_CPID name="PJ_CPID" class="form-control" formControlName="PJ_CPID" (click)="MostraRodada(PJ_CPID.value)">
+                        <select #PJ_CPID name="PJ_CPID" class="form-control" formControlName="PJ_CPID" (click)="MostraRodada(PJ_CPID.value)" [attr.disabled]="this.ptscompeticaojogador.PJ_PJID">
+                            <option  *ngIf="ptscompeticaojogador.PJ_PJID == null" value="">--</option>
                             <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}} - {{c.OBJ_Rodada.RO_RODESCRICAO}} </option>
                         </select>
                     </cft-input> 
@@ -90,13 +105,66 @@
             <div class="row">
                 <div class="col-sm-1 col-xs-1">
                     &nbsp;
+
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Jogo: 
+                </div>
+                <div class="col-sm-7 col-xs-7" >
+                    <cft-input errorMessage="Jogo deve ser preenchido" label="Jogo">
+                        <select #PJ_JGID name="PJ_JGID" class="form-control" formControlName="PJ_JGID" (change) = "EscolhaJogo(PJ_JGID.value)" [attr.disabled]="this.ptscompeticaojogador.PJ_PJID">
+                            <option  *ngIf="ptscompeticaojogador.PJ_PJID == null" value="">--</option>
+                            <option *ngFor=  "let c of (jogos)" [value]="c.JG_JGID">{{c.OBJ_CLUBE1.CL_CLSIGLA}} X {{c.OBJ_CLUBE2.CL_CLSIGLA}} </option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div *ngIf="showJogo" >
+                    <ngb-toast *ngIf="showJogo" header="{{jogoId.OBJ_CLUBE1.CL_CLSIGLA}} X {{jogoId.OBJ_CLUBE2.CL_CLSIGLA}}" [delay]="10000"
+                        [autohide]="autohideJogo" (mouseenter)="autohideJogo = false" (mouseleave)="autohideJogo = true"
+                        (hide)="showJogo = false; autohideJogo = true" [class.bg-warning]="!autohideJogo" >
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="jogoId.OBJ_CLUBE1.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                        {{jogoId.OBJ_CLUBE1.CL_CLSIGLA}} X
+                                        <img [src]="jogoId.OBJ_CLUBE2.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                        {{jogoId.OBJ_CLUBE2.CL_CLSIGLA}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-toast>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
                 </div>
                 <div class="col-sm-2 col-xs-2">
                     Jogador:
                 </div>
                 <div class="col-sm-7 col-xs-7" >
                     <cft-input errorMessage="Jogador deve ser preenchido" label="Jogador">
-                        <select #PJ_JOID name="PJ_JOID" class="form-control" formControlName="PJ_JOID" (click)="MostraJogador(PJ_JOID.value)">
+                        <select #PJ_JOID name="PJ_JOID" class="form-control" formControlName="PJ_JOID" (click)="MostraJogador(PJ_JOID.value)" [attr.disabled]="this.ptscompeticaojogador.PJ_PJID">
                             <option *ngFor=  "let j of (jogadores)" [value]="j.JO_JOID">{{j.JO_JOAPELIDO}}</option>
                         </select>
                     </cft-input> 
@@ -109,7 +177,7 @@
                 <div class="col-sm-3 col-xs-3">
                     &nbsp;
                 </div>
-                <div *ngIf="showJogadores" >
+                <div *ngIf="showJogadores == true && jogadorId != null" >
                     <ngb-toast *ngIf="showJogadores" header="{{jogadorId.JO_JONOME}}" [delay]="5000"
                         [autohide]="autohideJog" (mouseenter)="autohideJog = false" (mouseleave)="autohideJog = true"
                         (hide)="showJogadores = false; autohideJog = true" [class.bg-warning]="!autohideJog" >

@@ -57,7 +57,7 @@
                   <tr>
                     <th scope="col" sortable="EQ_EQNOME" (sort)="onSort($event)">Equipe</th>
                     <th scope="col" sortable="OBJ_USUARIO.US_USNOMETRATAMENTO" (sort)="onSort($event)">Login</th>
-                    <!-- <th scope="col" sortable="EQ_EQATIVO" (sort)="onSort($event)">Ativo</th> -->
+                    <th scope="col" sortable="EQ_EQATIVO" (sort)="onSort($event)">Status</th>
                     <th scope="col">Ação</th>
                     <th scope="col">Ação</th>
   
@@ -74,8 +74,9 @@
                     <td>
                         <ngb-highlight [result]="equipe.OBJ_USUARIO.US_USNOMETRATAMENTO" [term]="service.searchTerm"></ngb-highlight>
                     </td>
-                    <td>
-                        <ngb-highlight [result]="equipe.EQ_EQATIVO" [term]="service.searchTerm"></ngb-highlight> 
+                    <td style="text-align: center;">
+                        <input type="checkbox" checked="equipe.EQ_EQATIVO == 1"  class="form-control" autocomplete="off" placeholder="Ativo">
+                        <!-- <ngb-highlight [result]="equipe.EQ_EQATIVO" [term]="service.searchTerm"></ngb-highlight>  -->
                     </td>
                     <td><a class="nav-link" [routerLink]="['/equipe',equipe.EQ_EQID]">
                       <span tooltip="Editar" placement="top" show-delay="500">

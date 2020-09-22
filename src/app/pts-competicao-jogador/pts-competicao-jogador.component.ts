@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewChild} from '@angular/core';
+import { JogosService } from './../jogos/jogos.service';
+import { Component, OnInit, Input, ViewChild, ɵConsole} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl,AsyncValidatorFn,ValidationErrors, FormControl } from '@angular/forms'
 import { formatDate, DatePipe} from "@angular/common";
 import {switchMap, take, map, delay, tap} from  'rxjs/operators'
@@ -16,6 +17,7 @@ import { Competicao } from './../competicao/competicao.model';
 import { Jogador } from './../jogadores/jogador.model';
 import { CompeticaoService } from './../competicao/competicao.service';
 import { JogadorService } from './../jogadores/jogador.service';
+import { Jogos } from '../jogos/jogos.model';
 
 @Component({
   selector: 'cft-pts-competicao-jogador',
@@ -33,11 +35,16 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
   competicoes : Competicao[];
   jogadores : Jogador[];
   competicaoId : Competicao;
-  jogadorId : Jogador;
+  jogadorId : Jogador = null;
   show = false;
   autohide = true;
   showJogadores = false;
   autohideJog = true;
+  anos : number[] ;
+  jogos : Jogos[];
+  jogoId : Jogos = null;
+  showJogo = false;
+  autohideJogo = true; 
 
 
   constructor(private ptscompeticaojogadorService: PtsCompeticaoJogadorService
@@ -47,25 +54,46 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
     ,private alertService: AlertModalService
     ,private route: ActivatedRoute
     ,private competicaoService : CompeticaoService
-    ,private jogadorService : JogadorService){
+    ,private jogadorService : JogadorService
+    ,private jogosServ: JogosService){
 
 }
 
   ngOnInit(): void {
 
+    
     this.competicaoService.GetAllCompeticao().subscribe((cp : Competicao[]) => {
       this.competicoes = cp.filter(c=>c.CP_CPATIVO == true);
       });
+
+    this.competicaoService.GetAnoCompeticao().subscribe(( cp : number[]) => {
+      this.anos = cp;
+      if (this.ptscompeticaojogador.ano != null){
+        this.FiltraCompeticao(this.ptscompeticaojogador.ano);
+      }
+    })
 
     this.jogadorService.GetAllJogador().subscribe((jo : Jogador[]) => {
       this.jogadores = jo.filter(j=>j.JO_JOATIVO == true);
       });
 
-    this.ptscompeticaojogador = this.route.snapshot.data['ptscompeticaojogador'];
+    this.ptscompeticaojogador = this.route.snapshot.data['ptscompeticaojogador']; 
+    console.log(this.ptscompeticaojogador.PJ_PJID + "sssssssssssssssssss")
+    if (this.ptscompeticaojogador.PJ_PJID != null){
+      // this.FiltraCompeticao(this.ptscompeticaojogador.ano);
+      this.competicaoService.GetAllCompeticao().subscribe(( cp : Competicao[]) => {
+        this.competicoes = cp;
+        this.jogosServ.GetAllJogos().subscribe((es : Jogos[]) => {
+          this.jogos = es;
+        });
+      })
+    } 
+
     this.ptscompeticaojogadorCarregada =this.ptscompeticaojogador;
 
     this.ptscompeticaojogadorForm = this.formBuilder.group({
       PJ_PJID : [this.ptscompeticaojogador.PJ_PJID],
+      ano: this.formBuilder.control(this.ptscompeticaojogador.ano),
       PJ_CPID: this.formBuilder.control(this.ptscompeticaojogador.PJ_CPID,[Validators.required]),
       PJ_JOID: this.formBuilder.control(this.ptscompeticaojogador.PJ_JOID,[Validators.required]),
       PJ_PJPONTOS: this.formBuilder.control(this.ptscompeticaojogador.PJ_PJPONTOS,[Validators.required,Validators.pattern(this.numberPattern)]),
@@ -79,15 +107,30 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
       PJ_PJDERROTA : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJDERROTA,[Validators.pattern(this.numberPattern)]),
       PJ_PJGOLSPRO : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJGOLSPRO,[Validators.pattern(this.numberPattern)]),
       PJ_PJGOLCONTRA : this.formBuilder.control(this.ptscompeticaojogador.PJ_PJGOLCONTRA,[Validators.pattern(this.numberPattern)]),
-      
+      PJ_JGID: this.formBuilder.control(this.ptscompeticaojogador.PJ_JGID)
     });
 
+  }
+
+  
+  FiltraCompeticao(strCriterio : string){
+    this.competicaoService.GetAllCompeticao().subscribe(( cp : Competicao[]) => {
+      this.competicoes = cp.filter( j=> j.CP_CPDATAINICIO.substr(0,4) == strCriterio && j.CP_CJID == 1);
+    })
   }
   
   MostraRodada(id: number)
   {
+    if (id == null || id == 0)
+    return;
     this.show = true
     this.competicaoId = this.competicoes.filter(cp => cp.CP_CPID == id)[0];
+    this.jogosServ.GetAllJogos().subscribe((es : Jogos[]) => {
+      this.jogos = es.filter( c=> c.JG_CPID == id)
+      this.jogoId = this.jogos[0];
+      console.log(id)
+      console.log(this.jogos);
+    });
   }
   MostraJogador(id: number)
   {
@@ -95,6 +138,15 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
     this.jogadorId = this.jogadores.filter(j => j.JO_JOID == id)[0];
     
   }
+
+  EscolhaJogo(id: number)
+    {
+      if (id == null || id == 0)
+        return;
+      this.showJogo = true
+      this.jogoId = this.jogos.filter(cp => cp.JG_JGID == id)[0];
+      this.jogadores = this.jogadores.filter(j => j.JO_CLID == this.jogoId.OBJ_CLUBE1.CL_CLID ||  j.JO_CLID == this.jogoId.OBJ_CLUBE2.CL_CLID)
+    }
 
 
   podeDesativar() {
@@ -115,6 +167,11 @@ export class PtsCompeticaoJogadorComponent implements OnInit {
       msgBotao = "Alterar"
     }
 
+    console.log(ptscompeticaojogador.PJ_JGID + "iiiiiiiiiiiii");
+
+    ptscompeticaojogador.PJ_JGID = ptscompeticaojogador.PJ_JGID == null ? 0 : ptscompeticaojogador.PJ_JGID;
+    ptscompeticaojogador.PJ_JGID = ptscompeticaojogador.PJ_JGID == 0 ? 0 : ptscompeticaojogador.PJ_JGID;
+  
     ptscompeticaojogador.PJ_PJDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
     ptscompeticaojogador.PJ_JOMATRICULA = this.jogadorId.JO_JOMATRICULA;
     ptscompeticaojogador.PJ_PJSALDOGOLS = ptscompeticaojogador.PJ_PJGOLSPRO - ptscompeticaojogador.PJ_PJGOLCONTRA

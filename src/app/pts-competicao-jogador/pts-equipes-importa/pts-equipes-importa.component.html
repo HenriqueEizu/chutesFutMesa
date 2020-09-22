@@ -17,10 +17,10 @@
     <div class="col-sm-2 col-xs-2">
         &nbsp;
     </div>
-</div> 
+</div>
 <div class="row">
     <div class="col-sm-2 col-xs-2">&nbsp;</div>
-    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 30px"> Importar Pontuação Competição</h5></div>
+    <div class="col-sm-8 col-xs-8 badge badge-primary"> <h5><img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 30px"> Importar Pontuação Equipes</h5></div>
 </div>
 
 <form [formGroup]="ptscompeticaojogadorForm" novalidate> 
@@ -29,7 +29,26 @@
             &nbsp;
         </div> 
         <div class="col-sm-8 col-xs-8 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
-            <div class="row"> 
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    Ano:
+                </div>
+                <div class="col-sm-7  col-xs-7" >
+                    <select #ano name="ano" class="form-control"  (change)="FiltraCompeticao(ano.value)"  (click)="FiltraCompeticao(ano.value)">
+                        <option value="">--</option>
+                        <option *ngFor=  "let c of (anos)" [value]="c.ANO">{{c.ANO}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-1 col-xs-1">
                     &nbsp;
                 </div>
@@ -38,7 +57,8 @@
                 </div>
                 <div class="col-sm-7 col-xs-7" >
                     <cft-input errorMessage="Competição deve ser preenchida" label="Competição">
-                        <select #PJ_CPID name="PJ_CPID" class="form-control" formControlName="PJ_CPID" (click)="MostraRodada(PJ_CPID.value)">
+                        <select #PJ_CPID name="PJ_CPID" class="form-control" formControlName="PJ_CPID" (change)="MostraRodada(PJ_CPID.value)" >
+                            <option value="">--</option>
                             <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}} - {{c.OBJ_Rodada.RO_RODESCRICAO}} </option>
                         </select>
                     </cft-input> 
@@ -68,6 +88,59 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-xs-12">
                                         {{ competicaoId.OBJ_Rodada.RO_RODESCRICAO }} Inicio:{{ competicaoId.CP_CPDATAINICIO  | date: 'dd/MM/yyyy' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-toast>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Jogo: 
+                </div>
+                <div class="col-sm-7 col-xs-7" >
+                    <cft-input errorMessage="Jogo deve ser preenchido" label="Jogo">
+                        <select #PJ_JGID name="PJ_JGID" class="form-control" formControlName="PJ_JGID" (change) = "EscolhaJogo(PJ_JGID.value)">
+                            <option value="">--</option>
+                            <option *ngFor=  "let c of (jogos)" [value]="c.JG_JGID">{{c.OBJ_CLUBE1.CL_CLSIGLA}} X {{c.OBJ_CLUBE2.CL_CLSIGLA}} </option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    &nbsp;
+                </div>
+                <div *ngIf="showJogo" >
+                    <ngb-toast *ngIf="showJogo" header="{{jogoId.OBJ_CLUBE1.CL_CLSIGLA}} X {{jogoId.OBJ_CLUBE2.CL_CLSIGLA}}" [delay]="10000"
+                        [autohide]="autohideJogo" (mouseenter)="autohideJogo = false" (mouseleave)="autohideJogo = true"
+                        (hide)="showJogo = false; autohideJogo = true" [class.bg-warning]="!autohideJogo" >
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="jogoId.OBJ_CLUBE1.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                        {{jogoId.OBJ_CLUBE1.CL_CLSIGLA}} X
+                                        <img [src]="jogoId.OBJ_CLUBE2.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                        {{jogoId.OBJ_CLUBE2.CL_CLSIGLA}}
                                     </div>
                                 </div>
                             </div>

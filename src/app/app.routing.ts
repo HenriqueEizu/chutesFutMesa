@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core'
 import {LoginComponent} from "./login/login.component"
 import {UsuarioComponent} from "./usuario/usuario.component"
 import {HomeComponent} from "./home/home.component"
+import {DashboardComponent} from './dashboard/dashboard.component'
 import {ClubeComponent} from './clube/clube.component'
 import {ClubeListComponent} from './clube/clube-list/clube-list.component'
 import {ClubeResolverGuard} from './clube/guards/clube.resolver.guard'
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
     // {path: 'usuario', component: UsuarioComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},  //canActivateChild
     // {path: 'home', component: HomeComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},
     {path: 'home', component: HomeComponent},
+    {path: 'dashboard', component: DashboardComponent},
     
     { path: '', redirectTo : 'home', pathMatch: 'full'},
     // {path: 'clube', component: ClubeComponent,resolve:{clube :ClubeResolverGuard}},

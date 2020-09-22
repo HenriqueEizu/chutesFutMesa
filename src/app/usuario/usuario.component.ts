@@ -153,6 +153,9 @@ export class UsuarioComponent implements OnInit, IFormCanDeactivate {
       if (this.usuario.US_USSENHA == usuario.US_USSENHA) { usuario.US_USSENHA = null}
     }
      
+    usuario.US_USLOGIN = usuario.US_USLOGIN.trim();
+    usuario.US_USNOMETRATAMENTO = usuario.US_USNOMETRATAMENTO.trim();
+    usuario.US_USSENHA = usuario.US_USSENHA.trim();
     usuario.US_USDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
     const result$ = this.alertService.showConfirm(msgQuestãoTitulo,msgQuestaoCorpo,"Fechar",msgBotao);
     result$.asObservable()

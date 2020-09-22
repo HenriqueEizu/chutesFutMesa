@@ -160,6 +160,11 @@ export class UsuarioInicialComponent implements OnInit {
   SalvarUsuario(usuario: Usuario){
      
     usuario.US_USDATACADASTRO = formatDate(this.myDate,"yyyy-MM-dd","en-US");
+    usuario.US_USLOGIN = usuario.US_USLOGIN.trim();
+    usuario.US_USNOMETRATAMENTO = usuario.US_USNOMETRATAMENTO.trim();
+    usuario.US_USSENHA = usuario.US_USSENHA.trim();
+    usuario.US_GUID = 4; // jogador usuario
+    
     this.usuarioService.SalvarUsuario(usuario).subscribe(
         success => {
                     this.showAlertSuccess("Jogador inserido com sucesso");

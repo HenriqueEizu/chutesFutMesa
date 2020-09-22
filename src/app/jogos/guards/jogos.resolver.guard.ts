@@ -3,6 +3,7 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve} from 
 import {Observable, of} from 'rxjs';
 import { Jogos } from '../jogos.model';
 import { JogosService } from '../jogos.service';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,7 @@ constructor(private service: JogosService){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Jogos> {
         if  (route.params && route.params['id']){
-            return null
-            // return this.service.GetIdJogo(route.params['id']); 
+            return this.service.GetIdJogo(route.params['id']); 
         }
  
         return of ({

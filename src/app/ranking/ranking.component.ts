@@ -144,14 +144,17 @@ uploadFileToActivity() :boolean{
       RJ_RJANO : 0,
       RJ_RJDATA : null,
       RJ_JOID : 0,
+      OBJ_JOGADOR : null,
       RJ_JOMATRICULA : 0,
       RJ_RJPOSICAO : 0,
       RJ_RJPOSICAOANO : 0,
       RJ_RJPONTOS : 0,
       RJ_CJID : 0,
+      OBJ_CATEGORIAJOGADOR : null,
       RJ_RJOBSERVACAO : null,
       RJ_RJATIVO : false,
       RJ_RJDATACADASTRO : null}
+      
     return rank
   }
 

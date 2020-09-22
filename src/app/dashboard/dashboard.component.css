@@ -187,3 +187,53 @@
     .example-headers-align .mat-form-field + .mat-form-field {
       margin-left: 8px;
     }
+
+    .substituir:hover{
+      background-color: palevioletred;
+    }
+
+    .substituir{
+      background-color: crimson;
+      color: white;
+      text-align: center;
+    }
+
+    .perfil{
+      background-color: grey;
+      color: white;
+    }
+
+    .perfil:hover{
+      background-color: black;
+    }
+
+    .substituirTexto{
+      color: white;
+      font-size: medium;
+      text-align: center;
+    }
+
+    .colocacao{
+      color: grey;
+      font-size: x-large;
+      text-align: center;
+    }
+
+    /* Style the header */
+.header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}

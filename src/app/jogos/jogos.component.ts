@@ -63,24 +63,49 @@ export class JogosComponent implements OnInit {
 
     this.competicaoService.GetAnoCompeticao().subscribe(( cp : number[]) => {
       this.anos = cp;
+      if (this.jogo.ano != null){
+        this.imagemClube1 = this.jogo.OBJ_CLUBE1.CL_CLEMBLEMA;
+        this.imagemClube2 = this.jogo.OBJ_CLUBE2.CL_CLEMBLEMA
+        this.FiltraCompeticao(this.jogo.ano);
+      }
     })
-
-
 
     this.jogo = this.route.snapshot.data['jogo'];
 
+    if (this.jogo.JG_JGID != null){
+      this.FiltraCompeticao(this.jogo.ano);
+      this.clubeService.GetAllClube().subscribe((cl : Clube[]) => {
+        this.clubes1 = cl.filter(c=> c.CL_CLID == this.jogo.JG_CLID1 );
+        this.clubes2 = cl.filter(c=>  c.CL_CLID == this.jogo.JG_CLID2);
+      });
+      
+    } 
+ 
+
     this.jogosForm = this.formBuilder.group({
       JG_JGID: [this.jogo.JG_JGID],
-      ano: this.formBuilder.control(null,[Validators.required]),
-      JG_CPID: this.formBuilder.control(this.jogo.JG_CJID,[Validators.required]),
+      ano: this.formBuilder.control(this.jogo.ano),
+      JG_CPID: this.formBuilder.control(this.jogo.JG_CPID,[Validators.required]),
       JG_JGATIVO : this.formBuilder.control(this.jogo.JG_JGATIVO),
-      JG_CLID1: this.formBuilder.control(this.jogo.JG_JOID1,[Validators.required]),
+      JG_CLID1: this.formBuilder.control(this.jogo.JG_CLID1,[Validators.required]),
       JG_JGPTS1: this.formBuilder.control(this.jogo.JG_JGPTS1,[Validators.required, Validators.maxLength(3),Validators.pattern(this.numberPattern)]),
-      JG_CLID2: this.formBuilder.control(this.jogo.JG_JOID1,[Validators.required]),
+      JG_CLID2: this.formBuilder.control(this.jogo.JG_CLID2,[Validators.required]),
       JG_JGPTS2: this.formBuilder.control(this.jogo.JG_JGPTS2,[Validators.required, Validators.maxLength(3),Validators.pattern(this.numberPattern)]),
     })
 
   }
+
+  public findInvalidControls() {
+    const invalid = [];
+    const controls = this.jogosForm.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    alert(invalid);
+    return invalid;
+}
 
   MostraRodada(id: number)
   {

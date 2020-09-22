@@ -1,16 +1,45 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
 <div class="row border border-top-0 border-primary mb-3" >
     <div class="col-sm-1 col-xs-1  "> 
         <div *ngIf="EquipeUsuario != null"  style="text-align: center;"> 
             <img [src]="EquipeUsuario.EQ_EQESCUDO" class="mr-2" style="width: 80px;">
         </div>    
     </div>
-    <div *ngIf="EquipeUsuario != null" class="col-sm-5 col-xs-5 "> 
+    <div *ngIf="EquipeUsuario != null" class="col-sm-4 col-xs-4 "> 
         <h5>{{ EquipeUsuario.EQ_EQNOME }}</h5>
         <h2>{{ usuarioLogado.US_USNOMETRATAMENTO}} </h2>
     </div>
-    <div class="col-sm-6 col-xs-6 "> 
+    <div *ngIf = "mercadoFechado == 0" class="col-sm-4 col-xs-4 ">
         <h5> Mercado Fecha em:</h5>
-        <h2> 1 dia</h2>    
+        <h2 style="font-size: medium; color: green;"><strong>{{diasFechaMercado}} dia(s) </strong></h2>
+    </div>
+    <div *ngIf = "mercadoFechado != 0" class="col-sm-4 col-xs-4 ">
+        <h5> Mercado :</h5>
+        <h2 style="font-size: medium; color: red;"><strong>FECHADO </strong></h2>
+    </div>
+    <div class="col-sm-3 col-xs-3">
+        <a routerLinkActive="active" class="nav-link" [routerLink]="['/dashboard']">
+            <img src="/assets/images/icons/dashboard.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Dashboard</a> 
     </div>
 </div>
 
@@ -20,7 +49,7 @@
             <div class="row mb-5">
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 1</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 1</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(0)">
                                 <img src="{{imgJogadoresEscalados[0]}}" class="mr-2 rounded-circle botonista" >
@@ -28,17 +57,17 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[0]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[0]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[0].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[0]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[0]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 2</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 2</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(1)">
                                 <img src="{{imgJogadoresEscalados[1]}}" class="mr-2 rounded-circle botonista" >
@@ -46,17 +75,17 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[1]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[1]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[1].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[1]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[1]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 3</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 3</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(2)">
                                 <img src="{{imgJogadoresEscalados[2]}}" class="mr-2 rounded-circle botonista" >
@@ -64,11 +93,11 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[2]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[2]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[2].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[2]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[2]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +105,7 @@
             <div class="row">
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 4</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 4</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(3)">
                                 <img src="{{imgJogadoresEscalados[3]}}" class="mr-2 rounded-circle botonista" >
@@ -84,17 +113,17 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[3]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[3]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[3].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[3]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[3]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 5</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 5</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(4)">
                                 <img src="{{imgJogadoresEscalados[4]}}" class="mr-2 rounded-circle botonista" >
@@ -102,17 +131,17 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[4]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[4]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[4].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[4]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[4]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-4 "> 
                     <div class="card " style="text-align: center;">
-                        <div class="card-header" style="text-align: center;">Mesa 6</div>
+                        <div class="card-header" style="text-align: center;"><h1 style="color:green"><strong>Mesa 6</strong></h1></div>
                         <div class="card-body  campo " >
                             <div class="excluir mb-5" (click)="RemoverJogadorImagem(5)">
                                 <img src="{{imgJogadoresEscalados[5]}}" class="mr-2 rounded-circle botonista" >
@@ -120,11 +149,11 @@
                             </div>
                             <img src="{{NomeClubeJogadoresEscalados[5]}}" class="mr-2 " style="width:50px;" >
                             <div class="mt-2">
-                                <strong>{{NomeJogadoresEscalados[5]}}</strong> 
+                                <strong>{{NomeJogadoresEscalados[5].toUpperCase()}}</strong> 
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <p class="card-text">Valor: D$ {{valoresJogadores[5]}}</p>
+                            <p class="card-text">Valor: {{valoresJogadores[5]  | currency :'B$':'code'}}</p>
                         </div>
                     </div>
                 </div>
@@ -141,27 +170,27 @@
                 <tbody>
                     <tr>
                         <td>{{NomeJogadoresEscalados[0]}}</td>
-                        <td> D$ {{valoresJogadores[0]}}</td>
+                        <td> {{valoresJogadores[0]  | currency :'B$':'code'}}</td>
                     </tr>
                     <tr>
                         <td>{{NomeJogadoresEscalados[1]}}</td>
-                        <td> D$ {{valoresJogadores[1]}}</td>
+                        <td> {{valoresJogadores[1]  | currency :'B$':'code'}}</td>
                     </tr>
                     <tr>
                         <td>{{NomeJogadoresEscalados[2]}}</td>
-                        <td> D$ {{valoresJogadores[2]}}</td>
+                        <td> {{valoresJogadores[2]  | currency :'B$':'code'}}</td>
                     </tr>
                     <tr>
                         <td>{{NomeJogadoresEscalados[3]}}</td>
-                        <td> D$ {{valoresJogadores[3]}}</td>
+                        <td> {{valoresJogadores[3]  | currency :'B$':'code'}}</td>
                     </tr>
                     <tr>
                         <td>{{NomeJogadoresEscalados[4]}}</td>
-                        <td> D$ {{valoresJogadores[4]}}</td>
+                        <td> {{valoresJogadores[4]  | currency :'B$':'code'}}</td>
                     </tr>
                     <tr>
                         <td>{{NomeJogadoresEscalados[5]}}</td>
-                        <td> D$ {{valoresJogadores[5]}}</td>
+                        <td> {{valoresJogadores[5]  | currency :'B$':'code'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -192,8 +221,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>D$ {{intTotalPtsEquipe}}</td>
-                        <td>D$ 12,00</td>
+                        <td> {{intTotalPtsEquipe | currency :'B$':'code'}}</td> 
+                        <td> {{this.intTotalDisponivel | currency :'B$':'code'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -205,14 +234,14 @@
             <div class="col-sm-3 col-xs-3 ">Entenda as regras do Chutes FutMesa</div>
             <div class="col-sm-3 col-xs-3 "></div>
             <div class="col-sm-3 col-xs-3 ">
-                <button class="btn btn-danger pull-right btn-block rounded-sm" (click)="VenderTudo()" [disabled]="faltaEscalar == 6">Vender todo o time</button>
+                <button class="btn btn-danger pull-right btn-block rounded-sm" (click)="VenderTudo()" [disabled]="faltaEscalar == 6 || mercadoFechado != 0">Vender todo o time</button>
             </div>
             <div *ngIf="HabilitarSalvar() == true" class="col-sm-3 col-xs-3 ">
                 <button class="btn btn-info pull-right btn-block rounded-sm" [disabled]="HabilitarSalvar()">Confirmar Escalação</button>
                 <h3>Faltam escalar  {{faltaEscalar}} jogador(s)</h3>
             </div>
             <div *ngIf="HabilitarSalvar() == false" class="col-sm-3 col-xs-3 ">
-                <button class="btn btn-success pull-right btn-block rounded-sm" (click)="SalvarEscalacaoEquipe()">Confirmar Escalação</button>
+                <button class="btn btn-success pull-right btn-block rounded-sm" (click)="SalvarEscalacaoEquipe()" >Confirmar Escalação</button>
             </div>
         </div>
     </div>
@@ -222,10 +251,10 @@
     <div class="col-sm-12 col-xs-12 "> 
         <div class="row">
             <div class="col-sm-2 col-xs-2 "></div>
-            <div class="col-sm-2 col-xs-2 "><h1>Mercado</h1></div>
+            <div class="col-sm-2 col-xs-2 "><h1></h1></div>
             <div class="col-sm-2 col-xs-2 "></div>
             <div class="col-sm-2 col-xs-2 ">
-                <button class="btn btn-success pull-right btn-block rounded-sm">
+                <button class="btn btn-success pull-right btn-block rounded-sm" data-toggle="modal" data-target="#idTabelaJogos">
                     <img src="/assets/images/icons/SoccerBall.png" class="mr-2" style="width: 20px">
                     Tabela de Jogos
                 </button>
@@ -252,70 +281,119 @@
                         <!-- Self aware panel -->
                         </mat-panel-title>
                         <mat-panel-description>
-                            <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Equipe - Jogadores </h5> 
+                            <div style="text-align: center;" class="mt-3">
+                                <h1><img src="/assets/images/icons/mercado.png" class="mr-2" style="width: 50px"><strong>Mercado</strong></h1> 
+                            </div>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="row">
                             <div class="col-sm-12 col-xs-12" >
-                                <div class="col-sm-12 col-xs-12 badge badge-info ">
-                                <h4>  </h4>
-                                <!-- </div>
-                                <div class="col-sm-6 col-xs-6 badge badge-info "> -->
-                                <div *ngIf="blnBotaoOrdenarRank " class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
-                                    <h4>Ranking/Valor: <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
-                                </div>
-                                <div *ngIf="!blnBotaoOrdenarRank" class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
-                                    <h4> Ranking/Valor: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
-                                </div>
-                                </div>
+                                <!-- <div class="col-sm-12 col-xs-12 badge badge-info ">
+                                    <h4>  </h4>
+                                    <div *ngIf="blnBotaoOrdenarRank " class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                                        <h4>Ranking/Valor: <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                    </div>
+                                    <div *ngIf="!blnBotaoOrdenarRank" class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                                        <h4> Ranking/Valor: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                    </div>
+                                </div> -->
                                 
                                 <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
                                     <div class="example-container col-sm-12 col-xs-12 ">
                                         <div>
-                                        <div *ngFor="let item of JogadoresFiltro" cdkDrag>
-                                            <div class="row border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                                            <div class="row border rounded shadow-lg bg-white mb-3">
                                                 <div class="col-sm-10 col-xs-10">
-                                                    <div class="row">
+                                                    <div class="row ">
                                                         <div class="col-sm-1 col-xs-1">
-                                                            <img [src]="item.CL_CLEMBLEMA" class="mr-2" style="width: 50px">
-                                                            {{item.CL_CLSIGLA}}
+                                                            <div *ngIf="blnOrdenarPorClube " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('clube',blnOrdenarPorClube)">
+                                                                <h4>CLUBE <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                            <div *ngIf="!blnOrdenarPorClube" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('clube',blnOrdenarPorClube)">
+                                                                <h4> CLUBE <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-1 col-xs-1">
-                                                            <img [src]="item.JO_JOFOTO" class="mr-2" style="width: 50px">
+                                                        <div class="col-sm-4 col-xs-4">
+                                                            <div *ngIf="blnOrdenarPorJogador " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('jogador',blnOrdenarPorJogador)">
+                                                                <h4>JOGADOR<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                            <div *ngIf="!blnOrdenarPorJogador" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('jogador',blnOrdenarPorJogador)">
+                                                                <h4>JOGADOR<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
                                                         </div>
                                                         <div class="col-sm-2 col-xs-2">
-                                                            <h4><strong> {{item.JO_JOAPELIDO}}</strong></h4>
-                                                        </div>
-                                                        <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2">
-                                                            Status: <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 20px"> 
-                                                        </div>
-                                                        <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2">
-                                                            Status: <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 20px"> 
-                                                        </div>
-                                                        <div class="col-sm-1 col-xs-1">
-                                                            Valor: <b><h4><strong>{{item.PR_PRPRECO}}</strong></h4></b>
+                                                            <div *ngIf="blnOrdenarPorStatus " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('status',blnOrdenarPorStatus)">
+                                                                <h4>STATUS<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                            <div *ngIf="!blnOrdenarPorStatus" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('status',blnOrdenarPorStatus)">
+                                                                <h4>STATUS<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
                                                         </div>
                                                         <div class="col-sm-2 col-xs-2">
-                                                            Rank.: <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
+                                                            <div *ngIf="blnOrdenarPorValor " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('valor',blnOrdenarPorValor)">
+                                                                <h4>Valor(B$)<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                            <div *ngIf="!blnOrdenarPorValor" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('valor',blnOrdenarPorValor)">
+                                                                <h4>Valor(B$)<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2">
+                                                            <div *ngIf="blnOrdenarPorRanking " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('ranking',blnOrdenarPorRanking)">
+                                                                <h4>RANK<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                            <div *ngIf="!blnOrdenarPorRanking" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('ranking',blnOrdenarPorRanking)">
+                                                                <h4>RANK<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-1 col-xs-1">
+                                                            <h4><strong>Evolução</strong></h4>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        <div *ngFor="let item of JogadoresFiltro" cdkDrag>
+                                            <div class="row border rounded shadow-lg bg-white mb-3">
+                                                <div class="col-sm-10 col-xs-10">
+                                                    <div class="row ">
+                                                        <div class="col-sm-1 col-xs-1 text-align: center; mt-3">
+                                                            <img [src]="item.CL_CLEMBLEMA" style="width: 50px; ">
+                                                            <div style="text-align: center;">{{item.CL_CLSIGLA}}</div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2">
+                                                            <img [src]="item.JO_JOFOTO" class="mr-2" style="height: 100px">
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2 mt-5 ml-2">
+                                                            <h4><strong> {{item.JO_JOAPELIDO.toUpperCase()}}</strong></h4>
+                                                        </div>
+                                                        <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
+                                                            <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 40px"> 
+                                                        </div>
+                                                        <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
+                                                            <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 40px"> 
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2 mt-5">
+                                                            <b><h4><strong>{{item.PR_PRPRECO  | currency :'B$':'code'}}</strong></h4></b>
+                                                        </div>
+                                                        <div class="col-sm-2 col-xs-2 mt-5">
+                                                            <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
                                                         </div>
                                                     <!-- <div class="row "> -->
-                                                        <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-2 col-xs-2">
+                                                        <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-1 col-xs-1">
                                                             Evolução: <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
                                                         </div>
-                                                        <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-2 col-xs-2">
+                                                        <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-1 col-xs-1">
                                                             Evolução: <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px"> {{item.POSICOES}} {{item.EJ_EJID}}
                                                         </div>
                                                     </div> 
                                                 </div>
-                                                <div *ngIf="item.EQ_EQID == null" class="col-sm-2 col-xs-2">
+                                                <div *ngIf="item.EQ_EQID == null" class="col-sm-2 col-xs-2 mt-4">
                                                     <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item);" >
+                                                    <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item);" [disabled]="mercadoFechado != 0">
                                                         <i class="fa fa-check"></i> Comprar
                                                     </button>
                                                 </div>
-                                                <div *ngIf="item.EQ_EQID > 0" class="col-sm-2 col-xs-2">
+                                                <div *ngIf="item.EQ_EQID > 0" class="col-sm-2 col-xs-2 mt-4">
                                                     <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="RemoverJogador(item);" >
+                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="RemoverJogador(item);" [disabled]="mercadoFechado != 0">
                                                         <i class="fa fa-check"></i> Vender
                                                     </button>
                                                 </div>
@@ -334,3 +412,106 @@
 </div>
 
 
+<div class="modal" id="idTabelaJogos">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Tabela de Jogos/Competições</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body ">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                  <table class="table table-striped col-sm-12 col-xs-12">
+                    <thead>
+                    <tr>
+                        <th scope="col" >
+                            <div *ngIf="blnOrdenarPorData " class="col-sm-2 col-xs-2" (click)="OrdenarPor('data',blnOrdenarPorData)">
+                                <h4>Data <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                            <div *ngIf="!blnOrdenarPorData" class="col-sm-2 col-xs-2" (click)="OrdenarPor('data',blnOrdenarPorData)">
+                                <h4> Data <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                        </th>
+                        <th scope="col" >
+                            <div *ngIf="blnOrdenarPorCompeticao " class="col-sm-2 col-xs-2" (click)="OrdenarPor('competicao',blnOrdenarPorCompeticao)">
+                                <h4>Data <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                            <div *ngIf="!blnOrdenarPorCompeticao" class="col-sm-2 col-xs-2" (click)="OrdenarPor('competicao',blnOrdenarPorCompeticao)">
+                                <h4> Data <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                        </th>
+                        <th scope="col" >
+                            <div *ngIf="blnOrdenarPorRodada " class="col-sm-2 col-xs-2" (click)="OrdenarPor('rodada',blnOrdenarPorRodada)">
+                                <h4>Rodada <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                            <div *ngIf="!blnOrdenarPorRodada" class="col-sm-2 col-xs-2" (click)="OrdenarPor('rodada',blnOrdenarPorRodada)">
+                                <h4> Rodada <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                        </th>
+                        <th scope="col" >
+                            
+                            <div *ngIf="blnOrdenarPorClube1 " class="col-sm-2 col-xs-2" (click)="OrdenarPor('clube1',blnOrdenarPorClube1)">
+                                <h4>Clube <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                            <div *ngIf="!blnOrdenarPorClube1" class="col-sm-2 col-xs-2" (click)="OrdenarPor('clube1',blnOrdenarPorClube1)">
+                                <h4> Clube: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                        </th>
+                        <th scope="col" >X</th>
+                        <th scope="col" >
+                            <div *ngIf="blnOrdenarPorClube2 " class="col-sm-2 col-xs-2" (click)="OrdenarPor('clube2',blnOrdenarPorClube2)">
+                                <h4>Clube <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                            <div *ngIf="!blnOrdenarPorClube2" class="col-sm-2 col-xs-2" (click)="OrdenarPor('clube2',blnOrdenarPorClube2)">
+                                <h4> Clube: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                            </div>
+                        </th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let tabJogos of (tabelaJogos)">
+                        <td>
+                            {{tabJogos.OBJ_COMPETICAO.CP_CPDATAINICIO  | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td>
+                            <img [src]="tabJogos.OBJ_COMPETICAO.CP_CPFOTO" class="mr-2" style="width: 30px">
+                            <span [tooltip]="tabJogos.OBJ_COMPETICAO.CP_CPDESCRICAO" placement="top" show-delay="500">
+                            {{tabJogos.OBJ_COMPETICAO.CP_CPDESCRICAO.substring(0,15)}}
+                            </span>
+                        </td>
+                        <td>
+                            {{tabJogos.OBJ_COMPETICAO.OBJ_Rodada.RO_RODESCRICAO}}
+                        </td>
+                        <td>
+                            <img [src]="tabJogos.OBJ_CLUBE1.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                            <span [tooltip]="tabJogos.OBJ_CLUBE1.CL_CLNOME" placement="top" show-delay="500">
+                            {{tabJogos.OBJ_CLUBE1.CL_CLSIGLA}}
+                            </span>
+                        </td>
+                        <td>X</td>
+                        <td>
+                            <img [src]="tabJogos.OBJ_CLUBE2.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                            <span [tooltip]="tabJogos.OBJ_CLUBE2.CL_CLNOME" placement="top" show-delay="500">
+                            {{tabJogos.OBJ_CLUBE2.CL_CLSIGLA}}
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

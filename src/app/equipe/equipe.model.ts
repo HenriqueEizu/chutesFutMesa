@@ -41,11 +41,11 @@ export interface RankingJogadorStatus{
 }
 
 export interface RankingEquipe{
-     POSICAO : Number,
-     TOTAL : number
-     AJ_CPDESCRICAO : string,
-     AJ_RODESCRICAO : string,
-     AJ_EQNOME : string,
-     AJ_USNOMETRATAMENTO : string,
-     AJ_EQESCUDO : string
+    COLOCACAO : number,
+    TOTAL : number,
+    AJ_EQNOME : string,
+    AJ_USNOMETRATAMENTO : string,
+    AJ_EQESCUDO : string,
+    AJ_USID : number,
+    AJ_AJDATAVIGENTE : Date
 }

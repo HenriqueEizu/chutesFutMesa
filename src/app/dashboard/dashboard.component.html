@@ -1,3 +1,13 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
 <!-- <div class="container"> -->
     <div class="row jumbotron">
         <div class="col-sm-3 col-xs-3 " >
@@ -6,17 +16,29 @@
                     &nbsp;
                 </div>
                 <div class="col-sm-10 col-xs-10 card mb-3" style="text-align: center;">
-                    <h6> Mercado Fecha em:</h6>
-                    <h2> 1 dia</h2>
+                    
+                    <div *ngIf = "mercadoFechado == 0">
+                        <h5> Mercado Fecha em:</h5>
+                        <h2 style="font-size: xx-large; color: green;"><strong>{{diasFechaMercado}} dia(s) </strong></h2>
+                    </div>
+                    <div *ngIf = "mercadoFechado != 0">
+                        <h5> Mercado :</h5>
+                        <h2 style="font-size: xx-large; color: red;"><strong>FECHADO </strong></h2>
+                    </div>
+                    
                     <div *ngIf="EquipeUsuario != null" class="card h-100 d-flex align-items-center" style="text-align: center;"> 
                         <img [src]="EquipeUsuario.EQ_EQESCUDO" class="mr-2" style="width: 80px;">
                         <h5>{{ EquipeUsuario.EQ_EQNOME }}</h5>
                         <h4>{{ usuarioLogado.US_USNOMETRATAMENTO}} </h4>
                     </div>
-                    <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe',usuarioLogado.US_USID]">
-                        <img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 20px; color: white; ">
-                        <i class="fa fa-app-store"></i>Perfil
-                    </a> 
+                    <div *ngIf="usuarioLogado != null">
+                        <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe',usuarioLogado.US_USID]">
+                            <div class="rounded-lg perfil" >
+                                <img src="/assets/images/icons/usercolor.png" class="mr-2" style="width: 50px; color: white; ">
+                                <span class="substituirTexto">Perfil</span>
+                            </div>
+                        </a> 
+                    </div>
                     <!-- <button class="btn btn-primary pull-right btn-block"></button> -->
                 </div>
             </div>
@@ -25,13 +47,59 @@
                     &nbsp;
                 </div>
                 <div class="col-sm-5 col-xs-5 card ">
-                    <div class="card-body">
-                        Patrimonio
+                    <div class="card-body" style="text-align: center;">
+                        <h4>Posição:</h4>
+                        <div *ngIf="rankingEquipe != null" class="colocacao">
+                            {{rankingEquipe.COLOCACAO}}º
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-5 col-xs-5 card">
+                    <div class="card-body"  style="text-align: center;">
+                        <div *ngIf="rankingEquipe != null" class="colocacao">
+                            <h4>Pts Total:</h4> {{rankingEquipe.TOTAL}}
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-10 col-xs-10 card ">
                     <div class="card-body">
-                        Pontuação/Rodada
+                        <button class="btn btn-primary pull-right btn-block" data-toggle="modal" data-target="#PtsUltimaRodada" type="button">
+                            <img src="assets/images/icons/rating.png" class="mr-2" style="width: 30px; color: white; ">
+                            Pts Última Rodada
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-10 col-xs-10 card ">
+                    <div class="card-body">
+                        <button class="btn btn-primary pull-right btn-block" data-toggle="modal" data-target="#PtsGeral" type="button">
+                            <img src="assets/images/icons/ptscompeticaojogador2.png" class="mr-2" style="width: 30px; color: white; ">
+                            Pontuação Geral
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 col-xs-1 ">
+                    &nbsp;
+                </div>
+                <div class="col-sm-10 col-xs-10 card ">
+                    <div class="card-body">
+                        <button class="btn btn-primary pull-right btn-block" data-toggle="modal" data-target="#idRanking" type="button">
+                            <img src="assets/images/logos clubes/fpfm.png" class="mr-2" style="width: 50px; color: white; ">
+                            Ranking Fpfm
+                        </button>
                     </div>
                 </div>
             </div>
@@ -42,15 +110,28 @@
                     <div class="card-body">Basic card</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" >
                 <div class="col-sm-5 col-xs-5 card mb-5">
-                    <div class="card-header">Escalação</div>
+                    <div class="card-header"><h5>Escalação</h5></div>
                     <div class="card-body">
-                        <!-- <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador',usuarioLogado.US_USID]"> -->
-                        <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador']">
-                            <img src="/assets/images/icons/escalacao.png" class="mr-2" style="width: 50px; color: white; ">
-                            <i class="fa fa-app-store"></i>Substituir Jogadores
-                        </a>
+                        <div *ngIf = "mercadoFechado == 0 && EquipeUsuario != null && osSeusEscalados != null" class="rounded-lg substituir" >
+                            <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador']">
+                                <img src="/assets/images/icons/replace.png" class="mr-2" style="width: 50px; color: white; ">
+                                <span class="substituirTexto">Substituir Jogadores</span>
+                            </a>
+                        </div>
+                        <div *ngIf = "mercadoFechado != 0 && EquipeUsuario != null && osSeusEscalados != null" class="rounded-lg substituir" >
+                            <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador']">
+                                <img src="/assets/images/icons/teams.png" class="mr-2" style="width: 50px; color: white; ">
+                                <span class="substituirTexto">Ver time</span>
+                            </a>
+                        </div>
+                        <div *ngIf = "osSeusEscalados == null" class="rounded-lg substituir" >
+                            <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipejogador']">
+                                <img src="/assets/images/icons/teams.png" class="mr-2" style="width: 50px; color: white; ">
+                                <span class="substituirTexto">Escalar time</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-1 col-xs-1 ">
@@ -59,12 +140,13 @@
                 
                 <div class="col-sm-5 col-xs-5 card mb-5">
                     <div class="card-header">
-                        <h5> <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 30px"> Cadastro de Competições </h5>
+                        <h5> Competições </h5>
                     </div>
                     <div class="card-body">
-                        <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicoes']">
+                        <button class="btn btn-primary pull-right btn-block" data-toggle="modal" data-target="#idCompeticoes" type="button">
+                            <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 50px; color: white; ">
                             Competições
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -138,23 +220,25 @@
                             <!-- Self aware panel -->
                             </mat-panel-title>
                             <mat-panel-description>
-                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Top Escalados </h5> 
+                                <div style="text-align: center;" class="mt-3">
+                                    <h1><img src="/assets/images/icons/top.png" class="mr-2" style="width: 40px"><strong>Top Escalados</strong></h1> 
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="row">
                                 <div class="col-sm-12 col-xs-12" >
                                     <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
                                         <div class="example-container col-sm-12 col-xs-12 ">
-                                            <div class="col-sm-12 col-xs-12">
+                                            <div class="col-sm-12 col-xs-12 header" id="myHeader">
                                                 <div class="row">
                                                     <div class="col-sm-2 col-xs-2">
                                                         CLUBE
                                                     </div>
-                                                    <div class="col-sm-3 col-xs-3">
+                                                    <div class="col-sm-4 col-xs-4">
                                                         JOGADORES
                                                     </div>
                                                     
-                                                    <div class="col-sm-4 col-xs-4"></div>
+                                                    <div class="col-sm-3 col-xs-3"></div>
                                                     <div class="col-sm-2 col-xs-2">
                                                         Qtd. Escalação
                                                     </div>
@@ -167,18 +251,18 @@
                                                 <div class="row border rounded shadow-lg bg-white mb-3">
                                                     <div class="col-sm-12 col-xs-12">
                                                         <div class="row">
-                                                            <div class="col-sm-2 col-xs-2 mt-3">
-                                                                <img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="width: 50px">
-                                                                {{item.AJ_CLSIGLA}}
+                                                            <div class="col-sm-2 col-xs-2 mt-2">
+                                                                <div class="row"></div><img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="height: 50px">
+                                                                <div class="row ml-4" >&nbsp;{{item.AJ_CLSIGLA}}</div>
                                                             </div>
                                                             <div class="col-sm-2 col-xs-2">
-                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="width: 80px">
+                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="height:100px">
                                                             </div>
-                                                            <div class="col-sm-2 col-xs-2 mt-5">
-                                                                <strong>{{item.AJ_JOAPELIDO}}</strong>
+                                                            <div class="col-sm-3 col-xs-3 mt-5">
+                                                                <strong>{{item.AJ_JOAPELIDO.toUpperCase()}}</strong>
                                                             </div>
                                                             
-                                                            <div class="col-sm-4 col-xs-4"></div>
+                                                            <div class="col-sm-3 col-xs-3"></div>
                                                             <div class="col-sm-2 col-xs-2 mt-5">
                                                                 <h4><strong> {{item.AJ_AJPONTOS}}</strong> </h4>
                                                             </div>
@@ -257,7 +341,9 @@
                             <!-- Self aware panel -->
                             </mat-panel-title>
                             <mat-panel-description>
-                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Seus Pontuadores </h5> 
+                                <div style="text-align: center;" class="mt-3">
+                                    <h1><img src="/assets/images/icons/pointers.png" class="mr-2" style="width: 40px"><strong>Seus Pontuadores</strong></h1> 
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="row">
@@ -269,11 +355,11 @@
                                                     <div class="col-sm-2 col-xs-2">
                                                         CLUBE
                                                     </div>
-                                                    <div class="col-sm-3 col-xs-3">
+                                                    <div class="col-sm-4 col-xs-4">
                                                         JOGADORES
                                                     </div>
                                                     
-                                                    <div class="col-sm-4 col-xs-4"></div>
+                                                    <div class="col-sm-3 col-xs-3"></div>
                                                     <div class="col-sm-3 col-xs-3">
                                                         Pontos
                                                     </div>
@@ -282,22 +368,22 @@
                                             </div>
                                         </div>
                                         <div class="example-container col-sm-12 col-xs-12 ">
-                                            <div *ngFor="let item of osSeusEscalados" >
+                                            <div *ngFor="let item of osSeusEscalados" > 
                                                 <div class="row border rounded shadow-lg bg-white mb-3">
                                                     <div class="col-sm-12 col-xs-12">
                                                         <div class="row">
-                                                            <div class="col-sm-2 col-xs-2 mt-3">
-                                                                <img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="width: 50px">
-                                                                {{item.AJ_CLSIGLA}}
+                                                            <div class="col-sm-2 col-xs-2 mt-1">
+                                                                <div class="row"><img [src]="item.AJ_CLEMBLEMA" class="mr-2" style="height:60px"></div>
+                                                                <div class="row">&nbsp;&nbsp;&nbsp;{{item.AJ_CLSIGLA}}</div>
                                                             </div>
                                                             <div class="col-sm-2 col-xs-2">
-                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="width: 80px">
+                                                                <img [src]="item.AJ_JOFOTO" class="mr-2" style="height: 100px">
                                                             </div>
-                                                            <div class="col-sm-2 col-xs-2 mt-5">
-                                                                <strong>{{item.AJ_JOAPELIDO}}</strong>
+                                                            <div class="col-sm-3 col-xs-3 mt-5">
+                                                                <strong>{{item.AJ_JOAPELIDO.toUpperCase()}}</strong>
                                                             </div>
                                                             
-                                                            <div class="col-sm-4 col-xs-4"></div>
+                                                            <div class="col-sm-3 col-xs-3"></div>
                                                             <div class="col-sm-2 col-xs-2 mt-5">
                                                                 <h4><strong> {{item.AJ_AJPONTOS}}</strong> Pontos</h4>
                                                             </div>
@@ -324,7 +410,9 @@
                             <!-- Self aware panel -->
                             </mat-panel-title>
                             <mat-panel-description>
-                                <h5><img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 30px"> Top Pontuadores </h5> 
+                                <div style="text-align: center;" class="mt-3">
+                                    <h1><img src="/assets/images/icons/top.png" class="mr-2" style="width: 40px"><strong>Top Pontuadores</strong></h1> 
+                                </div> 
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="row">
@@ -333,38 +421,38 @@
                                         <div class="example-container col-sm-12 col-xs-12 ">
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="row">
-                                                    <div class="col-sm-1 col-xs-1 mt-3" style="text-align: center;">
-                                                        CLUBE
+                                                    <div class="col-sm-1 col-xs-1 mt-5" style="text-align: center;">
+                                                        <strong>CL.</strong> 
                                                     </div>
-                                                    <div class="col-sm-2 col-xs-2">
-                                                        JOGADOR
-                                                    </div>
-                                                    <div class="col-sm-1 col-xs-1 mt-5">
-                                                        PTS
+                                                    <div class="col-sm-2 col-xs-2 mt-5">
+                                                        <strong>JOGADOR</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        PG
+                                                        <strong>PTS</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        JG
+                                                        <strong>PG</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        V
+                                                        <strong>JG</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        E
+                                                        <strong>V</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        D
+                                                        <strong>E</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        GP
+                                                        <strong>D</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        GC
+                                                        <strong>GP</strong>
                                                     </div>
                                                     <div class="col-sm-1 col-xs-1 mt-5">
-                                                        SG
+                                                        <strong>GC</strong>
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-1 mt-5">
+                                                        <strong>SG</strong>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -374,13 +462,13 @@
                                                 <div class="row border rounded shadow-lg bg-white mb-3">
                                                     <div class="col-sm-12 col-xs-12">
                                                         <div class="row" style="text-align: center;">
-                                                            <div class="col-sm-1 col-xs-1 mt-3" style="text-align: center;">
-                                                                <img [src]="item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 50px">
-                                                                {{item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}
+                                                            <div class="col-sm-1 col-xs-1 mt-2" style="text-align: center;">
+                                                                <div class="row" ><img [src]="item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" style="height:50px"></div>
+                                                                <div class="row " style="text-align: center; ">&nbsp;&nbsp;&nbsp;{{item.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}</div>
                                                             </div>
-                                                            <div class="col-sm-2 col-xs-2">
-                                                                <img [src]="item.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="width: 50px">
-                                                                {{item.OBJ_JOGADOR.JO_JOAPELIDO}}
+                                                            <div class="col-sm-2 col-xs-2" style="text-align: center;">
+                                                                <div class="row" style="text-align: center;"><img [src]="item.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="height: 60px"></div>
+                                                                <div class="row" style="text-align: center;">{{item.OBJ_JOGADOR.JO_JOAPELIDO}}</div>
                                                             </div>
                                                             <div class="col-sm-1 col-xs-1 mt-5">
                                                                 {{item.PJ_PJPONTOS}}
@@ -425,3 +513,350 @@
         </div>
     </div>
 <!-- </div> -->
+
+<div class="modal" id="idCompeticoes">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Competições da Temporada</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body ">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                  <table class="table table-striped col-sm-12 col-xs-12">
+                    <thead>
+                    <tr>
+                        <th scope="col" >Data Inicio</th>
+                        <th scope="col" >Competicao</th>
+                        <th scope="col" >Rodada</th>
+                        <th scope="col" >Categoria Jogo</th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let competicao of (competicoes)">
+                        <td>
+                            {{competicao.CP_CPDATAINICIO  | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td>
+                            <img [src]="competicao.CP_CPFOTO" class="mr-2" style="width: 30px">
+                            <span [tooltip]="competicao.CP_CPDESCRICAO" placement="top" show-delay="500">
+                            {{competicao.CP_CPDESCRICAO.substring(0,15)}}
+                            </span>
+                        </td>
+                        <td>
+                            {{competicao.OBJ_Rodada.RO_RODESCRICAO }}
+                        </td>
+                        <td>
+                            {{competicao.OBJ_CATEGORIAJOGADOR.CJ_CJDESCRICAO}}
+                        </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="PtsGeral">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Competições da Temporada</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body ">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                  <table class="table table-striped col-sm-12 col-xs-12">
+                    <thead>
+                    <tr>
+                        <th scope="col" >Colocação</th>
+                        <th scope="col" >Equipe</th>
+                        <th scope="col" >Usuário</th>
+                        <th scope="col" >Pontos</th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let rkg of (rankingEquipeGeral)">
+                        <td>
+                            {{rkg.COLOCACAO}} º
+                        </td>
+                        <td>
+                            <img [src]="rkg.AJ_EQESCUDO" class="mr-2" style="width: 30px">
+                            {{rkg.AJ_EQNOME}}
+                        </td>
+                        <td>
+                            {{rkg.AJ_USNOMETRATAMENTO}}
+                        </td>
+                        <td>
+                            {{rkg.TOTAL}}
+                        </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="PtsUltimaRodada" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Colocação Ultima Evento</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body ">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                  <table class="table table-striped col-sm-12 col-xs-12">
+                    <thead>
+                    <tr>
+                        <th scope="col" >Colocação</th>
+                        <th scope="col" >Equipe</th>
+                        <th scope="col" >Usuário</th>
+                        <th scope="col" >Pontos</th>
+                    </tr> 
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let rkg of (PontuacaoUltimaRodada)">
+                        <td>
+                            {{rkg.COLOCACAO}} º
+                        </td>
+                        <td>
+                            <img [src]="rkg.AJ_EQESCUDO" class="mr-2" style="width: 30px">
+                            {{rkg.AJ_EQNOME}}
+                        </td>
+                        <td>
+                            {{rkg.AJ_USNOMETRATAMENTO}}
+                        </td>
+                        <td>
+                            {{rkg.TOTAL}}
+                        </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="idRanking">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Ranking Federação {{dataranking | date: 'dd/MM/yyyy' }}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        
+  
+        
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>Adulto</a>
+              <ng-template ngbNavContent>
+                <div class="modal-body ">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 ">
+                          <table class="table table-striped col-sm-12 col-xs-12">
+                            <thead>
+                            <tr>
+                                <th scope="col" >Pos</th>
+                                <th scope="col" >Pos.Ano</th>
+                                <th scope="col" >Matr.</th>
+                                <th scope="col" >Jogador</th>
+                                <th scope="col" >Clube</th>
+                                <th scope="col" >Pontos</th>
+                            </tr> 
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let rk of (rankingGeralAdulto)">
+                                <td>
+                                    {{rk.RJ_RJPOSICAO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPOSICAOANO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_JOMATRICULA}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.JO_JOAPELIDO}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPONTOS}}
+                                </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>Master</a>
+              <ng-template ngbNavContent>
+                <div class="modal-body ">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 ">
+                          <table class="table table-striped col-sm-12 col-xs-12">
+                            <thead>
+                            <tr>
+                                <th scope="col" >Pos</th>
+                                <th scope="col" >Pos.Ano</th>
+                                <th scope="col" >Matr.</th>
+                                <th scope="col" >Jogador</th>
+                                <th scope="col" >Clube</th>
+                                <th scope="col" >Pontos</th>
+                            </tr> 
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let rk of (rankingGeralMaster)">
+                                <td>
+                                    {{rk.RJ_RJPOSICAO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPOSICAOANO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_JOMATRICULA}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.JO_JOAPELIDO}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPONTOS}}
+                                </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+              <a ngbNavLink>Sub 20</a>
+              <ng-template ngbNavContent>
+                <div class="modal-body ">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 ">
+                          <table class="table table-striped col-sm-12 col-xs-12">
+                            <thead>
+                            <tr>
+                                <th scope="col" >Pos</th>
+                                <th scope="col" >Pos.Ano</th>
+                                <th scope="col" >Matr.</th>
+                                <th scope="col" >Jogador</th>
+                                <th scope="col" >Clube</th>
+                                <th scope="col" >Pontos</th>
+                            </tr> 
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let rk of (rankingGeralSub20)">
+                                <td>
+                                    {{rk.RJ_RJPOSICAO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPOSICAOANO}}°
+                                </td>
+                                <td>
+                                    {{rk.RJ_JOMATRICULA}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.JO_JOFOTO" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.JO_JOAPELIDO}}
+                                </td>
+                                <td>
+                                    <img [src]="rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLEMBLEMA" class="mr-2" style="width: 30px">
+                                    {{rk.OBJ_JOGADOR.OBJ_CLUBE.CL_CLSIGLA}}
+                                </td>
+                                <td>
+                                    {{rk.RJ_RJPONTOS}}
+                                </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          
+          <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+<script>
+    window.onscroll = function() {myFunction()};
+    
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+    </script>

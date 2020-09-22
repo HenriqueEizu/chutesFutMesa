@@ -17,7 +17,7 @@ import { CompeticaoService } from '.././../competicao/competicao.service';
 import { Jogador } from 'src/app/jogadores/jogador.model';
 import { JogadorService } from 'src/app/jogadores/jogador.service';
 
-type AOA = any[][];
+type AOA = any[][];  
 
 @Component({
   selector: 'cft-pts-competicao-importacao',
@@ -60,7 +60,7 @@ export class PtsCompeticaoImportacaoComponent implements OnInit {
   ngOnInit(): void {
 
     this.competicaoService.GetAllCompeticao().subscribe((cp : Competicao[]) => {
-      this.competicoes = cp.filter(c=>c.CP_CPATIVO == true);
+      this.competicoes = cp.filter(c=>c.CP_CPATIVO == true && c.CP_CJID != 1);
       });
 
       this.jogadorService.GetAllJogador().subscribe((jgs : Jogador[]) =>{
@@ -121,6 +121,7 @@ initialize() : PtsCompeticaoJogador{
   ptsCompeticao = { 
     PJ_PJID : 0,
     PJ_CPID : 0,
+    PJ_JGID : 0,
     OBJ_COMPETICAO : null,
     PJ_JOMATRICULA : 0,
     PJ_JOID : 0,

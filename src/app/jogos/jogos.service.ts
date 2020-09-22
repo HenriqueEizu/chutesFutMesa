@@ -18,7 +18,7 @@ export class JogosService {
 
   GetIdJogo(id: number):Observable<Jogos>{
     var jogadorLocal : Observable<Jogos>
-    jogadorLocal = this.http.get<Jogos>(`${MEAT_API}/jogos/GetIdJogador/${id}` ).pipe();
+    jogadorLocal = this.http.get<Jogos>(`${MEAT_API}/jogos/GetIdJogo/${id}` ).pipe();
     return jogadorLocal;
   }
 
@@ -47,5 +47,11 @@ export class JogosService {
     }
     return this.InserirJogo(jogo);
   } 
+
+  TabelaJogos(): Observable<Jogos[]>{
+    let jogos$ = new Observable<Jogos[]>();
+    jogos$ = this.http.get<Jogos[]>(`${MEAT_API}/jogos/TabelaJogos`).pipe();
+    return jogos$;
+  }
 
 }

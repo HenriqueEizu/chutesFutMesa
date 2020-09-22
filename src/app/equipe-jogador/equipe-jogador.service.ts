@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 
 import {EquipeJogador} from './equipe-jogador.model'
 import { Equipe } from '../equipe/equipe.model';
+import { Jogos } from '../jogos/jogos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,8 @@ export class EquipeJogadorService {
   ExcluirEquipeEscalacao(equipe : Equipe): Observable<boolean>{
     return this.http.delete<boolean>(`${MEAT_API}/equipejogador/ExcluirEquipeEscalacao/${equipe.EQ_EQID}`);
   } 
+
+  
 
   
 

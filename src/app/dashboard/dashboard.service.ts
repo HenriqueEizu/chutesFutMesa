@@ -1,4 +1,5 @@
 
+
 import { Injectable } from "@angular/core"
 import {Observable} from 'rxjs'
 import {MEAT_API, MEAT_APP} from '../app.api'
@@ -7,7 +8,8 @@ import { HttpClient , HttpHeaders,HttpErrorResponse,HttpInterceptor } from '@ang
 import {BehaviorSubject,throwError} from 'rxjs'
 import 'rxjs/Rx';
 
-import { ApuracaoJogadores } from './dashboard.model';
+import { ApuracaoJogadores, PARAMETROSSISTEMAS } from './dashboard.model';
+import { Jogos } from './../jogos/jogos.model';
 
 
 @Injectable({
@@ -28,5 +30,14 @@ export class DashboardService {
     apuracao$ = this.http.get<ApuracaoJogadores[]>(`${MEAT_API}/ranking/OsSeusEscalados/${id}`).pipe();
     return apuracao$;
   }
+
+  CarregaParametros(): Observable<PARAMETROSSISTEMAS>{
+    let apuracao$ = new Observable<PARAMETROSSISTEMAS>();
+    apuracao$ = this.http.get<PARAMETROSSISTEMAS>(`${MEAT_API}/ranking/CarregaParametros`).pipe();
+    return apuracao$;
+  }
+
+  
+  
 
 }

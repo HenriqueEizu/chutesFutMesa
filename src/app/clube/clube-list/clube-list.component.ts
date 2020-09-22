@@ -30,7 +30,7 @@ export class ClubeListComponent implements OnInit {
     this.clubes$ = service.clubes$;
     this.total$ = service.total$;
   }
- 
+  
   ngOnInit(): void { 
     delay(3000);
   }

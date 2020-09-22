@@ -4,6 +4,7 @@ import {Jogador} from "../jogadores/jogador.model";
 export interface PtsCompeticaoJogador{
     PJ_PJID : number,
     PJ_CPID : number,
+    PJ_JGID : number,
     OBJ_COMPETICAO : Competicao,
     PJ_JOMATRICULA : number,
     PJ_JOID : number,

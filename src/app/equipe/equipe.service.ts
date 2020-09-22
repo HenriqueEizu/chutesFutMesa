@@ -40,11 +40,15 @@ export class EquipeService {
     return rkJogStatus$;
   }
 
-  
-
   GetEquipeId(id: number):Observable<Equipe>{
     var equipeLocal : Observable<Equipe>
     equipeLocal = this.http.get<Equipe>(`${MEAT_API}/equipe/GetEquipeId/${id}` ).pipe();
+    return equipeLocal;
+  }
+
+  GetEquipeIdPorusuario(id: number):Observable<Equipe>{
+    var equipeLocal : Observable<Equipe>
+    equipeLocal = this.http.get<Equipe>(`${MEAT_API}/equipe/GetEquipeIdPorusuario/${id}` ).pipe();
     return equipeLocal;
   }
 
@@ -74,10 +78,27 @@ export class EquipeService {
     return this.InserirEquipe(equipe);
   } 
 
-  GetRankingEquipes(blnPorRodada: boolean): Observable<RankingEquipe[]>{
+  GetRankingEquipes(): Observable<RankingEquipe[]>{
     let rkEquipes$ = new Observable<RankingEquipe[]>();
-    rkEquipes$ =  this.http.get<RankingEquipe[]>(`${MEAT_API}/equipe/GetRankingEquipes/${blnPorRodada}`).pipe();
+    rkEquipes$ =  this.http.get<RankingEquipe[]>(`${MEAT_API}/equipe/GetRankingEquipes`).pipe();
     return rkEquipes$;
   }
+
+  PontuacaoUltimaRodada(): Observable<RankingEquipe[]>{
+    let rkEquipes$ = new Observable<RankingEquipe[]>();
+    rkEquipes$ =  this.http.get<RankingEquipe[]>(`${MEAT_API}/equipe/PontuacaoUltimaRodada`).pipe();
+    return rkEquipes$;
+  }
+
+  DiasFechaMercado(): Observable<number>{
+    return this.http.get<number>(`${MEAT_API}/equipe/DiasFechaMercado`).pipe();
+  }
+
+  Mercadofechado(): Observable<number>{
+    return this.http.get<number>(`${MEAT_API}/equipe/Mercadofechado`).pipe();
+  }
+
+  
+  
 } 
      

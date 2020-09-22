@@ -20,6 +20,7 @@ constructor(private service: PtsCompeticaoJogadorService){}
         return of ({
             PJ_PJID : null,
             PJ_CPID : null,
+            PJ_JGID : null,
             OBJ_COMPETICAO : null,
             PJ_JOMATRICULA : null,
             PJ_JOID : null,

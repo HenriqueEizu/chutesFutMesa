@@ -1,5 +1,5 @@
 <!-- <nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"> -->
-  <nav  class="navbar navbar-expand-md navbar-default">
+  <nav  class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -8,69 +8,66 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
   
-        <li class="nav-item">
-          <a class="nav-link" routerLink=""><i class="fa fa-home"></i> Home</a>
-        </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['home']" class="nav-link" routerLink=""><i class="fa fa-home"></i> Home</a>
+        </li> -->
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['listausuarios']">
             <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Usuarios</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/clubes']">
             <img src="/assets/images/icons/clube1.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i> Clubes</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/jogadores']">
             <img src="/assets/images/icons/jogador.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Jogadores</a>
         </li>
-        <li class="nav-item">
-          <a routerLinkActive="active" class="nav-link" [routerLink]="['/jogo']">
-            <img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 20px; color: white;">
-            <i class="fa fa-app-store"></i>Jogos</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/competicoes']">
             <img src="/assets/images/icons/competicao.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Competições</a>
         </li> 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/ptscompeticoesjogadores']">
             <img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Pontos Competições</a>
         </li> 
-        <li class="nav-item">
-          <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipe',usuarioLogado.US_USID]">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/equipes']">
             <img src="/assets/images/icons/Equipe.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Equipes</a> 
         </li> 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/ranking']">
             <img src="/assets/images/icons/rankinggeral.png" class="mr-2" style="width: 20px; color: white;">
-            <i class="fa fa-app-store"></i>Ranking</a> 
+            <i class="fa fa-app-store"></i>Importa Ranking</a> 
         </li> 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/importacaoptscomp']">
             <img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 20px; color: white;">
-            <i class="fa fa-app-store"></i>Ranking</a> 
+            <i class="fa fa-app-store"></i>Importa Pontos</a> 
         </li> 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/importacaojogoequipe']">
+            <img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 20px; color: white;">
+            <i class="fa fa-app-store"></i>Importa Equipes Pontos</a> 
+        </li>
+
+        
+        <li class="nav-item" *ngIf="blnHabilitaDashboard == true">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/dashboard']">
             <img src="/assets/images/icons/dashboard.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Dashboard</a> 
         </li> 
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['/jogos']">
             <img src="/assets/images/icons/jogo1.png" class="mr-2" style="width: 20px; color: white;">
             <i class="fa fa-app-store"></i>Jogos</a> 
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/exemplosPipes']">
-          <i class="fa fa-app-store"></i> pipes</a>
-        </li>
-          
   
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -79,11 +76,11 @@
             <div class="col">
               <div ngbDropdown >
                 <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img src="/assets/images/icons/userlogo1.png" class="mr-2" style="width: 20px; color: white;">{{usuarioLogado.US_USNOMETRATAMENTO}}</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem>Action - 1</button>
                   <button ngbDropdownItem>Another Action</button>
                   <button ngbDropdownItem>Something else is here</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

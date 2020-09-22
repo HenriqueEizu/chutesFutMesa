@@ -19,3 +19,13 @@ export interface ApuracaoJogadores{
     AJ_CLEMBLEMA : string,
     AJ_JOFOTO: string
 }
+
+export interface PARAMETROSSISTEMAS {
+    PS_PSID : number,
+    PS_PSDESCRICAO : string,
+    PS_PDDATAINICIOTEMPORADA : Date,
+    PS_PDDATAFIMTEMPORADA :  Date,
+    PS_PSOBSERVACAO : string,
+    PS_PSATIVO : boolean,
+    PS_PSDATACADASTRO : Date
+}

@@ -44,7 +44,7 @@
                     <span class="help-block pull-right has-error-block" *ngIf="equipeForm.get('EQ_EQNOME').hasError('nomeEquipeInvalido')" style="color:red"><i class="fa fa-remove"></i> Já existe equipe com este nome</span>
                   </div>
                 </div> 
-                <div class="row">
+                <div class="row" *ngIf="usuarioLogado.US_GUID == 1">
                   <div class="col-sm-2 col-xs-2">
                       &nbsp;
                   </div>

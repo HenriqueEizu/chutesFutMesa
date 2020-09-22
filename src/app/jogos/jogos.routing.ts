@@ -11,7 +11,7 @@ import { DeactivateGuard } from '../guards/deactive.guard'
 
 export const JogosRoutes: Routes = [
     {path: 'jogo', component: JogosComponent,resolve:{jogo :JogosResolverGuard},canActivate : [AuthGuard], canDeactivate : [DeactivateGuard], canLoad:[AuthGuard]},
-    {path: 'jogos/:id',component : JogosComponent,resolve:{ jogo :JogosResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
+    {path: 'jogo/:id',component : JogosComponent,resolve:{ jogo :JogosResolverGuard},canActivate : [AuthGuard],canDeactivate : [DeactivateGuard],canLoad:[AuthGuard]},
     {path: 'jogos', component: JogosListComponent,canActivate : [AuthGuard],canLoad:[AuthGuard]},
 ]
 

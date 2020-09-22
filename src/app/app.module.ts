@@ -60,6 +60,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { NgxScrollTopModule } from 'ngx-scrolltop';
 
+
 import { DiretivasCustomizadasComponent } from './diretivas-customizadas/diretivas-customizadas.component';
 import { ExemplosPipeComponent } from './exemplos-pipe/exemplos-pipe.component';
 import { CamelCasePipe } from './camel-case.pipe'
@@ -73,6 +74,7 @@ import { PtsCompeticaoJogadorModule } from './pts-competicao-jogador/pts-competi
 import { EquipeModule } from './equipe/equipe.module';
 import { EquipeJogadorModule } from './equipe-jogador/equipe-jogador.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     LoginComponent,
     PaginaNaoEncontradaComponent,
     HeaderComponent,
-    HomeComponent,
+    // HomeComponent,
     DiretivasCustomizadasComponent,
     ExemplosPipeComponent,
     CamelCasePipe,
@@ -146,7 +148,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     EquipeModule,
     RankingModule,
     EquipeJogadorModule,
-    DashboardModule
+    DashboardModule,
+    HomeModule
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,
               { provide: HTTP_INTERCEPTORS,

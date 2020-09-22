@@ -23,4 +23,11 @@ export class RankingService {
     rkJogadores$ =  this.http.post<boolean>(`${MEAT_API}/ranking/ImportarRanking`,rakings)
     return rkJogadores$;
   } 
+
+  RankingGeral(): Observable<RankingJogadores[]>{
+    let apuracao$ = new Observable<RankingJogadores[]>();
+    apuracao$ = this.http.get<RankingJogadores[]>(`${MEAT_API}/ranking/RankingGeral`).pipe();
+    return apuracao$;
+  }
+
 }

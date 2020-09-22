@@ -24,7 +24,7 @@ export class JogosListComponent implements OnInit {
   constructor(public service: JogosListService,
         private modalService: BsModalService,
         private alertService: AlertModalService,
-        private jogadorService : JogosService,
+        private jogoService : JogosService,
         private router: Router) {
     this.jogos$ = service.jogos$;
     this.total$ = service.total$;
@@ -49,6 +49,28 @@ export class JogosListComponent implements OnInit {
 
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
+  }
+  
+  ExcluiJogo(id: number){
+    const result$ = this.alertService.showConfirm("Confirmação de Exclusão","Você realmente deseja excluir este jogo?","Fechar","Excluir");
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.jogoService.ExcluirJogo(id) : EMPTY)
+    ).subscribe(
+      success => {  
+                   this.alertService.showAlertSuccess("Usuário excluido com sucesso");
+                  //  window.location.reload();
+                   this.router.navigate(['jogos'])
+                   },
+      error =>  { 
+                this.alertService.showAlertDanger("Erro ao excluir usuário. Tente novamente") ;
+                }
+    )
+  }
+
+  onDeclineInsert(){
+    this.insertModalRef.hide();
   }
 
 }

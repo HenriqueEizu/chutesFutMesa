@@ -17,7 +17,7 @@ export class UsuarioService{
    
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  usuarioLogado1: Usuario;
+  usuarioLogado1: Usuario = null;
 
   private usuarioLogado = new BehaviorSubject<Usuario>(this.usuarioLogado1);
 

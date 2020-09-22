@@ -131,7 +131,6 @@ export class EquipeComponent implements OnInit, IFormCanDeactivate {
                           event.currentIndex);
                           this.imageCardEquipe = event.container.data[0] as unknown  as ImagemEscudo;
                           this.strImageEscudo = this.imageCardEquipe.IM_IMPATH
-                          alert (this.imageCardEquipe.IM_IMPATH)
       }else{
         this.alertService.showAlertDanger("Remover escudo existente") ;
       }

@@ -10,12 +10,13 @@ import { PtsCompeticaoJogadorListSortableHeader } from './list-pts-competicao-jo
 import { PtsCompeticaoJogadorRouting } from './pts-competicao-jogador.route';
 import { SharedModule} from  '../shared/shared.module';
 import {PtsCompeticaoJogadorResolverGuard} from './guards/pts-competicao-jogador.resolver.guard';
-import { PtsCompeticaoImportacaoComponent } from './pts-competicao-importacao/pts-competicao-importacao.component'
+import { PtsCompeticaoImportacaoComponent } from './pts-competicao-importacao/pts-competicao-importacao.component';
+import { PtsEquipesImportaComponent } from './pts-equipes-importa/pts-equipes-importa.component'
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, PtsCompeticaoJogadorRouting,SharedModule.forRoot()],
   exports: [],
-  declarations: [PtsCompeticaoJogadorComponent,ListPtsCompeticaoJogadorComponent,PtsCompeticaoJogadorListSortableHeader, PtsCompeticaoImportacaoComponent],
+  declarations: [PtsCompeticaoJogadorComponent,ListPtsCompeticaoJogadorComponent,PtsCompeticaoJogadorListSortableHeader, PtsCompeticaoImportacaoComponent, PtsEquipesImportaComponent],
   providers: [PtsCompeticaoJogadorService, PtsCompeticaoJogadorResolverGuard],
 })
 export class PtsCompeticaoJogadorModule { }
