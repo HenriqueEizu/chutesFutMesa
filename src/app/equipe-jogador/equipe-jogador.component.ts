@@ -26,7 +26,7 @@ export class EquipeJogadorComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   panelOpenState = true;
-  isLoggedIn$: Observable<boolean>;
+  isLoggedIn$: boolean;
   usuarioLogado : Usuario = null;
   EquipeUsuario : Equipe = null;
   imageCardEquipe : string
@@ -72,8 +72,15 @@ export class EquipeJogadorComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.isLoggedIn$ = this.usuarioService.isLoggedIn;
+    this.usuarioService.isLoggedIn.subscribe(( p : boolean) => {
+      this.isLoggedIn$ = p
+      if (p == false)
+      {
+        this.router.navigate(['login'])
+      }
+    });
 
+    
     var i:number; 
     
     this.imgJogadoresEscalados = ["","","","","",""];

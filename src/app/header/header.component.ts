@@ -13,6 +13,7 @@ import { Equipe } from '../equipe/equipe.model';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
+  logado : boolean;
   usuarioLogadoObs : Observable<Usuario>;
   usuarioLogado : Usuario;
   equipeUser : Equipe;
@@ -24,6 +25,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.usuarioService.isLoggedIn;
+
+    this.usuarioService.isLoggedIn.subscribe(( p : boolean) => {
+      this.logado = p
+      if (p == false)
+      {
+        this.router.navigate(['login'])
+      }
+    });
+
     this.usuarioService.usuarioCacheFunc.subscribe((u : Usuario) =>{
       this.usuarioLogado = u
       if (this.usuarioLogado != null){
