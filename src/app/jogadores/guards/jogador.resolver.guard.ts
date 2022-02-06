@@ -27,7 +27,8 @@ constructor(private service: JogadorService){}
             JO_CLID : null,
             OBJ_CLUBE : null,
             JO_JODATACADASTRO : null,
-            JO_JOMATRICULA : null
+            JO_JOMATRICULA : null,
+            JO_JOINSCRITO : null,
 
         });
     }

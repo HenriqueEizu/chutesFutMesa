@@ -1,0 +1,220 @@
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-2">
+        &nbsp;
+    </div>
+</div> 
+<div class="row">
+    <div class="col-sm-1 col-xs-1"></div>
+    <div class="col-sm-10 col-xs-10 badge badge-primary"> <h5><img src="/assets/images/icons/ptscompeticaojogador.png" class="mr-2" style="width: 30px"> Inscrição de Jogadores Competição</h5></div>
+</div>
+
+<form [formGroup]="inscricaoForm" novalidate> 
+    <div class="row">
+        <div class="col-sm-1 col-xs-1">
+            &nbsp;
+        </div> 
+        <div class="col-sm-10 col-xs-10 border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+            <div class="row"> 
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                        Competição: 
+                </div>
+                <div class="col-sm-7 col-xs-7" >
+                    <cft-input errorMessage="Competição deve ser preenchida" label="Competição">
+                        <select #IS_CPID name="IS_CPID" class="form-control" formControlName="IS_CPID" (change)="MostraRodada(IS_CPID.value)">
+                            <!-- <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}} - {{c.OBJ_Rodada.RO_RODESCRICAO}} </option> -->
+                            <option *ngFor=  "let c of (competicoes)" [value]="c.CP_CPID">{{c.CP_CPDESCRICAO}} </option>
+                        </select>
+                    </cft-input> 
+                </div>
+            </div>
+          
+            <div class="row" >
+                <div class="col-sm-1 col-xs-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+                <div *ngIf="show" class="col-sm-8 col-xs-8">
+                    <ngb-toast *ngIf="show" header="{{competicaoId.CP_CPDESCRICAO}}" [delay]="500000"
+                        [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true"
+                        (hide)="show = false; autohide = true" [class.bg-warning]="!autohide" >
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img [src]="competicaoId.CP_CPFOTO" class="mr-2" style="width: 30px">
+                                    <!-- </div>
+                                    <div class="col-sm-11 col-xs-11"> -->
+                                        {{ competicaoId.CP_CPDESCRICAO }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- <div class="col-sm-12 col-xs-12">
+                                        {{ competicaoId.OBJ_Rodada.RO_RODESCRICAO }} Inicio:{{ competicaoId.CP_CPDATAINICIO  | date: 'dd/MM/yyyy' }}
+                                    </div> -->
+                                    <div class="col-sm-12 col-xs-12">
+                                        Inicio:{{ competicaoId.CP_CPDATAINICIO  | date: 'dd/MM/yyyy' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngb-toast>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    
+                </div>
+                
+                <div class="col-sm-8 col-xs-8" >
+                    <button (click)="SalvarInscritos(inscricaoForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!inscricaoForm.valid || JogadoresInscritos.length == 0" >
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-sm-12 col-xs-12" >
+                    <!-- <div class="col-sm-12 col-xs-12 badge badge-info ">
+                        <h4>  </h4>
+                        <div *ngIf="blnBotaoOrdenarRank " class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                            <h4>Ranking/Valor: <img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                        </div>
+                        <div *ngIf="!blnBotaoOrdenarRank" class="col-sm-2 col-xs-2" (click)="OrdenarPorRanking()">
+                            <h4> Ranking/Valor: <img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                        </div>
+                    </div> -->
+                    
+                    <div class="testeJogadores border border-primary rounded shadow-lg p-4 mb-4 bg-white">
+                        <div class="col-sm-5 col-xs-5 ">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input  class="form-control" placeholder="Nome Jogador ou matricula" type="text" #filtro  (keyup)="FiltraJogador(filtro.value)" >
+                              </div>
+                        </div>
+                        <div class="example-container col-sm-12 col-xs-12 ">
+                            <div>
+                                <div class="row border rounded shadow-lg bg-white mb-3">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <div class="row ">
+                                            <div class="col-sm-1 col-xs-1">
+                                                <div *ngIf="blnOrdenarPorMatricula " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('matricula',blnOrdenarPorMatricula)">
+                                                    <h4>MATRICULA<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                                <div *ngIf="!blnOrdenarPorMatricula" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('matricula',blnOrdenarPorMatricula)">
+                                                    <h4>MATRICULA<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 col-xs-1">
+                                                <div *ngIf="blnOrdenarPorJogador " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('jogador',blnOrdenarPorJogador)">
+                                                    <h4>JOGADOR<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                                <div *ngIf="!blnOrdenarPorJogador" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('jogador',blnOrdenarPorJogador)">
+                                                    <h4>JOGADOR<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 col-xs-3"></div>
+                                            <div class="col-sm-2 col-xs-2">
+                                                <div *ngIf="blnOrdenarPorInscrito " class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('inscrito',blnOrdenarPorInscrito)">
+                                                    <h4>INSCRITO<img src="/assets/images/icons/ArrowUp.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                                <div *ngIf="!blnOrdenarPorInscrito" class="col-sm-2 col-xs-2" (click)="JogadoresOrdenarPor('inscrito',blnOrdenarPorInscrito)">
+                                                    <h4>INSCRITO<img src="/assets/images/icons/arrowDown.png" class="mr-2" style="width: 20px"> </h4>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div *ngFor="let item of Jogadores" cdkDrag>
+                                    <div class="row border rounded shadow-lg bg-white mb-3">
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="row ">
+                                                <div class="col-sm-1 col-xs-1 mt-5 ml-2">
+                                                    <h4><strong>{{item.JO_JOMATRICULA}}</strong> </h4>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1">
+                                                    <img [src]="item.JO_JOFOTO" class="mr-2" style="height: 100px">
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1"></div>
+                                                <div class="col-sm-2 col-xs-2 mt-5 ml-2">
+                                                    <h4><strong> {{item.JO_JOAPELIDO.toUpperCase()}}</strong></h4>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1"></div>
+                                                <div *ngIf="item.JO_JOINSCRITO" class="col-sm-1 col-xs-1 mt-4">
+                                                    <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 40px"> 
+                                                </div>
+                                                <div *ngIf="!item.JO_JOINSCRITO" class="col-sm-1 col-xs-1 mt-4">
+                                                    <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 40px"> 
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1"></div>
+                                        
+                                                <div  *ngIf="!item.JO_JOINSCRITO" class="col-sm-3 col-xs-3 mt-4">
+                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="EscalaJogador(item);" >
+                                                         Inscrever
+                                                    </button>
+                                                </div>
+                                                <div *ngIf="item.JO_JOINSCRITO" class="col-sm-3 col-xs-3 mt-4">
+                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                    <button type="button" class="btn btn-success pull-right btn-block" (click)="RemoverJogador(item);" >
+                                                        Inscrito
+                                                    </button>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    &nbsp;
+                </div>
+            </div>  
+            <!-- <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                    
+                </div>
+                
+                <div class="col-sm-8 col-xs-8" >
+                    <button (click)="SalvarInscritos(inscricaoForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!inscricaoForm.valid && JogadoresInscritos.length == 0" >
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</form>

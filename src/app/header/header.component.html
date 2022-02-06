@@ -11,6 +11,10 @@
         <!-- <li class="nav-item">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['home']" class="nav-link" routerLink=""><i class="fa fa-home"></i> Home</a>
         </li> -->
+        <li class="nav-item" >
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/inscricao']">
+            <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Inscrição para Torneios</a>
+        </li>
         <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
           <a routerLinkActive="active" class="nav-link" [routerLink]="['listausuarios']">
             <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Usuarios</a>
@@ -76,7 +80,8 @@
             <div class="col">
               <div ngbDropdown >
                 <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img src="/assets/images/icons/userlogo1.png" class="mr-2" style="width: 20px; color: white;">{{usuarioLogado.US_USNOMETRATAMENTO}}</button>
-                <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                
+                <img  *ngIf="clube1 != undefined" [src]="clube1.CL_CLEMBLEMA" class="mr-2" style="width: 30px; color: white;"><!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem>Action - 1</button>
                   <button ngbDropdownItem>Another Action</button>
                   <button ngbDropdownItem>Something else is here</button>

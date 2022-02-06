@@ -5,6 +5,8 @@ import {Usuario} from '../usuario/usuario.model'
 import {Router} from '@angular/router'
 import {Observable} from 'rxjs'
 import { Equipe } from '../equipe/equipe.model';
+import { Clube } from '../clube/clube.model';
+import { ClubeService } from '../clube/clube.service';
 
 @Component({
   selector: 'cft-header',
@@ -17,11 +19,13 @@ export class HeaderComponent implements OnInit {
   usuarioLogadoObs : Observable<Usuario>;
   usuarioLogado : Usuario;
   equipeUser : Equipe;
+  clube1 : Clube;
   strNome : string;
   blnHabilitaDashboard : boolean = false;
   constructor(private usuarioService: UsuarioService
               ,private router: Router
-              ,private equipeService: EquipeService) { }
+              ,private equipeService: EquipeService
+              ,private clubeService : ClubeService) { }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.usuarioService.isLoggedIn;
@@ -37,6 +41,9 @@ export class HeaderComponent implements OnInit {
     this.usuarioService.usuarioCacheFunc.subscribe((u : Usuario) =>{
       this.usuarioLogado = u
       if (this.usuarioLogado != null){
+        this.clubeService.GetClubeId(this.usuarioLogado.US_CLID).subscribe((club : Clube) => {
+          this.clube1 = club;
+        })
         this.equipeService.GetEquipeIdPorusuario(this.usuarioLogado.US_USID).subscribe((jog : Equipe) => {
           console.log(jog);
           this.equipeUser = jog

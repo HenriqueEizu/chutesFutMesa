@@ -350,55 +350,55 @@
                                                     </div> 
                                                 </div>
                                             </div>
-                                        <div *ngFor="let item of JogadoresFiltro" cdkDrag>
-                                            <div class="row border rounded shadow-lg bg-white mb-3">
-                                                <div class="col-sm-10 col-xs-10">
-                                                    <div class="row ">
-                                                        <div class="col-sm-1 col-xs-1 text-align: center; mt-3">
-                                                            <img [src]="item.CL_CLEMBLEMA" style="width: 50px; ">
-                                                            <div style="text-align: center;">{{item.CL_CLSIGLA}}</div>
-                                                        </div>
-                                                        <div class="col-sm-2 col-xs-2">
-                                                            <img [src]="item.JO_JOFOTO" class="mr-2" style="height: 100px">
-                                                        </div>
-                                                        <div class="col-sm-2 col-xs-2 mt-5 ml-2">
-                                                            <h4><strong> {{item.JO_JOAPELIDO.toUpperCase()}}</strong></h4>
-                                                        </div>
-                                                        <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
-                                                            <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 40px"> 
-                                                        </div>
-                                                        <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
-                                                            <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 40px"> 
-                                                        </div>
-                                                        <div class="col-sm-2 col-xs-2 mt-5">
-                                                            <b><h4><strong>{{item.PR_PRPRECO  | currency :'B$':'code'}}</strong></h4></b>
-                                                        </div>
-                                                        <div class="col-sm-2 col-xs-2 mt-5">
-                                                            <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
-                                                        </div>
-                                                    <!-- <div class="row "> -->
-                                                        <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-1 col-xs-1">
-                                                            Evolução: <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
-                                                        </div>
-                                                        <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-1 col-xs-1">
-                                                            Evolução: <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px"> {{item.POSICOES}} {{item.EJ_EJID}}
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                                <div *ngIf="item.EQ_EQID == null" class="col-sm-2 col-xs-2 mt-4">
-                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item);" [disabled]="mercadoFechado != 0">
-                                                        <i class="fa fa-check"></i> Comprar
-                                                    </button>
-                                                </div>
-                                                <div *ngIf="item.EQ_EQID > 0" class="col-sm-2 col-xs-2 mt-4">
-                                                    <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="RemoverJogador(item);" [disabled]="mercadoFechado != 0">
-                                                        <i class="fa fa-check"></i> Vender
-                                                    </button>
+                                            <div *ngFor="let item of JogadoresFiltro" cdkDrag>
+                                                <div class="row border rounded shadow-lg bg-white mb-3">
+                                                    <div class="col-sm-10 col-xs-10">
+                                                        <div class="row ">
+                                                            <div class="col-sm-1 col-xs-1 text-align: center; mt-3">
+                                                                <img [src]="item.CL_CLEMBLEMA" style="width: 50px; ">
+                                                                <div style="text-align: center;">{{item.CL_CLSIGLA}}</div>
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2">
+                                                                <img [src]="item.JO_JOFOTO" class="mr-2" style="height: 100px">
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5 ml-2">
+                                                                <h4><strong> {{item.JO_JOAPELIDO.toUpperCase()}}</strong></h4>
+                                                            </div>
+                                                            <div *ngIf="item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
+                                                                <img src="/assets/images/icons/ativo.png" class="mr-2" style="width: 40px"> 
+                                                            </div>
+                                                            <div *ngIf="!item.JO_JOATIVO" class="col-sm-2 col-xs-2 mt-4">
+                                                                <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 40px"> 
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <b><h4><strong>{{item.PR_PRPRECO  | currency :'B$':'code'}}</strong></h4></b>
+                                                            </div>
+                                                            <div class="col-sm-2 col-xs-2 mt-5">
+                                                                <h4><strong>{{item.RJ_RJPOSICAOATUAL}}º </strong></h4>
+                                                            </div>
+                                                        <!-- <div class="row "> -->
+                                                            <div *ngIf="item.STATUSPOSICAO == 'SOBE' " class="col-sm-1 col-xs-1">
+                                                                Evolução: <img src="/assets/images/icons/setaSobe.png" class="mr-2" style="width: 20px"> {{item.POSICOES}}
+                                                            </div>
+                                                            <div *ngIf="item.STATUSPOSICAO == 'DESCE' " class="col-sm-1 col-xs-1">
+                                                                Evolução: <img src="/assets/images/icons/setaDesce.png" class="mr-2" style="width: 20px"> {{item.POSICOES}} {{item.EJ_EJID}}
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                    <div *ngIf="item.EQ_EQID == null" class="col-sm-2 col-xs-2 mt-4">
+                                                        <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                        <button type="button" class="btn btn-primary pull-right btn-block" (click)="EscalaJogador(item);" [disabled]="mercadoFechado != 0">
+                                                            <i class="fa fa-check"></i> Comprar
+                                                        </button>
+                                                    </div>
+                                                    <div *ngIf="item.EQ_EQID > 0" class="col-sm-2 col-xs-2 mt-4">
+                                                        <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
+                                                        <button type="button" class="btn btn-danger pull-right btn-block" (click)="RemoverJogador(item);" [disabled]="mercadoFechado != 0">
+                                                            <i class="fa fa-check"></i> Vender
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>

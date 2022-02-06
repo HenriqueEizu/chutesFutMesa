@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanLoad{
   canLoad(route: Route) : Observable<boolean> | Promise<boolean> | boolean{
     return this.blnLogado;
   }
-  
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
 
     if (state.url == "/home"){
@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate, CanLoad{
       }
 
     return this.blnLogado;
- 
+
   }
 
   VerificaLogin(blnHome: boolean) : boolean{
@@ -59,7 +59,7 @@ export class AuthGuard implements CanActivate, CanLoad{
           this.blnLogado = false;
       }
     });
-    
+
     return this.blnLogado;
   }
 }

@@ -9,5 +9,6 @@ export interface Jogador {
         JO_CLID : number,
         OBJ_CLUBE : Clube,
         JO_JODATACADASTRO : string,
-        JO_JOMATRICULA : number
+        JO_JOMATRICULA : number,
+        JO_JOINSCRITO: boolean,
     }

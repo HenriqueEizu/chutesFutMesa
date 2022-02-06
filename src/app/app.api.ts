@@ -1,6 +1,10 @@
-export const MEAT_API = 'http://localhost:3000'
+//export const MEAT_API = 'http://localhost:3000'
 
-export const MEAT_APP = 'http://localhost:4200'
+export const MEAT_API = 'https://www.chutesfutmesa.com.br/apichutesfutmesa'
+
+// export const MEAT_APP = 'http://localhost:4200'
+
+export const MEAT_APP = 'https://www.chutesfutmesa.com.br'
 
 export const DIR_CLUBE = 'assets/images/logos clubes/'
 

@@ -55,7 +55,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   podeDesativar() {
     return true;
   }
-  
+
   ngOnInit(): void {
     this.clubeService.GetAllEstado().subscribe((es : Estado[]) => {
     this.estados = es;
@@ -87,7 +87,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
     //   this.pathimagecomplete = clube.CL_CLEMBLEMA;
     //   this.updateForm(clube)});
 
- 
+
     this.clube = this.route.snapshot.data['clube'];
     this.clubeCarregado =this.clube;
 
@@ -138,7 +138,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   }
 
   VerificaSiglaClube(SiglaClube:string, SiglaClube2:string = "sigla"){
-    
+
     return this.clubeService.VerificaClube().pipe(
       delay(3000),
       map((dados: {clubes : any[]}) => dados.clubes),
@@ -151,7 +151,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
   }
 
 
-  ValidaSiglaClube(formControl : FormControl) 
+  ValidaSiglaClube(formControl : FormControl)
   {
     return this.VerificaSiglaClube(formControl.value, this.clube.CL_CLSIGLA != null ? this.clube.CL_CLSIGLA : "").pipe(
       tap(console.log),
@@ -222,7 +222,7 @@ export class ClubeComponent implements OnInit, IFormCanDeactivate {
 
     return sucesso;
   }
- 
+
   SalvarClube(clube: Clube){
 
     let msgSuccess = "Clube inserido com sucesso";

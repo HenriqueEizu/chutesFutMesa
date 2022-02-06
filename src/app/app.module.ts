@@ -14,9 +14,7 @@ import { ModalModule} from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { SharedModule} from  './shared/shared.module';
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
+
 import { HomeComponent } from './home/home.component';
 import { PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component'
 import { AuthGuard } from './guards/auth.guard';
@@ -75,6 +73,10 @@ import { EquipeModule } from './equipe/equipe.module';
 import { EquipeJogadorModule } from './equipe-jogador/equipe-jogador.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HomeModule } from './home/home.module';
+import { SharedModule} from  './shared/shared.module';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import {InscricaoModule} from './inscricao/inscricao.module'
 
 @NgModule({
   declarations: [
@@ -86,12 +88,12 @@ import { HomeModule } from './home/home.module';
     DiretivasCustomizadasComponent,
     ExemplosPipeComponent,
     CamelCasePipe,
+    
   ],
   imports: [
     BrowserModule,
-    
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules}),
     CarouselModule.forRoot(),
@@ -149,7 +151,8 @@ import { HomeModule } from './home/home.module';
     RankingModule,
     EquipeJogadorModule,
     DashboardModule,
-    HomeModule
+    HomeModule,
+    InscricaoModule
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}, AuthGuard,DeactivateGuard,
               { provide: HTTP_INTERCEPTORS,

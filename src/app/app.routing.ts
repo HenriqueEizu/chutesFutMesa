@@ -17,18 +17,13 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 
 export const appRoutes: Routes = [
     {path: 'login', component : LoginComponent},
-    // {path: 'usuario', component: UsuarioComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},  //canActivateChild
-    // {path: 'home', component: HomeComponent, canActivate : [AuthGuard],canLoad:[AuthGuard]},
     {path: 'home', component: HomeComponent},
     {path: 'dashboard', component: DashboardComponent},
-    
-    { path: '', redirectTo : 'home', pathMatch: 'full'},
-    // {path: 'clube', component: ClubeComponent,resolve:{clube :ClubeResolverGuard}},
-    // {path: 'clube/:id',component : ClubeComponent,resolve:{ clube :ClubeResolverGuard}},
-    // {path: 'clubes', component: ClubeListComponent},
+
+    {path: '', redirectTo : 'home', pathMatch: 'full'},
     {path: 'diretivasCuston', component: DiretivasCustomizadasComponent},
     {path: 'exemplosPipes',component: ExemplosPipeComponent} ,
-    {path: '**',component: PaginaNaoEncontradaComponent,canActivate : [AuthGuard]}  
+    {path: '**',component: PaginaNaoEncontradaComponent,canActivate : [AuthGuard]}
 ]
 
 const routes: Routes = [];

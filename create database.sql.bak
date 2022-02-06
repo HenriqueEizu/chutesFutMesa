@@ -935,7 +935,7 @@ create table INSCRICAOCOMPETICAO (
         IS_JOID int NOT NULL,
         IS_CPID int NOT NULL,
         IS_ISDATACADASTRO  Date,
-        IS_CLID int NOT NULL);
+        IS_CLID int NOT NULL,);
         
 use chutesfutmesa;
 ALTER TABLE INSCRICAOCOMPETICAO ADD CONSTRAINT FK_Inscricao_Jogador FOREIGN KEY (IS_JOID) REFERENCES JOGADOR (JO_JOID); 

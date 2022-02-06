@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  usuarioLogado1: Usuario;
+  usuarioLogado1: Usuario = null;
 
   private usuarioLogado = new BehaviorSubject<Usuario>(this.usuarioLogado1);
 
@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private usuarioService: UsuarioService
-              
               , private formBuilder : FormBuilder
               ,private alertService: AlertModalService){}
 
