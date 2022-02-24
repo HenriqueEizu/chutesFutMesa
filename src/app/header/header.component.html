@@ -12,7 +12,11 @@
           <a routerLinkActive="active" class="nav-link" [routerLink]="['home']" class="nav-link" routerLink=""><i class="fa fa-home"></i> Home</a>
         </li> -->
         <li class="nav-item" >
-          <a routerLinkActive="active" class="nav-link" [routerLink]="['/inscricao']">
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/inscricao']" *ngIf="usuarioLogado.US_GUID == 2">
+            <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Inscrição para Torneios</a>
+        </li>
+        <li class="nav-item" >
+          <a routerLinkActive="active" class="nav-link" [routerLink]="['/inscricao']" *ngIf="usuarioLogado.US_GUID == 5">
             <img src="/assets/images/icons/user1.png" class="mr-2" style="width: 20px">  Inscrição para Torneios</a>
         </li>
         <li class="nav-item" *ngIf="usuarioLogado.US_GUID == 1">
