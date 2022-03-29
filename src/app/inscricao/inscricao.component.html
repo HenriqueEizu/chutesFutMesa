@@ -199,17 +199,23 @@
                                                 <div *ngIf="!item.JO_JOINSCRITO" class="col-sm-1 col-xs-1 mt-4">
                                                     <img src="/assets/images/icons/inativo.png" class="mr-2" style="width: 40px"> 
                                                 </div>
-                                                
+                                                <div *ngIf="competicaoId.CP_CJID == 2" class="col-sm-2 col-xs-2 mt-4">
+                                                    <select #IS_ISDIA name="IS_ISDIA" class="form-control" (change)="EscolhaDia(item,IS_ISDIA.value)" [value]="item.JO_JODIA" >
+                                                        <option  value="sabado" >Sábado</option>
+                                                        <option value="domingo">Domingo </option>
+                                                        <option value="indiferente" selected >Indiferente </option>
+                                                    </select> 
+                                                </div>
                                         
                                                 <div  *ngIf="!item.JO_JOINSCRITO" class="col-sm-2 col-xs-2 mt-4">
                                                     <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="EscalaJogador(item);"  [disabled] = "blnIncricaoEncerrada == true ? true : null">
+                                                    <button type="button" class="btn btn-danger pull-right btn-block" (click)="EscalaJogador(item);"  [disabled] = "blnIncricaoEncerrada  == true || item.JO_JODIA == null ? true : null ">
                                                          Inscrever
                                                     </button>
                                                 </div>
                                                 <div *ngIf="item.JO_JOINSCRITO" class="col-sm-2 col-xs-2 mt-4">
                                                     <!-- <button (click)="SalvarClube(clubeForm.value)"type="button" class="btn btn-primary pull-right btn-block" [disabled]="!clubeForm.valid" > -->
-                                                    <button type="button" class="btn btn-success pull-right btn-block" (click)="RemoverJogador(item);" [disabled] = "blnIncricaoEncerrada == true ? true : null ">
+                                                    <button type="button" class="btn btn-success pull-right btn-block" (click)="RemoverJogador(item);" [disabled] = "blnIncricaoEncerrada  == true || item.JO_JODIA == null ? true : null ">
                                                         Inscrito
                                                     </button>
                                                 </div>

@@ -37,4 +37,8 @@ export class Inscricao {
         public IS_ISDATACADASTRO : string;
         get _IS_ISDATACADASTRO(): string {return this.IS_ISDATACADASTRO;}
         set _IS_ISDATACADASTRO(p : string) {this.IS_ISDATACADASTRO = p; }
+
+        public IS_ISDIA : string;
+        get _IS_ISDIA(): string {return this.IS_ISDIA;}
+        set _IS_ISDIA(p : string) {this.IS_ISDIA = p; }
 }

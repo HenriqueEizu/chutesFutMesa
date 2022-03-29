@@ -41,6 +41,7 @@ export class InscricaoComponent implements OnInit {
   idClube : number;
   jaInscritos : Inscricao[] = []
   usuarioLogado : Usuario
+  diaPadrao : string = "indiferente";
 
   constructor(
     private router: Router
@@ -60,6 +61,7 @@ export class InscricaoComponent implements OnInit {
 
     this.competicaoService.GetAllCompeticao().subscribe((cp : Competicao[]) => {
       this.competicoes = cp.filter(c=> c.CP_CJID != 1 && c.CP_CPATIVO == true);
+      this.competicaoId = cp[0];
       });
 
     this.inscricaoForm = this.formBuilder.group({
@@ -90,6 +92,11 @@ export class InscricaoComponent implements OnInit {
     
   }
 
+  EscolhaDia(jogador : Jogador,dia: string)
+  {
+    jogador.JO_JODIA = dia;
+  }
+
   MostraRodada(id: number)
   {
     var i : number;
@@ -97,6 +104,7 @@ export class InscricaoComponent implements OnInit {
     var dataAtual : Date;
     this.show = true
     this.competicaoId = this.competicoes.filter(cp => cp.CP_CPID == id)[0];
+    var diaJogador : Inscricao;
 
     dataLimite =  new Date(Number(this.competicaoId.CP_CPDATALIMITEAPOSTA.substring(0,4)),Number(this.competicaoId.CP_CPDATALIMITEAPOSTA.substring(5,7) )-1,Number(this.competicaoId.CP_CPDATALIMITEAPOSTA.substring(8,10)));
 
@@ -148,8 +156,10 @@ export class InscricaoComponent implements OnInit {
       
       for (i = 0; i < this.Jogadores.length ; i++){
         if (this.jaInscritos.filter(c=> c.IS_JOID == this.Jogadores[i].JO_JOID).length > 0){
+          diaJogador = this.jaInscritos.filter(c=> c.IS_JOID == this.Jogadores[i].JO_JOID)[0]
           console.log(this.Jogadores[i])
           this.Jogadores[i].JO_JOINSCRITO = true;
+          this.Jogadores[i].JO_JODIA = diaJogador.IS_ISDIA;
         }
       }
       this.JogadoresInscritos = this.Jogadores.filter(c=> c.JO_JOINSCRITO == true)
@@ -258,6 +268,7 @@ export class InscricaoComponent implements OnInit {
   
   EscalaJogador(jogador : Jogador) {
     jogador.JO_JOINSCRITO = true;
+    jogador.JO_JODIA = jogador.JO_JODIA == undefined ? 'indiferente' : jogador.JO_JODIA;
     this.JogadoresInscritos.push(jogador)
     console.log(this.JogadoresInscritos)
   }
@@ -317,6 +328,7 @@ export class InscricaoComponent implements OnInit {
       incricao.IS_CPID = incrito.IS_CPID;
       incricao.IS_ISDATACADASTRO = formatDate(DataAtual,"yyyy-MM-dd","en-US");
       incricao.IS_CLID = this.JogadoresInscritos[i].JO_CLID;
+      incricao.IS_ISDIA = this.JogadoresInscritos[i].JO_JODIA == "" ? "indiferente" : this.JogadoresInscritos[i].JO_JODIA;
       incricoes.push(incricao);
       jogadores = jogadores + this.JogadoresInscritos[i].JO_JOAPELIDO + " - ";
       

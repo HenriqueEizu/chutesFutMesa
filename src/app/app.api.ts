@@ -2,7 +2,7 @@
 
 export const MEAT_API = 'https://www.chutesfutmesa.com.br/apichutesfutmesa'
 
-// export const MEAT_APP = 'http://localhost:4200'
+//export const MEAT_APP = 'http://localhost:4200'
 
 export const MEAT_APP = 'https://www.chutesfutmesa.com.br'
 

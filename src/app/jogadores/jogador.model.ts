@@ -11,4 +11,5 @@ export interface Jogador {
         JO_JODATACADASTRO : string,
         JO_JOMATRICULA : number,
         JO_JOINSCRITO: boolean,
+        JO_JODIA: string
     }
